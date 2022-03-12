@@ -29,7 +29,7 @@
       >
         <div
           v-if="visibleMobileMenu"
-          class="fixed top-0 right-0 h-screen w-full bg-white py-8 px-10 flex flex-col origin-right"
+          class="z-10 fixed top-0 right-0 h-screen w-full bg-white py-8 px-10 flex flex-col origin-right"
         >
           <XIcon
             class="w-6 ml-auto"

@@ -2,9 +2,13 @@
   <div class="banner-container relative">
     <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30" />
     <img src="~@/assets/images/about-illustration-1.jpg" alt="">
+
     <div class="banner-description__overlay" />
-    <p class="banner-description__text">{{ props.banner.description }}</p>
-    <div class="text-white text-2xl text-left absolute left-0 bottom-0 mx-14 mb-14">
+    <p class="banner-description__text">
+      {{ props.banner.description }}
+    </p>
+
+    <div class="text-white w-3/4 text-xl xl:text-2xl text-left absolute left-0 bottom-0 mx-8 mb-8 xl:mx-14 xl:mb-14">
       {{ props.banner.title }}
     </div>
   </div>
@@ -23,7 +27,7 @@
   &__text {
     @apply absolute right-0 bottom-1/3
       transform -translate-y-1/2
-      w-3/4 mr-6 opacity-0 text-left;
+      w-3/4 mr-6 opacity-0 text-left text-sm;
     transition: .1s ease;
     transition-delay: .1s;
   }
