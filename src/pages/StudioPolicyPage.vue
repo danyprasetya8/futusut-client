@@ -1,20 +1,18 @@
 <template>
   <BaseLayout>
     <section class="flex flex-col">
-      <section class="flex items-center py-10 px-20">
-        <p class="text-2xl">
-          Support
-        </p>
-        <div class="h-1 w-24 bg-black mx-8" />
-        <p class="text-4xl font-bold">
-          Studio Policy
-        </p>
-        <div class="ml-auto">
+      <section class="flex flex-col xl:flex-row py-10 px-8 xl:px-20">
+        <div class="flex items-center">
+          <p class="text-xl xl:text-2xl">Support</p>
+          <div class="h-1 w-full xl:w-24 bg-black mx-8" />
+        </div>
+        <p class="text-2xl font-bold mt-4 xl:mt-0">Studio Policy</p>
+        <div class="mt-4 xl:mt-0 ml-auto">
           <LanguageDropdown />
         </div>
       </section>
 
-      <section class="px-20 mt-6 w-1/2 self-center">
+      <section class="px-12 xl:px-20 xl:mt-6 xl:w-1/2 self-center">
         <div class="text-xl font-bold mb-2 underline">
           {{ t('protocols.title') }}
         </div>
@@ -28,7 +26,7 @@
         </ul>
       </section>
 
-      <section class="px-20 mt-6 mb-12 w-1/2 self-center">
+      <section class="px-12 xl:px-20 mt-6 mb-12 xl:w-1/2 self-center">
         <div class="text-xl font-bold mb-2 underline">
           {{ t('regulations.title') }}
         </div>
@@ -48,7 +46,7 @@
         <div
           v-for="i in damagedGoodsItemsLength"
           :key="i"
-          class="flex justify-between w-2/5"
+          class="flex justify-between xl:w-2/5"
         >
           <div>{{ t(`regulations.damagedGoodsItems[${i - 1}].name`) }}</div>
           <div>{{ numberFormatter(t(`regulations.damagedGoodsItems[${i - 1}].price`), 'Rp. ') }}</div>

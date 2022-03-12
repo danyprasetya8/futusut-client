@@ -1,17 +1,15 @@
 <template>
   <BaseLayout>
-    <section class="flex flex-col w-4/6">
-      <section class="flex items-center py-10 px-20">
-        <p class="text-2xl">
-          Support
-        </p>
-        <div class="h-1 w-24 bg-black mx-8" />
-        <p class="text-4xl font-bold">
-          Reschedule Policy
-        </p>
+    <section class="flex flex-col">
+      <section class="flex flex-col xl:flex-row py-10 px-8 xl:px-20">
+        <div class="flex items-center">
+          <p class="text-xl xl:text-2xl">Support</p>
+          <div class="h-1 w-full xl:w-24 bg-black mx-8" />
+        </div>
+        <p class="text-2xl font-bold mt-4 xl:mt-0">Reschedule Policy</p>
       </section>
 
-      <section class="px-20 mt-6">
+      <section class="px-8 xl:px-20 xl:mt-6">
         <p class="font-bold underline mb-2 text-lg">
           Cancellation Policy
         </p>
@@ -20,7 +18,7 @@
         </p>
       </section>
 
-      <section class="px-20 my-10">
+      <section class="px-8 xl:px-20 my-5 xl:my-10">
         <p class="font-bold underline mb-2 text-lg">
           Reschedule Policy
         </p>
@@ -29,7 +27,7 @@
         </p>
       </section>
 
-      <section class="px-20 mb-10">
+      <section class="px-8 xl:px-20 mb-10">
         <p class="font-bold underline mb-2 text-lg">
           Reach Us
         </p>
