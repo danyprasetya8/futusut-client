@@ -1,27 +1,27 @@
 <template>
   <BaseLayout>
-    <section class="flex flex-col">
-      <section class="flex py-10 px-20">
-        <p class="text-2xl">
+    <section class="flex flex-col xl:mb-24 mt-8 xl:mt-20 w-10/12 xl:w-2/3 self-center">
+      <section class="grid grid-cols-3 xl:grid-cols-6 gap-4 xl:w-2/3">
+        <p class="text-xl xl:text-2xl">
           Contact
         </p>
-        <div class="h-1 w-24 bg-black mx-8 mt-4" />
-        <p class="text-4xl font-bold">
+        <div class="h-1 xl:w-3/4 bg-black mt-4 col-span-2 xl:col-span-1" />
+        <p class="text-2xl xl:text-4xl font-bold col-span-3 xl:col-span-4">
           Let's be friends.
           <br>
           Don't Hesitate to Get in Touch
         </p>
       </section>
 
-      <form class="mb-12 w-1/2 self-center grid grid-cols-2 gap-6">
-        <div class="p-4 border-b-2 border-black">
+      <form class="my-12 w-full xl:w-1/2 self-center grid grid-cols-2 gap-3 xl:gap-6">
+        <div class="p-4 border-b-2 border-black col-span-2 xl:col-span-1">
           <input
             type="text"
             class="outline-none w-full"
             placeholder="Name"
           >
         </div>
-        <div class="p-4 border-b-2 border-black">
+        <div class="p-4 border-b-2 border-black col-span-2 xl:col-span-1">
           <input
             type="text"
             class="outline-none w-full"

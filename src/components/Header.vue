@@ -54,7 +54,7 @@
 
 <style scoped>
 .hover-title {
-  @apply mb-4 font-semibold hover:text-gray-500 transition duration-200 ease-in-out;
+  @apply mb-4 font-semibold hover:text-sky-800 transition duration-200 ease-in-out;
 }
 
 .active {
