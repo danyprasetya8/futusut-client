@@ -24,18 +24,25 @@
       </a>
     </section>
 
-    <section class="mt-12 xl:mt-16 mb-8 xl:mb-14 flex flex-col xl:flex-row">
+    <form
+      class="mt-12 xl:mt-16 mb-8 xl:mb-14 flex flex-col xl:flex-row"
+      @submit="doSubscribe"
+    >
       <div class="text-black p-2 xl:p-3 bg-white xl:w-1/3 mb-4 xl:mb-0">
         <input
+          v-model="email"
           type="text"
           class="outline-none w-full"
           placeholder="Enter your email here"
         >
       </div>
-      <button class="xl:ml-8 text-lg hover:text-gray-300 transition duration-150 ease">
+      <button
+        type="submit"
+        class="xl:ml-8 text-lg hover:text-gray-300 transition duration-150 ease"
+      >
         Subscribe Now
       </button>
-    </section>
+    </form>
 
     <section class="text-gray-400 xl:w-1/2 flex flex-col items-center xl:flex-row justify-between">
       <div class="mb-3 xl:mb-0">
@@ -53,6 +60,19 @@
 
 <script setup>
 import config from '@/constant/config'
+import { ref } from 'vue'
+import { isValidEmail } from '@/utils/validation'
 
 const { faq, reschedulePolicy, studioPolicy } = config.page
+
+const email = ref('')
+
+const doSubscribe = e => {
+  e.preventDefault()
+  alert('Email submitted')
+  email.value = ''
+  if (isValidEmail) {
+    // API call
+  }
+}
 </script>

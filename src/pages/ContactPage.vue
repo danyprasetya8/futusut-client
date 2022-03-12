@@ -13,9 +13,13 @@
         </p>
       </section>
 
-      <form class="my-12 w-full xl:w-1/2 self-center grid grid-cols-2 gap-3 xl:gap-6">
+      <form
+        class="my-12 w-full xl:w-1/2 self-center grid grid-cols-2 gap-3 xl:gap-6"
+        @submit="sendMessage"
+      >
         <div class="p-4 border-b-2 border-black col-span-2 xl:col-span-1">
           <input
+            v-model="name"
             type="text"
             class="outline-none w-full"
             placeholder="Name"
@@ -23,13 +27,16 @@
         </div>
         <div class="p-4 border-b-2 border-black col-span-2 xl:col-span-1">
           <input
+            :value="phone"
             type="text"
             class="outline-none w-full"
             placeholder="Phone"
+            @keypress="numberInput"
           >
         </div>
         <div class="p-4 border-b-2 border-black col-span-2">
           <input
+            v-model="email"
             type="text"
             class="outline-none w-full"
             placeholder="Email"
@@ -37,6 +44,7 @@
         </div>
         <div class="p-4 border-b-2 border-black col-span-2">
           <textarea
+            v-model="message"
             class="outline-none w-full"
             placeholder="Message"
           />
@@ -57,4 +65,15 @@
 
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
+import { ref } from 'vue'
+import { numberInput } from '@/utils/number-input'
+
+const email = ref('')
+const message = ref('')
+const name = ref('')
+const phone = ref('')
+
+const sendMessage = e => {
+  e.preventDefault()
+}
 </script>
