@@ -19,4 +19,28 @@
 </style>
 
 <script setup>
+import {
+  isMediumDesktop,
+  isMediumDesktopAndDown,
+  isMediumDesktopAndUp,
+  isMobile,
+  isSmallDesktop,
+  isSmallDesktopAndUp,
+  isSmallMobile
+} from '@/utils/responsive'
+import { useStore } from 'vuex'
+import { onBeforeMount } from 'vue'
+
+const store = useStore()
+
+onBeforeMount(() => {
+  store.commit('setIsMobile', isMobile())
+  store.commit('setIsSmallDesktop', isSmallDesktop())
+  store.commit('setIsSmallDesktopAndUp', isSmallDesktopAndUp())
+  store.commit('setIsMediumDesktop', isMediumDesktop())
+  store.commit('setIsMediumDesktopAndDown', isMediumDesktopAndDown())
+  store.commit('setIsMediumDesktopAndUp', isMediumDesktopAndUp())
+  store.commit('setIsSmallMobile', isSmallMobile())
+})
+
 </script>
