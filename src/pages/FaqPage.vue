@@ -1,19 +1,17 @@
 <template>
   <BaseLayout>
-    <section class="flex flex-col w-4/6">
-      <section class="flex items-center py-10 px-20">
-        <p class="text-2xl">
-          Support
-        </p>
-        <div class="h-1 w-24 bg-black mx-8" />
-        <p class="text-4xl font-bold">
-          FAQ
-        </p>
+    <section class="flex flex-col xl:w-4/6">
+      <section class="flex flex-col xl:flex-row py-10 px-8 xl:px-20">
+        <div class="flex items-center">
+          <p class="text-xl xl:text-2xl">Support</p>
+          <div class="h-1 w-full xl:w-24 bg-black mx-8" />
+        </div>
+        <p class="text-2xl font-bold mt-4 xl:mt-0">FAQ</p>
       </section>
 
-      <section class="px-20 mb-32">
-        <div class="flex justify-between">
-          <div class="flex text-xl">
+      <section class="px-4 xl:px-20 mb-6 xl:mb-32">
+        <div class="flex flex-col xl:flex-row justify-between">
+          <div class="flex text-lg xl:text-xl">
             <button
               v-for="tab in FAQ_TABS"
               :key="tab.id"
@@ -28,7 +26,7 @@
             </button>
           </div>
 
-          <div class="flex border border-gray-300 px-3 py-2 rounded-md w-1/4">
+          <div class="flex border border-gray-300 px-3 py-2 mt-6 xl:mt-0 rounded-md xl:w-1/4">
             <SearchIcon class="w-7 mr-3 text-gray-500" />
             <input
               v-model="searchKeyword"
@@ -38,7 +36,7 @@
           </div>
         </div>
 
-        <div class="mt-12">
+        <div class="mt-6 xl:mt-12">
           <div
             v-for="(faq, i) in faqList"
             :key="i"
