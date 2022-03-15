@@ -67,7 +67,7 @@ const { t, tm } = useI18n()
 
 const protocolItemsLength = toRaw(tm('protocols.items')).length
 const regulationItemsLength = toRaw(tm('regulations.items')).length
-const damagedGoodsItemsLength = toRaw(tm('regulations.items')).length
+const damagedGoodsItemsLength = toRaw(tm('regulations.damagedGoodsItems')).length
 
 onMounted(() => {
   window.scrollTo({

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AboutPage from '@/pages/AboutPage'
 import BookOnlinePage from '@/pages/BookOnlinePage'
+import BookServicePage from '@/pages/BookServicePage'
 import ContactPage from '@/pages/ContactPage'
 import FaqPage from '@/pages/FaqPage'
 import HomePage from '@/pages/HomePage'
@@ -34,6 +35,11 @@ const router = createRouter({
       path: page.bookOnline,
       name: 'BookOnline',
       component: BookOnlinePage
+    },
+    {
+      path: page.bookService,
+      name: 'BookService',
+      component: BookServicePage
     },
     {
       path: page.pricelist,
