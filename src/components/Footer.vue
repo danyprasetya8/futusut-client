@@ -62,17 +62,26 @@
 import config from '@/constant/config'
 import { ref } from 'vue'
 import { isValidEmail } from '@/utils/validation'
+import { useStore } from 'vuex'
 
 const { faq, reschedulePolicy, studioPolicy } = config.page
 
 const email = ref('')
+const store = useStore()
 
 const doSubscribe = e => {
   e.preventDefault()
+  if (!email.value) return
   alert('Email submitted')
-  email.value = ''
+
   if (isValidEmail) {
-    // API call
+    store.dispatch('subscribeNewsletter', {
+      payload: {
+        email: email.value
+      }
+    })
   }
+
+  email.value = ''
 }
 </script>

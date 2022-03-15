@@ -4,6 +4,8 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
+const mock = process.env.NODE_ENV !== 'production' || process.env.MOCK === 'true'
+
 module.exports = {
   runtimeCompiler: true,
   assetsDir: 'static',
@@ -17,7 +19,9 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@': resolve('src')
+        '@': resolve('src'),
+        '@api-mock': mock ? resolve('src/api-mock') : resolve('src/empty'),
+        'axios-mock-adapter': mock ? 'axios-mock-adapter/dist/axios-mock-adapter.min.js' : resolve('src/empty')
       }
     },
     entry: {
@@ -26,13 +30,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    port: 8080,
-    proxy: {
-      '/api/': {
-        target: 'http://localhost:8081',
-        changeOrigin: true
-      }
-    }
+    port: 8080
   },
   chainWebpack: config => {
     config.module

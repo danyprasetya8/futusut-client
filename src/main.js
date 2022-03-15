@@ -5,6 +5,8 @@ import router from '@/router'
 import store from '@/store'
 import './assets/tailwind.css'
 
+require('@api-mock')
+
 const app = createApp(App)
 app.use(i18n)
 app.use(router)

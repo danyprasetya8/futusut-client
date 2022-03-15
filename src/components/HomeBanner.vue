@@ -1,7 +1,11 @@
 <template>
   <div class="banner-container relative">
     <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30" />
-    <img src="~@/assets/images/about-illustration-1.jpg" alt="">
+    <img
+      :src="props.banner.url"
+      alt=""
+      class="banner-image"
+    >
 
     <div class="banner-description__overlay" />
     <p class="banner-description__text">
@@ -15,6 +19,12 @@
 </template>
 
 <style lang="scss" scoped>
+.banner-image {
+  height: 520px;
+  width: 390px;
+  object-fit: cover;
+}
+
 .banner-description {
   &__overlay {
     @apply absolute left-0 top-0 h-0

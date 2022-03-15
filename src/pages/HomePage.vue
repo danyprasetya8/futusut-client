@@ -1,7 +1,7 @@
 <template>
   <BaseLayout>
     <section class="mb-10 xl:mb-24 mt-8 xl:mt-20 w-10/12 xl:w-2/3 self-center">
-      <section class="flex flex-col xl:flex-row">
+      <section class="flex flex-col xl:flex-row mb-6">
         <div
           v-for="banner in paginatedBanners"
           :key="banner.image"
@@ -12,7 +12,7 @@
 
       <section
         v-if="totalPage > 1"
-        class="flex items-center justify-end mt-4"
+        class="flex items-center justify-end mb-4"
       >
         <ChevronLeftIcon
           v-if="currentPage > 1"
@@ -44,6 +44,7 @@
 <script setup>
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 import { computed, onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
 import BaseLayout from '@/components/BaseLayout'
 import HomeBanner from '@/components/HomeBanner'
 import config from '@/constant/config'
@@ -56,16 +57,15 @@ const currentPage = ref(1)
 const totalPage = ref(0)
 const banners = ref([])
 const { isMobile } = useResponsive()
-
-const dummy = {
-  image: 'http://dummy',
-  title: 'very very very very very very very very very long',
-  description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt reiciendis quis laborum unde sed rem consequuntur placeat. Itaque obcaecati inventore rerum harum quos odit, recusandae deserunt saepe, molestias rem in!'
-}
+const store = useStore()
 
 onMounted(() => {
-  banners.value = Array.from({ length: 15 }, (v, i) => ({ ...dummy, title: 'Image ' + (i + 1) + dummy.title }))
-  totalPage.value  = banners.value.length / BANNER_PER_PAGE
+  store.dispatch('getBanners', {
+    onSuccess: res => {
+      banners.value = res.data.data
+      totalPage.value  = banners.value.length / BANNER_PER_PAGE
+    }
+  })
 })
 
 const paginatedBanners = computed(() => {
