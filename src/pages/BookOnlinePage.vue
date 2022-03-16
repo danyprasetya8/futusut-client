@@ -57,6 +57,11 @@ const toBookServicePage = serviceId => {
 const photoSessionDuration = duration => duration + ' minutes'
 
 onMounted(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+
   store.dispatch('getServices', {
     onSuccess: res => {
       services.value = res.data.data

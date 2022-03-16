@@ -1,7 +1,11 @@
 <template>
   <BaseLayout>
-    <section>
-      Pricelist Page
+    <section class="flex justify-center">
+      <img
+        alt=""
+        src="~@/assets/images/pricelist.png"
+        class="xl:w-1/3 mt-5"
+      >
     </section>
   </BaseLayout>
 </template>

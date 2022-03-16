@@ -29,7 +29,7 @@ export default [
           },
           image: '',
           pax: 4,
-          price: 140000,
+          price: 240000,
           printedPhotos: 4
         }
       ]
@@ -70,7 +70,7 @@ export default [
         },
         image: '',
         pax: 4,
-        price: 140000,
+        price: 240000,
         printedPhotos: 4
       }
     }
