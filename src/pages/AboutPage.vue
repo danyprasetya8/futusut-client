@@ -1,6 +1,6 @@
 <template>
   <BaseLayout>
-    <section class="bg-light-black text-white flex flex-col">
+    <section class="bg-light-black text-white flex flex-col xl:text-lg">
       <section class="flex flex-col xl:flex-row py-10 px-8 xl:px-20">
         <div class="flex items-center">
           <p class="text-xl xl:text-2xl">About</p>

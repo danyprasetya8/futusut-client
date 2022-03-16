@@ -39,11 +39,13 @@
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
 import { numberFormatter } from '@/utils/formatter'
-import config from '@/constant/config'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 const router = useRouter()
-const { services } = config
+const store = useStore()
+const services = ref([])
 
 const toBookServicePage = serviceId => {
   router.push({
@@ -53,4 +55,12 @@ const toBookServicePage = serviceId => {
 }
 
 const photoSessionDuration = duration => duration + ' minutes'
+
+onMounted(() => {
+  store.dispatch('getServices', {
+    onSuccess: res => {
+      services.value = res.data.data
+    }
+  })
+})
 </script>

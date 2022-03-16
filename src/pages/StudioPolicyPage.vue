@@ -46,9 +46,11 @@
         <div
           v-for="i in damagedGoodsItemsLength"
           :key="i"
-          class="flex justify-between xl:w-2/5"
+          class="flex xl:w-3/5"
         >
-          <div>{{ t(`regulations.damagedGoodsItems[${i - 1}].name`) }}</div>
+          <div class="w-1/2">
+            {{ t(`regulations.damagedGoodsItems[${i - 1}].name`) }}
+          </div>
           <div>{{ numberFormatter(t(`regulations.damagedGoodsItems[${i - 1}].price`), 'Rp. ') }}</div>
         </div>
       </section>

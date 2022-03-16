@@ -8,7 +8,7 @@ const actions = {
       .catch(err => onFail && onFail(err))
   },
   getService(_, { payload = {}, onSuccess, onFail } = {}) {
-    return axios.post(api.service(payload.serviceId))
+    return axios.get(api.service(payload.serviceId))
       .then(res => onSuccess && onSuccess(res))
       .catch(err => onFail && onFail(err))
   }

@@ -37,10 +37,7 @@ export default [
   },
   {
     method: 'GET',
-    url: api.service,
-    params: {
-      serviceId: 'one-session'
-    },
+    url: api.service('1-session'),
     response: {
       success: true,
       message: 'Success Fetch Data',
@@ -60,10 +57,7 @@ export default [
   },
   {
     method: 'GET',
-    url: api.service,
-    params: {
-      serviceId: 'two-session'
-    },
+    url: api.service('2-session'),
     response: {
       success: true,
       message: 'Success Fetch Data',

@@ -121,6 +121,33 @@
   }
 ```
 
+### Get Add-ons
+# Method: GET
+# Url: 
+# Response body
+```json
+  {
+    "code": 200,
+    "data": [
+      {
+        "id": "id-1",
+        "name": "People",
+        "price": 40000
+      },
+      {
+        "id": "id-2",
+        "name": "Softcopy",
+        "price": 40000
+      },
+      {
+        "id": "id-3",
+        "name": "Print",
+        "price": 20000
+      }
+    ]
+  }
+```
+
 ### Get Reserved Booking's Time
 # Method: GET
 # Url: 
@@ -165,8 +192,12 @@
     "phone": "123456789",
     "pax": 4,
     "message": "",
+    "backdrop": "BLACK | WHITE | GRAY",
+    "softcopy": true,
+    "printedPhotos": 4,
     "serviceId": "one-session",
-    "bookingTime": 1647316500000
+    "bookingTime": 1647316500000,
+    "totalPrice": 300000
   }
 ```
 # Response body
