@@ -58,16 +58,19 @@
         {{ selectedTimeString }}
       </div>
 
-      <div class="mt-3 text-gray-400">
+      <div class="mt-2 text-gray-400">
         Futusut Studio
       </div>
       <div class="text-gray-400">
         {{ photoSessionDuration(service.duration.photoSession) }}
       </div>
+      <div class="text-gray-600 text-lg mt-1">
+        {{ numberFormatter(service.price, 'Rp.') }}
+      </div>
 
       <button
         type="button"
-        class="bg-sky-700 text-white py-1.5 mt-4"
+        class="bg-sky-700 text-white py-2 mt-4"
         @click="toBookFormPage"
       >
         Next
@@ -82,6 +85,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { Calendar } from 'v-calendar'
+import { numberFormatter } from '@/utils/formatter'
 import config from '@/constant/config'
 
 const route = useRoute()
@@ -187,11 +191,14 @@ const setBookingSumaryElement = el => {
 
 const toBookFormPage = () => {
   if (!selectedTime.value) {
-    // show snackbar
     return
   }
   isBookingTimeAvailable(selectedTime.value, () => {
-    // set global object
+    store.commit('setCurrentBook', {
+      serviceId: serviceId.value,
+      bookingDate: selectedDate.value.getTime(),
+      bookingTime: selectedTime.value
+    })
     router.push(config.page.bookForm)
   })
 }

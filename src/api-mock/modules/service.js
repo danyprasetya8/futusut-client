@@ -74,5 +74,30 @@ export default [
         printedPhotos: 4
       }
     }
+  },
+  {
+    method: 'GET',
+    url: api.addOns,
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: [
+        {
+          id: 'people',
+          name: 'People',
+          price: 40000
+        },
+        {
+          id: 'softcopy',
+          name: 'Softcopy',
+          price: 40000
+        },
+        {
+          id: 'printedPhotos',
+          name: 'Printed Photo\'s',
+          price: 20000
+        }
+      ]
+    }
   }
 ]

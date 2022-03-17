@@ -11,6 +11,11 @@ const actions = {
     return axios.get(api.service(payload.serviceId))
       .then(res => onSuccess && onSuccess(res))
       .catch(err => onFail && onFail(err))
+  },
+  getServiceAddOns(_, { onSuccess, onFail } = {}) {
+    return axios.get(api.addOns)
+      .then(res => onSuccess && onSuccess(res))
+      .catch(err => onFail && onFail(err))
   }
 }
 

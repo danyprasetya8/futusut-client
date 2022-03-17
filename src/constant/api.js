@@ -6,6 +6,7 @@ export default {
   service(serviceId) {
     return `${this.services}/${serviceId}`
   },
+  addOns: '/add-ons',
   reservedBookingTime: '/reserved-booking-time',
   bookingTimeAvailability: '/booking-time-availability'
 }
