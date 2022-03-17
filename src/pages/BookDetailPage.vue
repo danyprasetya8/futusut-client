@@ -26,12 +26,12 @@
         <div class="p-2.5 xl:p-4 border border-gray-300">Futusut Studio</div>
       </div>
 
-      <button
-        type="buton"
-        class="py-1.5 bg-sky-700 text-white rounded-sm w-1/4 xl:w-32 hover:bg-sky-600 transition duration-200 ease-linear"
+      <RouterLink
+        :to="{ name: 'BookTime', params: serviceId }"
+        class="py-1.5 bg-sky-700 text-white rounded-sm w-1/4 xl:w-32 hover:bg-sky-600 transition duration-200 ease-linear text-center"
       >
         Book
-      </button>
+      </RouterLink>
 
       <div class="h-0.5 w-full bg-gray-200 my-8" />
 

@@ -98,7 +98,7 @@
 ### Get Service
 # Method: GET
 # Url: 
-# Request params
+# Path variable
 `
   serviceId: 'service-id'
 `

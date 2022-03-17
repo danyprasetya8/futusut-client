@@ -25,7 +25,7 @@
             <button
               type="buton"
               class="py-1.5 bg-sky-700 text-white rounded-sm w-full hover:bg-sky-600 transition duration-200 ease-linear"
-              @click="toBookServicePage(service.id)"
+              @click="toBookDetailPage(service.id)"
             >
               Book
             </button>
@@ -47,9 +47,9 @@ const router = useRouter()
 const store = useStore()
 const services = ref([])
 
-const toBookServicePage = serviceId => {
+const toBookDetailPage = serviceId => {
   router.push({
-    name: 'BookService',
+    name: 'BookDetail',
     params: { serviceId }
   })
 }

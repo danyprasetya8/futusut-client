@@ -1,12 +1,14 @@
 import { createStore } from 'vuex'
-import responsiveModule from './modules/responsive'
+import bookModule from './modules/book'
 import commonModule from './modules/common'
+import responsiveModule from './modules/responsive'
 import serviceModule from './modules/service'
 
 export default createStore({
   modules: {
-    responsiveModule,
+    bookModule,
     commonModule,
+    responsiveModule,
     serviceModule
   }
 })
