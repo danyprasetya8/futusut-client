@@ -75,6 +75,7 @@
                 v-model="form.additionalPrintedPhotos"
                 type="text"
                 class="outline-none w-full"
+                placeholder="0"
                 @keypress="numberInput"
               >
             </div>
@@ -230,7 +231,7 @@ const form = ref({
   name: '',
   phone: '',
   pax: '',
-  additionalPrintedPhotos: '0',
+  additionalPrintedPhotos: '',
   backdrop: {},
   withSoftcopy: false
 })
@@ -265,7 +266,10 @@ const printedPhotosAdditionalPrice = computed(() => ({
 }))
 
 const paxAdditionalPrice = computed(() => {
-  const multiplier = +form.value.pax - service.value.pax
+  let multiplier = 0
+  if (+form.value.pax > service.value.pax) {
+    multiplier = +form.value.pax - service.value.pax
+  }
   return {
     id: personAddOns.value.id,
     total: multiplier * personAddOns.value.price
@@ -293,7 +297,7 @@ const getService = () => {
     },
     onSuccess: res => {
       service.value = res.data.data
-      paxOptions.value = Array.from({ length: 9 - service.value.pax }, (_, i) => service.value.pax + i)
+      paxOptions.value = Array.from({ length: 8 }, (_, i) => i + 1)
       form.value.pax = paxOptions.value[0]
     }
   })

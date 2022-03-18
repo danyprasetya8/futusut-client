@@ -104,39 +104,39 @@ const GENERAL_AND_POLICY_BREAKPOINT = 5
 
 const FAQ_LIST = [
   {
-    question: 'Do we get our soft copy files?',
-    answer: 'Yes, you can get the soft copy files of you session on additional charge (check our Price List for more info). Please note that soft copy files are only accessible 7 days after your session so please download your photos before they expire.'
+    question: 'Do I get soft copy files from my session?',
+    answer: 'You can get the soft copy files from your session on additional charge (check our Price List for more info). Please note that soft copy files are only accessible 7 days after your session so please download your photos before they expire.'
   },
   {
-    question: 'Can we use our shoes inside the studio?',
-    answer: 'Sorry but we do not allow shoes from outside the studio, but we do provide you comfy slippers :)'
+    question: 'Can I use my shoes inside the studio?',
+    answer: 'Sorry, any kind of footwear from outside is not allowed in the studio, but we do provide you comfy slippers :)'
   },
   {
-    question: 'Can we bring our pets?',
+    question: 'Can I bring my pets?',
     answer: 'As much as we love pets and admire them, our studio is not pet friendly :( Let\'s hope that soon we can allow your cute furbabies inside the studio!'
   },
   {
-    question: 'How many pax is the maximum?',
-    answer: 'Due to Covid-19 measures, we limit the number of our guests to maximum 8 pax per session.'
+    question: 'What is the maximum number of people in the studio?',
+    answer: 'Due to Covid-19 measures, we limit the number of our guests to maximum 8 people per session.'
   },
   {
     question: 'What clothing code would you recommend?',
     answer: 'Many of our guests prefer wearing contrast clothes like lightly-colored tops and dark-coloured bottoms. But at the end of the day, wear whatever that is comfortable for you and be confident during the session! You will look good anyway :)'
   },
   {
-    question: 'Can we reschedule our booking?',
-    answer: 'Yes! you can reschedule once with maximum 1x24 hours prior to your scheduled session.'
+    question: 'Can I cancel my booking?',
+    answer: 'Unfortunately, you can\'t cancel/ask for a refund after you have booked your session. But you can definitely reschedule your session! <br />*maximum 1x24 hours prior to your scheduled session. <br />*limited to one time'
   },
   {
-    question: 'Can we walk-in for a session?',
-    answer: 'Yes you can, but there is a low possibility that the slot you desire is available. Therefore, we highly encourageyou to do the bookings beforehand through the link in our bio.'
+    question: 'Can I walk-in for a session?',
+    answer: 'Yes you can, but there is a low possibility that the slot you desire is available. Therefore, we highly encourage you to do the bookings beforehand through the link on our bio.'
   },
   {
     question: 'What if we late for a session?',
-    answer: 'We strongly recommend you to arrive 10 minutes prior to your scheduled time as late arrivals will result in cancellation with no refund. Therefore, if you are unable to arrive on time, we encourage you to make a new booking on available dates/times.'
+    answer: 'We strongly recommend you to arrive 10 minutes prior to your scheduled time as late arrivals will result in cancellation with no refund. Therefore, if you are unable to arrive on time, we encourage you to make a new booking on available dates/times.'
   },
   {
-    question: 'How do we know if our booking is confirmed?',
+    question: 'How do I know if my booking is confirmed?',
     answer: 'You can claim your slot after you making your payments online. We will reach out to you regarding your booking via Whatsapp and Email after it is confirmed by our website.'
   }
 ]

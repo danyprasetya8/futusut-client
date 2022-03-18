@@ -7,7 +7,7 @@
         @click="visibleItems = !visibleItems"
       >
         <div>
-          {{ props.selectedItem.value || props.selectedItem || 'Choose backdrop' }}
+          {{ props.selectedItem.value || props.selectedItem }}
         </div>
         <ChevronDownIcon class="-mr-1 ml-2 h-5 w-5" />
       </button>
