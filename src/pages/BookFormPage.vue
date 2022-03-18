@@ -70,15 +70,10 @@
             <div class="mb-3">
               Additional printed photo's
             </div>
-            <div class="px-4 py-2 border border-gray-300 rounded-md">
-              <input
-                v-model="form.additionalPrintedPhotos"
-                type="text"
-                class="outline-none w-full"
-                placeholder="0"
-                @keypress="numberInput"
-              >
-            </div>
+            <Dropdown
+              v-model:selectedItem="form.additionalPrintedPhotos"
+              :items="ADDITIONAL_PRINTED_PHOTOS"
+            />
           </div>
 
           <div class="col-span-2 xl:col-span-1">
@@ -107,7 +102,6 @@
               class="h-4 w-4 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top mr-2 cursor-pointer"
               id="checkbox"
               type="checkbox"
-              value=""
             >
             <label
               class="form-check-label inline-block text-gray-800"
@@ -145,7 +139,7 @@
               {{ bookingTimeString }}
             </div>
             <div class="mt-1">
-              {{ service.pax }} person
+              {{ service.pax }} people
             </div>
             <div class="mt-1">
               {{ service.printedPhotos }} printed photo's
@@ -200,8 +194,10 @@ import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { numberInput } from '@/utils/number-input'
 import { numberFormatter } from '@/utils/formatter'
-// import { useRouter } from 'vue-router'
-// import config from '@/constant/config'
+import { useRouter } from 'vue-router'
+import config from '@/constant/config'
+
+const ADDITIONAL_PRINTED_PHOTOS = Array.from({ length: 11 }, (_, i) => i)
 
 const BACKDROP = [
   {
@@ -218,7 +214,7 @@ const BACKDROP = [
   }
 ]
 
-// const router = useRouter()
+const router = useRouter()
 const store = useStore()
 
 const service = ref({})
@@ -317,10 +313,10 @@ const pay = e => {
 }
 
 onMounted(() => {
-  // if (!currentBook.value.serviceId) {
-    // router.push(config.page.bookOnline)
-  //   return
-  // }
+  if (!currentBook.value.serviceId) {
+    router.push(config.page.bookOnline)
+    return
+  }
 
   window.scrollTo({
     top: 0,
@@ -329,5 +325,6 @@ onMounted(() => {
   getService()
   getServiceAddOns()
   form.value.backdrop = BACKDROP[0]
+  form.value.additionalPrintedPhotos = ADDITIONAL_PRINTED_PHOTOS[0]
 })
 </script>
