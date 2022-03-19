@@ -13,6 +13,12 @@
       </button>
     </div>
 
+    <div
+      v-if="visibleItems"
+      class="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-0"
+      @click="visibleItems = false"
+    />
+
     <transition
       enter-active-class="transition ease-out duration-100"
       enter-from-class="transform opacity-0 scale-95"
@@ -23,7 +29,7 @@
     >
       <div
         v-if="visibleItems"
-        class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none max-h-44 overflow-y-scroll"
+        class="z-10 origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none max-h-44 overflow-y-scroll"
       >
         <div class="py-1">
           <div

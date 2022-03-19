@@ -8,5 +8,6 @@ export default {
   },
   addOns: '/add-ons',
   reservedBookingTime: '/reserved-booking-time',
-  bookingTimeAvailability: '/booking-time-availability'
+  bookingTimeAvailability: '/booking-time-availability',
+  book: '/book'
 }

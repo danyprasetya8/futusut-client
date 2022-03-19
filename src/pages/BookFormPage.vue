@@ -2,19 +2,19 @@
   <BaseLayout>
     <section
       v-if="service.id"
-      class="flex flex-col px-6 xl:px-0 xl:w-2/3 mx-auto my-10"
+      class="flex flex-col px-6 xl:px-0 xl:w-2/3 xl:mx-auto my-5 xl:my-10"
     >
       <form
-        class="flex"
+        class="flex flex-col xl:flex-row"
         @submit="pay"
       >
-        <section class="grid grid-cols-4 gap-3 w-7/12">
+        <section class="grid grid-cols-4 gap-3 xl:w-7/12">
           <div class="text-2xl font-bold col-span-4">
             Fill out your details
           </div>
           <div class="my-3 h-0.5 bg-gray-200 w-full col-span-4" />
 
-          <div class="col-span-2 xl:col-span-2">
+          <div class="col-span-4 xl:col-span-2">
             <div class="mb-3">
               Name
             </div>
@@ -31,7 +31,7 @@
             </div>
           </div>
 
-          <div class="col-span-2 xl:col-span-2">
+          <div class="col-span-4 xl:col-span-2">
             <div class="mb-3">
               Phone
             </div>
@@ -66,7 +66,7 @@
             </div>
           </div>
 
-          <div class="col-span-2 xl:col-span-2">
+          <div class="col-span-4 xl:col-span-2">
             <div class="mb-3">
               Additional printed photo's
             </div>
@@ -76,7 +76,7 @@
             />
           </div>
 
-          <div class="col-span-2 xl:col-span-1">
+          <div class="col-span-4 xl:col-span-1">
             <div class="mb-3">
               Number of Pax
             </div>
@@ -86,7 +86,7 @@
             />
           </div>
 
-          <div class="col-span-2 xl:col-span-1">
+          <div class="col-span-4 xl:col-span-1">
             <div class="mb-3">
               Backdrop
             </div>
@@ -96,7 +96,7 @@
             />
           </div>
 
-          <div class="col-span-4">
+          <div class="col-span-4 mt-3 xl:mt-0">
             <input
               v-model="form.withSoftcopy"
               class="h-4 w-4 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top mr-2 cursor-pointer"
@@ -125,7 +125,7 @@
           </div>
         </section>
 
-        <section class="ml-6 w-5/12">
+        <section class="xl:ml-6 xl:w-5/12 mt-12 xl:mt-0">
           <div class="text-2xl font-bold col-span-1">
             Booking Summary
           </div>
@@ -188,6 +188,13 @@
   </BaseLayout>
 </template>
 
+<script type="text/javascript">
+  window.addEventListener('beforeunload', e => {
+    e.preventDefault()
+    e.returnValue = ''
+  })
+</script>
+
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
 import Dropdown from '@/components/Dropdown'
@@ -195,6 +202,7 @@ import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { numberInput } from '@/utils/number-input'
 import { numberFormatter } from '@/utils/formatter'
+import { isValidEmail } from '@/utils/validation'
 import { useRouter } from 'vue-router'
 import config from '@/constant/config'
 
@@ -221,6 +229,7 @@ const store = useStore()
 const service = ref({})
 const addOns = ref([])
 const paxOptions = ref([])
+const bookingInfo = ref({})
 
 const form = ref({
   email: '',
@@ -287,6 +296,28 @@ const addOnsInformation = computed(() => {
     }))
 })
 
+const isValidForm = () => {
+  if (!isValidEmail(form.value.email)) {
+    error.value.email = 'Must be valid email'
+  }
+
+  Object.keys(error.value).forEach(key => {
+    if (!form.value[key]) {
+      error.value[key] = 'Must be filled' 
+    }
+  })
+
+  return !Object.keys(error.value)
+    .filter(e => error.value[e])
+    .length
+}
+
+const cleanErrors = () => {
+  Object.keys(error.value).forEach(e => {
+    error.value[e] = ''
+  })
+}
+
 const getService = () => {
   store.dispatch('getService', {
     payload: {
@@ -310,7 +341,83 @@ const getServiceAddOns = () => {
 
 const pay = e => {
   e.preventDefault()
-  console.log(form.value)
+  cleanErrors()
+
+  if (isValidForm()) {
+    store.commit('setIsLoading', true)
+    store.dispatch('isBookingTimeAvailable', {
+      payload: {
+        timestamp: currentBook.value.bookingTime
+      },
+      onSuccess: getBookingTimeAvailabilityOnSuccess,
+      onFail: () => {
+        store.dispatch('toastGeneralError')
+        store.commit('setIsLoading', false)
+      }
+    })
+  } else {
+    scrollToTop()
+  }
+}
+
+const getBookingTimeAvailabilityOnSuccess = res => {
+  store.commit('setIsLoading', false)
+  const { data } = res.data
+
+  if (data) {
+    createBooking()
+  } else {
+    store.dispatch('toastError', 'Time is not available, please choose another time')
+    router.push({
+      name: 'BookTime',
+      params: {
+        serviceId: currentBook.value.serviceId
+      }
+    })
+  }
+}
+
+const createBooking = () => {
+  const {
+    email,
+    message,
+    name,
+    phone,
+    pax,
+    additionalPrintedPhotos,
+    backdrop = {},
+    withSoftcopy
+  } = form.value
+
+  store.dispatch('createBooking', {
+    payload: {
+      email,
+      message,
+      name,
+      phone,
+      pax: +pax,
+      additionalPrintedPhotos: +additionalPrintedPhotos,
+      backdrop: backdrop.id,
+      withSoftcopy,
+      serviceId: currentBook.value.serviceId,
+      bookingDate: currentBook.value.bookingDate,
+      bookingTime: currentBook.value.bookingTime,
+      totalPrice: totalPrice.value
+    },
+    onSuccess: createBookingOnSuccess
+  })
+}
+
+const createBookingOnSuccess = res => {
+  bookingInfo.value = res.data.data
+  const paymentWindow = window.open(bookingInfo.value.paymentUrl, 'Futusut payment', 'width=800,height=1000')
+}
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
 }
 
 onMounted(() => {
@@ -318,11 +425,7 @@ onMounted(() => {
     router.push(config.page.bookOnline)
     return
   }
-
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
+  scrollToTop()
   getService()
   getServiceAddOns()
   form.value.backdrop = BACKDROP[0]

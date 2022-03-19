@@ -1,11 +1,11 @@
 <template>
   <BaseLayout>
-    <section class="self-center xl:mb-10">
+    <section class="self-center flex flex-col items-center xl:items-start xl:mb-10">
       <div class="text-2xl xl:text-3xl font-bold mt-6 xl:mt-10">
         Our Services
       </div>
 
-      <div class="my-6">
+      <div class="my-6 text-sm xl:text-md flex px-8">
         <input
           v-model="isAgreedToPolicy"
           class="h-4 w-4 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top mr-2 cursor-pointer"
@@ -13,7 +13,7 @@
           type="checkbox"
         >
         <label
-          class="form-check-label inline-block text-gray-800"
+          class="form-check-label inline-block text-gray-800 text-center xl:text-left"
           for="checkbox"
         >
           I have read and agreed to

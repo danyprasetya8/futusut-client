@@ -35,6 +35,19 @@ const actions = {
     return axios.get(api.bookingTimeAvailability, { params: { ...payload } })
       .then(res => onSuccess && onSuccess(res))
       .catch(err => onFail && onFail(err))
+  },
+  createBooking({ commit, dispatch }, { payload = {}, onSuccess, onFail } = {}) {
+    commit('setIsLoading', true)
+    return axios.post(api.book, payload)
+      .then(res => {
+        commit('setIsLoading', false)
+        onSuccess && onSuccess(res)
+      })
+      .catch(err => {
+        commit('setIsLoading', false)
+        dispatch('toastGeneralError')
+        onFail && onFail(err)
+      })
   }
 }
 

@@ -195,7 +195,8 @@
     "backdrop": "BLACK | WHITE | GRAY",
     "softcopy": true,
     "printedPhotos": 4,
-    "serviceId": "one-session",
+    "serviceId": "1-session",
+    "bookingDate": 1647277200000,
     "bookingTime": 1647316500000,
     "totalPrice": 300000
   }
@@ -205,7 +206,9 @@
   {
     "code": 200,
     "data": {
-      "bookingId": "booking-id",
+      "booking": {
+        "id": "booking-id"
+      },
       "paymentLink": "https://www.linktoxendit.com"
     }
   }
