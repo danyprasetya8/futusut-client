@@ -178,7 +178,8 @@ const isBookingTimeAvailable = (timestamp, onAvailableTime) => {
       if (data) {
         onAvailableTime()
       } else {
-        getReservedTimes()
+        store.dispatch('toastInfo', 'Time is not available, please choose another time')
+        getReservedTimesOnChangingTime()
       }
     }
   })
@@ -219,16 +220,36 @@ onMounted(() => {
   getService()
 })
 
-const getReservedTimes = () => {
+const getReservedTimesOnChangingTime = () => {
   store.dispatch('getReservedBookingTimes', {
     payload: {
       timestamp: selectedDate.value.getTime()
     },
     onSuccess: res => {
       reservedTimes.value = res.data.data
+    },
+    onFail: () => {
+      store.dispatch('toastGeneralError')
     }
   })
 }
 
-watch(selectedDate, getReservedTimes)
+const getReservedTimesOnChangingDate = () => {
+  store.commit('setIsLoading', true)
+  store.dispatch('getReservedBookingTimes', {
+    payload: {
+      timestamp: selectedDate.value.getTime()
+    },
+    onSuccess: res => {
+      reservedTimes.value = res.data.data
+      store.commit('setIsLoading', false)
+    },
+    onFail: () => {
+      store.commit('setIsLoading', false)
+      store.dispatch('toastGeneralError')
+    }
+  })
+}
+
+watch(selectedDate, getReservedTimesOnChangingDate)
 </script>

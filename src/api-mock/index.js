@@ -30,7 +30,7 @@ data.forEach(d => {
     break
   }
   mock[methodMap[d.method]](...params).reply(() => {
-    const { url, method, response } = d
+    const { url, method, response, status } = d
     /* eslint-disable */
     console.log(`%c Request [${method}] ${url}: `, 'background: #fff; color: #000;', response)
     return [status || 200, response]

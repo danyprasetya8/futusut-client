@@ -11,19 +11,25 @@
         Valid for {{ service.pax }} pax
       </div>
       <div>
-        {{ photoSessionDuration(serviceDuration.photoSession) }} photo session
+        {{ serviceDuration.photoSession }} minutes photo session
       </div>
       <div>
-        {{ photoSessionDuration(serviceDuration.photoSelection) }} photo selection
+        {{ serviceDuration.photoSelection }} minutes photo selection
       </div>
       <div>
         {{ service.printedPhotos }} printed photos
       </div>
 
       <div class="flex my-4">
-        <div class="p-2.5 xl:p-4 border border-gray-300">{{ serviceDuration.photoSession }} min</div>
-        <div class="p-2.5 xl:p-4 border border-l-0 border-r-0 border-gray-300">{{ numberFormatter(service.price, 'Rp.') }}</div>
-        <div class="p-2.5 xl:p-4 border border-gray-300">Futusut Studio</div>
+        <div class="p-2.5 xl:p-4 border border-gray-300">
+          {{ serviceDuration.photoSession }} min
+        </div>
+        <div class="p-2.5 xl:p-4 border border-l-0 border-r-0 border-gray-300">
+          {{ numberFormatter(service.price, 'Rp.') }}
+        </div>
+        <div class="p-2.5 xl:p-4 border border-gray-300">
+          Futusut Studio
+        </div>
       </div>
 
       <RouterLink
@@ -77,7 +83,6 @@ const store = useStore()
 
 const serviceId = computed(() => route.params.serviceId)
 const serviceDuration = computed(() => service.value.duration || {})
-const photoSessionDuration = duration => duration + ' minutes'
 
 onMounted(() => {
   store.dispatch('getService', {

@@ -3,10 +3,14 @@
     <section class="bg-light-black text-white flex flex-col xl:text-lg">
       <section class="flex flex-col xl:flex-row py-10 px-8 xl:px-20">
         <div class="flex items-center">
-          <p class="text-xl xl:text-2xl">About</p>
+          <p class="text-xl xl:text-2xl">
+            About
+          </p>
           <div class="h-1 w-full xl:w-24 bg-white mx-8" />
         </div>
-        <p class="text-2xl font-bold mt-4 xl:mt-0">Our Story</p>
+        <p class="text-2xl font-bold mt-4 xl:mt-0">
+          Our Story
+        </p>
       </section>
 
       <section class="flex flex-col xl:flex-row items-center xl:mt-16 xl:w-1/2 self-center">
@@ -39,7 +43,9 @@
       </section>
 
       <section class="px-8 xl:px-0 text-center mt-16 xl:mt-32 xl:w-5/12 self-center leading-7">
-        <p class="text-2xl xl:text-4xl mb-4 font-bold">Our Mission</p>
+        <p class="text-2xl xl:text-4xl mb-4 font-bold">
+          Our Mission
+        </p>
         <p>
           We stand for honest images, filled with unique feelings in an ode to remember the moments you wish to cherish. It's a privilege to witness the genuine images created by you. The poses, the goofy dances, the coy smiles, the tears and laughter are all full of stories to tell, and we are here to translate them into a time machine of memories for you in the shape of pictures.
         </p>
@@ -51,7 +57,9 @@
 
       <section class="mt-16 xl:mt-32 flex flex-col xl:flex-row xl:justify-end bg-red-200 xl:h-96">
         <div class="xl:w-1/2 px-10 pt-16 bg-black bg-opacity-30">
-          <p class="text-2xl xl:text-3xl font-bold">Our Services</p>
+          <p class="text-2xl xl:text-3xl font-bold">
+            Our Services
+          </p>
           <p class="xl:w-1/2 my-6">
             By making an appointment for a photo session at Futusut Studio, not only will you have a private space all by yourself but also be equipped with a high-resolution camera and professional studio lighting. Additionally, a shutter-button will be provided for you so you can strike as many poses as you want! A variety of props are also available to complement your self-photo experience.
           </p>

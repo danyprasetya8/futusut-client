@@ -4,7 +4,7 @@
       <img
         alt=""
         src="~@/assets/images/pricelist.png"
-        class="xl:w-1/3 mt-5"
+        class="xl:w-1/3 xl:mt-5 mt-1"
       >
     </section>
   </BaseLayout>

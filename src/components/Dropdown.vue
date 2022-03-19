@@ -23,7 +23,7 @@
     >
       <div
         v-if="visibleItems"
-        class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        class="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none max-h-44 overflow-y-scroll"
       >
         <div class="py-1">
           <div
@@ -39,6 +39,28 @@
     </transition>
   </div>
 </template>
+
+<style scoped>
+::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b5b5b5;
+  border-radius: 12px; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+</style>
 
 <script setup>
 import { ChevronDownIcon } from '@heroicons/vue/solid'

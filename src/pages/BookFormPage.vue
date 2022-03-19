@@ -145,10 +145,12 @@
               {{ service.printedPhotos }} printed photo's
             </div>
 
-            <div
-              v-if="addOnsInformation.length"
-              class="mt-4"
-            >
+            <div class="flex justify-between mt-4">
+              <div>{{ service.name }}</div>
+              <div>{{ numberFormatter(service.price, 'Rp.') }}</div>
+            </div>
+
+            <div v-if="addOnsInformation.length">
               <div
                 v-for="addOn in addOnsInformation"
                 :key="addOn.id"
@@ -161,10 +163,9 @@
                   {{ numberFormatter(addOn.total, 'Rp.') }}
                 </div>
               </div>
-
-              <div class="my-3 h-0.5 bg-gray-700 w-full" />
             </div>
 
+            <div class="my-3 h-0.5 bg-gray-700 w-full" />
             <div class="flex justify-between font-bold mt-4">
               <div>
                 Total price:

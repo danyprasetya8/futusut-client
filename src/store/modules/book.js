@@ -18,10 +18,18 @@ const getters = {
 }
 
 const actions = {
-  getReservedBookingTimes(_, { payload = {}, onSuccess, onFail } = {}) {
+  getReservedBookingTimes({ commit, dispatch }, { payload = {}, onSuccess, onFail } = {}) {
+    commit('setIsLoading', true)
     return axios.get(api.reservedBookingTime, { params: { ...payload } })
-      .then(res => onSuccess && onSuccess(res))
-      .catch(err => onFail && onFail(err))
+      .then(res => {
+        commit('setIsLoading', false)
+        onSuccess && onSuccess(res)
+      })
+      .catch(err => {
+        commit('setIsLoading', false)
+        dispatch('toastGeneralError')
+        onFail && onFail(err)
+      })
   },
   isBookingTimeAvailable(_, { payload = {}, onSuccess, onFail } = {}) {
     return axios.get(api.bookingTimeAvailability, { params: { ...payload } })

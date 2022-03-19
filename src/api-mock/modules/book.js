@@ -20,7 +20,7 @@ export default [
     method: 'GET',
     url: api.bookingTimeAvailability,
     params: {
-      timestamp: 1648185000000
+      timestamp: 1648201500000
     },
     response: {
       success: true,

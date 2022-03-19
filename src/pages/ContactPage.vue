@@ -137,16 +137,19 @@ const sendMessage = e => {
   e.preventDefault()
   cleanErrors()
 
-  isValidForm() && store.dispatch('sendFeedback', {
-    payload: {
-      email: form.value.email,
-      message: form.value.message,
-      name: form.value.name,
-      phone: form.value.phone
-    },
-    onSuccess: () => {
-      cleanForm()
-    }
-  })
+  if (isValidForm()) {
+    store.dispatch('sendFeedback', {
+      payload: {
+        email: form.value.email,
+        message: form.value.message,
+        name: form.value.name,
+        phone: form.value.phone
+      },
+      onSuccess: () => {
+        store.dispatch('toastSuccess', 'Message sent')
+        cleanForm()
+      }
+    })
+  }
 }
 </script>

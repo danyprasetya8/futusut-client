@@ -7,10 +7,18 @@ const actions = {
       .then(res => onSuccess && onSuccess(res))
       .catch(err => onFail && onFail(err))
   },
-  getService(_, { payload = {}, onSuccess, onFail } = {}) {
+  getService({ commit, dispatch }, { payload = {}, onSuccess, onFail } = {}) {
+    commit('setIsLoading', true)
     return axios.get(api.service(payload.serviceId))
-      .then(res => onSuccess && onSuccess(res))
-      .catch(err => onFail && onFail(err))
+      .then(res => {
+        commit('setIsLoading', false)
+        onSuccess && onSuccess(res)
+      })
+      .catch(err => {
+        commit('setIsLoading', false)
+        dispatch('toastGeneralError')
+        onFail && onFail(err)
+      })
   },
   getServiceAddOns(_, { onSuccess, onFail } = {}) {
     return axios.get(api.addOns)

@@ -1,9 +1,20 @@
 <template>
   <RouterView />
+  <FullPageLoader v-if="isLoading" />
 </template>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&display=swap');
+
+.toast-container {
+  min-height: 20px !important;
+  padding: 15px 24px !important;
+  border-radius: 4px !important;
+}
+
+.toast-container .Vue-Toastification__toast-body {
+  font-size: 14px !important;
+}
 </style>
 
 <style lang="scss" scoped>
@@ -29,9 +40,12 @@ import {
   isSmallMobile
 } from '@/utils/responsive'
 import { useStore } from 'vuex'
-import { onBeforeMount } from 'vue'
+import { computed, onBeforeMount } from 'vue'
+import FullPageLoader from '@/components/FullPageLoader'
 
 const store = useStore()
+
+const isLoading = computed(() => store.getters.isLoading)
 
 onBeforeMount(() => {
   store.commit('setIsMobile', isMobile())
