@@ -188,22 +188,16 @@
   </BaseLayout>
 </template>
 
-<script type="text/javascript">
-  window.addEventListener('beforeunload', e => {
-    e.preventDefault()
-    e.returnValue = ''
-  })
-</script>
-
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
 import Dropdown from '@/components/Dropdown'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { numberInput } from '@/utils/number-input'
 import { numberFormatter } from '@/utils/formatter'
 import { isValidEmail } from '@/utils/validation'
 import { useRouter } from 'vue-router'
+import { popupCenter } from '@/utils/window'
 import config from '@/constant/config'
 
 const ADDITIONAL_PRINTED_PHOTOS = Array.from({ length: 11 }, (_, i) => i)
@@ -230,6 +224,7 @@ const service = ref({})
 const addOns = ref([])
 const paxOptions = ref([])
 const bookingInfo = ref({})
+const paymentWindow = ref(null)
 
 const form = ref({
   email: '',
@@ -410,7 +405,12 @@ const createBooking = () => {
 
 const createBookingOnSuccess = res => {
   bookingInfo.value = res.data.data
-  const paymentWindow = window.open(bookingInfo.value.paymentUrl, 'Futusut payment', 'width=800,height=1000')
+  paymentWindow.value = popupCenter({
+    url: bookingInfo.value.paymentUrl,
+    title: 'Futusut payment',
+    w: 800,
+    h: 1000
+  })
 }
 
 const scrollToTop = () => {
@@ -420,15 +420,25 @@ const scrollToTop = () => {
   })
 }
 
+const beforeUnloadCallback = e => {
+  e.preventDefault()
+  e.returnValue = ''
+}
+
 onMounted(() => {
   if (!currentBook.value.serviceId) {
     router.push(config.page.bookOnline)
     return
   }
+  window.addEventListener('beforeunload', beforeUnloadCallback)
   scrollToTop()
   getService()
   getServiceAddOns()
   form.value.backdrop = BACKDROP[0]
   form.value.additionalPrintedPhotos = ADDITIONAL_PRINTED_PHOTOS[0]
+})
+
+onUnmounted(() => {
+  window.removeEventListener('beforeunload', beforeUnloadCallback)
 })
 </script>

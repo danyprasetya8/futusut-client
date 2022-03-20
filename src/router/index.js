@@ -20,6 +20,10 @@ const router = createRouter({
   routes: [
     {
       path: page.base,
+      redirect: page.home
+    },
+    {
+      path: page.home,
       name: 'Home',
       component: HomePage
     },

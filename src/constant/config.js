@@ -25,6 +25,7 @@ const BOOKING_HOURS = [
 export default {
   page: {
     base: '/',
+    home: '/home',
     about: '/about',
     contact: '/contact',
     bookForm: '/book/form',

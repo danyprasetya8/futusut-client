@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-between px-6 xl:px-40 py-5 border bottom-1 shadow">
-    <RouterLink :to="base">
+    <RouterLink :to="home">
       <img
         src="~@/assets/images/logo.png"
         class="w-24 xl:w-40"
@@ -12,7 +12,7 @@
         v-for="page in PAGES"
         :key="page.text"
         :to="page.path"
-        :class="{ 'mr-10 hover-title': true, 'active': isTabActive(page.path) }"
+        :class="{ 'mr-10 hover-title': true, 'active': isTabActive(page) }"
       >
         {{ page.text  }}
       </RouterLink>
@@ -41,7 +41,7 @@
               v-for="page in PAGES"
               :key="page.text"
               :to="page.path"
-              :class="{ 'hover-title': true, 'active': isTabActive(page.path) }"
+              :class="{ 'hover-title': true, 'active': isTabActive(page) }"
             >
               {{ page.text  }}
             </RouterLink>
@@ -70,11 +70,11 @@ import { XIcon } from '@heroicons/vue/solid'
 import useResponsive from '@/composable/responsive'
 import BurgerMenu from '@/components/BurgerMenu'
 
-const { base, about, contact, bookOnline, pricelist } = config.page
+const { home, about, contact, bookOnline, pricelist } = config.page
 
 const PAGES = [
   {
-    path: base,
+    path: home,
     text: 'Home'
   },
   {
@@ -99,5 +99,7 @@ const { isMobile } = useResponsive()
 const route = useRoute()
 const visibleMobileMenu = ref(false)
 
-const isTabActive = path => route.path === path
+const isTabActive = page => {
+  return route.path.indexOf(page.path) > -1
+}
 </script>
