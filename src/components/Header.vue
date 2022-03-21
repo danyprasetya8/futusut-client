@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between px-6 xl:px-40 py-5 border bottom-1 shadow">
+  <header class="flex items-center justify-between px-6 xl:px-40 py-5 border bottom-1 shadow">
     <RouterLink :to="home">
       <img
         src="~@/assets/images/logo.png"
@@ -49,7 +49,7 @@
         </div>
       </transition>
     </nav>
-  </div>
+  </header>
 </template>
 
 <style scoped>

@@ -1,11 +1,13 @@
 import MockAdapter from 'axios-mock-adapter'
 import axios from '@/axios'
 
+import adminBookingModule from './modules/admin-booking'
 import bookModule from './modules/book'
 import commonModule from './modules/common'
 import serviceModule from './modules/service'
 
 const data = [
+  ...adminBookingModule,
   ...bookModule,
   ...commonModule,
   ...serviceModule

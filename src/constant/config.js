@@ -35,7 +35,9 @@ export default {
     pricelist: '/pricelist',
     faq: '/faq',
     reschedulePolicy: '/reschedule-policy',
-    studioPolicy: '/studio-policy'
+    studioPolicy: '/studio-policy',
+    adminBooking: '/admin/booking',
+    adminBookingDetail: '/admin/booking/:id'
   },
   role: {
     ADMIN: 'ROLE_ADMIN',
@@ -51,5 +53,11 @@ export default {
       text: 'English'
     }
   ],
-  bookingHours: BOOKING_HOURS.map(h => h * 60 * 1000)
+  bookingHours: BOOKING_HOURS.map(h => h * 60 * 1000),
+  paymentStatus: {
+    PENDING: 'Pending',
+    PAID: 'Paid',
+    EXPIRED: 'Expired',
+    CANCELLED: 'Cancelled'
+  }
 }

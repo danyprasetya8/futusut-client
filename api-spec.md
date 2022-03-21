@@ -230,3 +230,67 @@
     "data": true
   }
 ```
+
+### Get List of Bookings
+# Method: GET
+# Url: 
+# Request params
+`
+  page: 1
+  status: PENDING | PAID | EXPIRED | CANCELLED
+  keyword: dany
+  size: 10
+`
+# Response body
+```json
+  {
+    "code": 200,
+    "data": [
+      {
+        "id": "booking-id",
+        "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
+        "email": "danyprasetyaangtoni@gmail.com",
+        "phone": "085156760534",
+        "serviceId": "1-session",
+        "bookingTime": 1647857400000,
+        "pax": 2,
+        "totalPrice": 120000,
+        "paymentStatus": "PENDING"
+      }
+    ],
+    "paging": {
+      "page": 1,
+      "totalPage": 10,
+      "size": 10
+    }
+  }
+```
+
+### Get Booking Detail
+# Method: GET
+# Url: 
+# Path Variable
+`
+  bookingId: "booking-id"
+`
+# Response body
+```json
+  {
+    "code": 200,
+    "data": {
+      "id": "booking-id",
+      "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
+      "email": "danyprasetyaangtoni@gmail.com",
+      "phone": "085156760534",
+      "message": "I want to bring my pet",
+      "additionalPrintedPhotos": 0,
+      "backdrop": "GRAY",
+      "withSoftCopy": false,
+      "serviceId": "1-session",
+      "bookingTime": 1647857400000,
+      "pax": 2,
+      "totalPrice": 120000,
+      "paymentStatus": "PENDING"
+    }
+  }
+```

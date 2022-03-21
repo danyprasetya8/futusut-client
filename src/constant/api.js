@@ -9,5 +9,11 @@ export default {
   addOns: '/add-ons',
   reservedBookingTime: '/reserved-booking-time',
   bookingTimeAvailability: '/booking-time-availability',
-  book: '/book'
+  book: '/book',
+  admin: {
+    booking: '/admin-booking',
+    bookingDetail(id) {
+      return `${this.booking}/${id}`
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light-black text-white px-10 py-8 xl:px-24 xl:py-16">
+  <footer class="bg-light-black text-white px-10 py-8 xl:px-24 xl:py-16">
     <section class="text-xl xl:text-3xl flex">
       <a
         href="https://instagram.com/futusut?utm_medium=copy_link"
@@ -65,7 +65,7 @@
     <section class="text-gray-400 flex flex-col items-center xl:flex-row justify-center mt-8">
       &copy; 2022 by Futusut
     </section>
-  </div>
+  </footer>
 </template>
 
 <script setup>

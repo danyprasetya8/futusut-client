@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AboutPage from '@/pages/AboutPage'
+import AdminBookingPage from '@/pages/admin/AdminBookingPage'
+import AdminBookingDetailPage from '@/pages/admin/AdminBookingDetailPage'
 import BookFormPage from '@/pages/BookFormPage'
 import BookTimePage from '@/pages/BookTimePage'
 import BookOnlinePage from '@/pages/BookOnlinePage'
@@ -78,13 +80,20 @@ const router = createRouter({
       component: StudioPolicyPage
     },
     {
+      path: page.adminBooking,
+      name: 'AdminBooking',
+      component: AdminBookingPage
+    },
+    {
+      path: page.adminBookingDetail,
+      name: 'AdminBookingDetail',
+      component: AdminBookingDetailPage
+    },
+    {
       path: '/:notFound(.*)*',
       abstract: true,
       name: 'NotFound',
-      component: NotFoundPage,
-      meta: {
-        roles: []
-      }
+      component: NotFoundPage
     }
   ]
 })
