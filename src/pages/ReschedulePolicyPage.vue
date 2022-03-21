@@ -7,6 +7,9 @@
           <div class="h-1 w-full xl:w-24 bg-black mx-8" />
         </div>
         <p class="text-2xl font-bold mt-4 xl:mt-0">Reschedule Policy</p>
+        <div class="mt-4 xl:mt-0 ml-auto">
+          <LanguageDropdown />
+        </div>
       </section>
 
       <section class="px-8 xl:px-20 xl:mt-6">
@@ -14,7 +17,7 @@
           Cancellation Policy
         </p>
         <p class="text-gray-400">
-          It is non refundable for any payment that has been made.
+          {{ t('reschedule.cancellation') }}
         </p>
       </section>
 
@@ -23,7 +26,7 @@
           Reschedule Policy
         </p>
         <p class="text-gray-400">
-          It is possible to reschedule once with maximum 1x24 hours prior to your scheduled session, for more information about session rescheduling please reach out through our whatsapp below
+          {{ t('reschedule.policy') }}
         </p>
       </section>
 
@@ -51,6 +54,10 @@
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
 import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import LanguageDropdown from '@/components/LanguageDropdown'
+
+const { t } = useI18n()
 
 onMounted(() => {
   window.scrollTo({

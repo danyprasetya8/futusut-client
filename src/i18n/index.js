@@ -100,6 +100,10 @@ const i18n = createI18n({
           question: 'How do I know if my booking is confirmed?',
           answer: 'You can claim your slot after you making your payments online. We will reach out to you regarding your booking via Whatsapp and Email after it is confirmed by our website.'
         }
+      },
+      reschedule: {
+        cancellation: 'It is non refundable for any payment that has been made.',
+        policy: 'It is possible to reschedule once with maximum 1x24 hours prior to your scheduled session, for more information about session rescheduling please reach out through our whatsapp below'
       }
     },
     ID: {
@@ -167,6 +171,10 @@ const i18n = createI18n({
           question: 'Bagaimana saya tahu jika pemesanan saya sudah dikonfirmasi?',
           answer: 'Anda dapat mengklaim slot Anda setelah melakukan pembayaran secara online. Kami akan menghubungi Anda mengenai pemesanan Anda melalui Whatsapp dan Email setelah dikonfirmasi oleh situs web kami.'
         }
+      },
+      reschedule: {
+        cancellation: 'Semua pembayaran yang sudah dilakukan tidak bisa di dikembalikan/refund',
+        policy: 'Anda hanya dapat  melakukan pergantian jadwal/reschedule sekali dengan ketentuan pergantian harus dilakukan paling lambat 1x24 jam dari waktu sesi yang sudah dipilih'
       }
     }
   }
