@@ -1,4 +1,5 @@
 import { useToast, POSITION } from 'vue-toastification'
+import debounce from '@/utils/debouncer'
 
 const toast = useToast()
 
@@ -19,7 +20,7 @@ const actions = {
     toast.error(errorMessage, OPTION)
   },
   toastGeneralError() {
-    toast.error('Something went wrong, please try again', OPTION)
+    debounce(() => toast.error('Something went wrong, please try again', OPTION), 300, 'toast')
   }
 }
 

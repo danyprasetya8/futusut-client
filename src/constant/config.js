@@ -59,5 +59,21 @@ export default {
     PAID: 'Paid',
     EXPIRED: 'Expired',
     CANCELLED: 'Cancelled'
+  },
+  addOns: {
+    backdrop: [
+      {
+        id: 'GRAY',
+        value: 'Gray'
+      },
+      {
+        id: 'WHITE',
+        value: 'White'
+      },
+      {
+        id: 'BLACK',
+        value: 'Black'
+      }
+    ]
   }
 }

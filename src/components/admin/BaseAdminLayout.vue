@@ -1,6 +1,6 @@
 <template>
   <section class="flex">
-    <section class="w-1/5 h-screen bg-sky-600 text-white flex flex-col">
+    <section class="w-1/5 h-screen bg-sky-600 text-white flex flex-col sticky left-0 top-0">
       <div class="flex justify-center my-10">
         <img
           src="~@/assets/images/logo-white.png"

@@ -960,8 +960,5 @@ module.exports = {
     width: ['responsive'],
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
-  },
-  plugins: [
-    require('@tailwindcss/line-clamp')
-  ],
+  }
 }

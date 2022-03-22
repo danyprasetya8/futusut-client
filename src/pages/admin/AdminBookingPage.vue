@@ -32,6 +32,7 @@
           <Table
             :headers="TABLE_HEADERS"
             :items="computeBookings"
+            :isLoading="isGettingBookings"
           >
             <template #openDetail="{ item }">
               <RouterLink :to="{
@@ -45,6 +46,7 @@
         </section>
 
         <Pagination
+          v-if="!isGettingBookings"
           v-model:currentPage="currentPage"
           :totalPage="totalPage"
           class="ml-auto"
@@ -115,6 +117,7 @@ const selectedTab = ref(STATUSES[0])
 const currentPage = ref(1)
 const totalPage = ref(0)
 const bookings = ref([])
+const isGettingBookings = ref(false)
 
 const computeBookings = computed(() => bookings.value.map(booking => ({
   ...booking,
@@ -125,20 +128,27 @@ const setSelectedTab = status => {
   selectedTab.value = status
 }
 
-const getBookingList = page => store.dispatch('getBookingList', {
-  payload: {
-    page,
-    keyword: searchKeyword.value,
-    ...(selectedTab.value.id !== 'ALL' && { status: selectedTab.value.id }),
-    size: 10
-  },
-  onSuccess: res => {
-    const { data, paging } = res.data
-    bookings.value = data
-    totalPage.value = paging.totalPage
-    currentPage.value = paging.page
-  }
-})
+const getBookingList = page => {
+  isGettingBookings.value = true
+  store.dispatch('getBookingList', {
+    payload: {
+      page,
+      keyword: searchKeyword.value,
+      ...(selectedTab.value.id !== 'ALL' && { status: selectedTab.value.id }),
+      size: 10
+    },
+    onSuccess: res => {
+      const { data, paging } = res.data
+      bookings.value = data
+      totalPage.value = paging.totalPage
+      currentPage.value = paging.page
+      isGettingBookings.value = false
+    },
+    onFail: () => {
+      isGettingBookings.value = false
+    }
+  })
+}
 
 const setSearchKeyword = keyword => {
   searchKeyword.value = keyword

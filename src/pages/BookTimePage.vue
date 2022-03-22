@@ -23,22 +23,11 @@
             {{ selectedDateString }}
           </div>
 
-          <div class="flex flex-wrap mt-2 justify-center xl:justify-start">
-            <button
-              v-for="time in bookingHours"
-              :key="time.timestamp"
-              type="button"
-              :class="{
-                'p-2 w-1/4 m-1 border border-gray-300 transition duration-200 ease-linear': true,
-                'hover:bg-gray-200': time.available && time.timestamp !== selectedTime,
-                'bg-sky-700 text-white': time.available && time.timestamp === selectedTime,
-                'bg-gray-100 text-gray-400 cursor-default': !time.available,
-              }"
-              @click="setSelectedTime(time)"
-            >
-              {{ time.text }}
-            </button>
-          </div>
+          <TimeSelection
+            v-model:selectedTime="selectedTime"
+            :selectedDate="selectedDate"
+            :onUpdateTimestamp="onUpdateTimestamp"
+          />
         </div>
       </section>
 
@@ -81,11 +70,13 @@
 
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { Calendar } from 'v-calendar'
 import { numberFormatter } from '@/utils/formatter'
+import { setStartOfDay, getIncrementedDate } from '@/utils/date'
+import TimeSelection from '@/components/TimeSelection'
 import config from '@/constant/config'
 
 const route = useRoute()
@@ -96,18 +87,12 @@ const photoSessionDuration = duration => duration + ' minutes'
 const store = useStore()
 const service = ref({})
 const selectedDate = ref(null)
-const selectedTime = ref(null)
-const reservedTimes = ref([])
+const selectedTime = ref(0)
+const refreshTimeSelection = ref(0)
 const bookingSummaryEl = ref()
 
 const minDate = computed(() => getIncrementedDate(1))
 const maxDate = computed(() => getIncrementedDate(14))
-
-const getIncrementedDate = increment => {
-  const date = new Date()
-  date.setDate(date.getDate() + increment)
-  return setStartOfDay(date)
-}
 
 const attributes = computed(() => [
   {
@@ -116,14 +101,14 @@ const attributes = computed(() => [
   }
 ])
 
-const selectedDateString = computed(() => selectedDate.value.toLocaleDateString('en-US', {
+const selectedDateString = computed(() => selectedDate.value.toLocaleDateString('en-GB', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 }))
 
-const selectedTimeString = computed(() => new Date(selectedTime.value).toLocaleDateString('en-US', {
+const selectedTimeString = computed(() => new Date(selectedTime.value).toLocaleDateString('en-GB', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',
@@ -132,56 +117,19 @@ const selectedTimeString = computed(() => new Date(selectedTime.value).toLocaleD
   minute: '2-digit'
 }))
 
-const bookingHours = computed(() => config.bookingHours.map(toBookingHourInformation))
-
-const toBookingHourInformation = bookingHour => {
-  const date = new Date(selectedDate.value.getTime() + bookingHour)
-  return {
-    timestamp: date.getTime(),
-    text: ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2),
-    available: !reservedTimes.value.includes(date.getTime())
-  }
-}
-
-const setStartOfDay = date => {
-  date.setHours(0)
-  date.setMinutes(0)
-  date.setSeconds(0)
-  date.setMilliseconds(0)
-  return date
-}
-
 const onDayClick = day => {
   const startOfDay = setStartOfDay(day.date)
 
   if (startOfDay.getTime() >= minDate.value.getTime() && startOfDay.getTime() <= maxDate.value.getTime()) {
     selectedDate.value = day.date
+    selectedTime.value = 0
   }
 }
 
-const setSelectedTime = time => {
-  if (!time.available) return
-  isBookingTimeAvailable(time.timestamp, () => {
-    selectedTime.value = time.timestamp
-    window.scrollTo({
-      top: bookingSummaryClientRect.value.top,
-      behavior: 'smooth'
-    })
-  })
-}
-
-const isBookingTimeAvailable = (timestamp, onAvailableTime) => {
-  store.dispatch('isBookingTimeAvailable', {
-    payload: { timestamp },
-    onSuccess: res => {
-      const { data } = res.data
-      if (data) {
-        onAvailableTime()
-      } else {
-        store.dispatch('toastInfo', 'Time is not available, please choose another time')
-        getReservedTimesOnChangingTime()
-      }
-    }
+const onUpdateTimestamp = () => {
+  window.scrollTo({
+    top: bookingSummaryClientRect.value.top,
+    behavior: 'smooth'
   })
 }
 
@@ -190,18 +138,31 @@ const setBookingSumaryElement = el => {
   bookingSummaryEl.value = el
 }
 
+const isBookingTimeAvailable = timestamp => {
+  store.dispatch('isBookingTimeAvailable', {
+    payload: { timestamp },
+    onSuccess: res => {
+      const { data } = res.data
+      if (data) {
+        store.commit('setCurrentBook', {
+          serviceId: serviceId.value,
+          bookingDate: selectedDate.value.getTime(),
+          bookingTime: selectedTime.value
+        })
+        router.push(config.page.bookForm)
+      } else {
+        store.dispatch('toastInfo', 'Time is not available, please choose another time')
+        refreshTimeSelection.value++
+      }
+    }
+  })
+}
+
 const toBookFormPage = () => {
   if (!selectedTime.value) {
     return
   }
-  isBookingTimeAvailable(selectedTime.value, () => {
-    store.commit('setCurrentBook', {
-      serviceId: serviceId.value,
-      bookingDate: selectedDate.value.getTime(),
-      bookingTime: selectedTime.value
-    })
-    router.push(config.page.bookForm)
-  })
+  isBookingTimeAvailable(selectedTime.value)
 }
 
 const getService = () => {
@@ -219,37 +180,4 @@ onMounted(() => {
   selectedDate.value = minDate.value
   getService()
 })
-
-const getReservedTimesOnChangingTime = () => {
-  store.dispatch('getReservedBookingTimes', {
-    payload: {
-      timestamp: selectedDate.value.getTime()
-    },
-    onSuccess: res => {
-      reservedTimes.value = res.data.data
-    },
-    onFail: () => {
-      store.dispatch('toastGeneralError')
-    }
-  })
-}
-
-const getReservedTimesOnChangingDate = () => {
-  store.commit('setIsLoading', true)
-  store.dispatch('getReservedBookingTimes', {
-    payload: {
-      timestamp: selectedDate.value.getTime()
-    },
-    onSuccess: res => {
-      reservedTimes.value = res.data.data
-      store.commit('setIsLoading', false)
-    },
-    onFail: () => {
-      store.commit('setIsLoading', false)
-      store.dispatch('toastGeneralError')
-    }
-  })
-}
-
-watch(selectedDate, getReservedTimesOnChangingDate)
 </script>

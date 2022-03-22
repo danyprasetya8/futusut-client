@@ -1,5 +1,12 @@
 <template>
-  <table class="w-full">
+  <TableSkeletonLoader
+    v-if="props.isLoading"
+    :headers="props.headers"
+  />
+  <table
+    v-else
+    class="w-full"
+  >
     <thead>
       <tr>
         <th
@@ -13,7 +20,7 @@
         </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody v-if="props.items.length">
       <tr
         v-for="item in props.items"
         :key="item.id"
@@ -28,7 +35,7 @@
             {{ numberFormatter(item[header.value], 'Rp.') }}
           </template>
           <template v-else-if="header.date">
-            {{ formatDate(item[header.value]) }}
+            {{ formatDate(item[header.value], option) }}
           </template>
           <template v-else-if="header.slot">
             <slot
@@ -42,12 +49,21 @@
         </td>
       </tr>
     </tbody>
+    <tbody v-else>
+      <tr>
+        <td :colspan="props.headers.length" class="text-center py-10">
+          No booking yet
+        </td>
+      </tr>
+    </tbody>
   </table>
 </template>
 
 <script setup>
 import { defineProps } from 'vue'
 import { numberFormatter } from '@/utils/formatter'
+import { formatDate } from '@/utils/date'
+import TableSkeletonLoader from '@/components/admin/TableSkeletonLoader'
 
 const props = defineProps({
   headers: {
@@ -64,11 +80,11 @@ const props = defineProps({
   }
 })
 
-const formatDate = date => new Date(date).toLocaleDateString('en-GB', {
+const option = {
   year: 'numeric',
   month: 'numeric',
   day: 'numeric',
   hour: '2-digit',
   minute: '2-digit'
-})
+}
 </script>

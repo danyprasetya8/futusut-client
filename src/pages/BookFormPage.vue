@@ -202,20 +202,7 @@ import config from '@/constant/config'
 
 const ADDITIONAL_PRINTED_PHOTOS = Array.from({ length: 11 }, (_, i) => i)
 
-const BACKDROP = [
-  {
-    id: 'GRAY',
-    value: 'Gray'
-  },
-  {
-    id: 'WHITE',
-    value: 'White'
-  },
-  {
-    id: 'BLACK',
-    value: 'Black'
-  }
-]
+const BACKDROP = config.addOns.backdrop
 
 const router = useRouter()
 const store = useStore()
@@ -243,7 +230,7 @@ const error = ref({
 })
 
 const currentBook = computed(() => store.getters.currentBook || {})
-const bookingTimeString = computed(() => new Date(currentBook.value.bookingTime).toLocaleDateString('en-US', {
+const bookingTimeString = computed(() => new Date(currentBook.value.bookingTime).toLocaleDateString('en-GB', {
   weekday: 'long',
   year: 'numeric',
   month: 'long',

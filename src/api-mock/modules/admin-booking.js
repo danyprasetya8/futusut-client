@@ -57,13 +57,27 @@ export default [
         message: 'I want to bring my pet',
         additionalPrintedPhotos: 0,
         backdrop: 'GRAY',
-        withSoftCopy: false,
+        withSoftCopy: true,
         serviceId: '1-session',
-        bookingTime: 1647857400000,
+        bookingTime: 1648030200000,
         pax: 2,
         totalPrice: 120000,
-        paymentStatus: 'PENDING'
+        paymentStatus: 'PAID',
+        createdDate: 1647857400000
       }
+    }
+  },
+  {
+    method: 'PUT',
+    url: api.admin.reschedule,
+    body: {
+      bookingId: 'booking-id',
+      bookingTime: 1648203000000
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
     }
   }
 ]

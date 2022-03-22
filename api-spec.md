@@ -1,4 +1,4 @@
-### Get List of Banners
+### Get List of Banners (PENDING)
 # Method: GET
 # Url: 
 # Response body
@@ -22,7 +22,7 @@
   }
 ```
 
-### Subscription
+### Subscription (PENDING)
 # Method: POST
 # Url: 
 # Request body
@@ -160,8 +160,28 @@
   {
     "code": 200,
     "data": [
-      1647315000000,
-      1647316500000
+      {
+        "id": "booking-id",
+        "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
+        "email": "danyprasetyaangtoni@gmail.com",
+        "phone": "085156760534",
+        "serviceId": "1-session",
+        "bookingTime": 1647315000000,
+        "pax": 2,
+        "totalPrice": 120000,
+        "paymentStatus": "PENDING"
+      },
+      {
+        "id": "booking-id",
+        "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
+        "email": "danyprasetyaangtoni@gmail.com",
+        "phone": "085156760534",
+        "serviceId": "1-session",
+        "bookingTime": 1647316500000,
+        "pax": 2,
+        "totalPrice": 120000,
+        "paymentStatus": "PENDING"
+      }
     ]
   }
 ```
@@ -290,7 +310,24 @@
       "bookingTime": 1647857400000,
       "pax": 2,
       "totalPrice": 120000,
-      "paymentStatus": "PENDING"
+      "paymentStatus": "PENDING",
+      "createdDate": 1647857400000
     }
+  }
+```
+
+### Update Booking Time
+# Method: PUT
+# Url: 
+# Request Body
+`
+  bookingId: "booking-id",
+  bookingTime: 1647857400000
+`
+# Response body
+```json
+  {
+    "code": 200,
+    "data": true
   }
 ```

@@ -14,6 +14,7 @@ export default {
     booking: '/admin-booking',
     bookingDetail(id) {
       return `${this.booking}/${id}`
-    }
+    },
+    reschedule: '/reschedule'
   }
 }
