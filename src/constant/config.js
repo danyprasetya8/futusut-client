@@ -41,8 +41,7 @@ export default {
     adminHome: '/admin/home'
   },
   role: {
-    ADMIN: 'ROLE_ADMIN',
-    SUPER_ADMIN: 'ROLE_SUPER_ADMIN'
+    ADMIN: 'ADMIN'
   },
   languages: [
     {
@@ -58,8 +57,7 @@ export default {
   paymentStatus: {
     PENDING: 'Pending',
     PAID: 'Paid',
-    EXPIRED: 'Expired',
-    CANCELLED: 'Cancelled'
+    EXPIRED: 'Expired'
   },
   addOns: {
     backdrop: [

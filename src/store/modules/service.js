@@ -9,7 +9,7 @@ const actions = {
   },
   getService({ commit, dispatch }, { payload = {}, onSuccess, onFail } = {}) {
     commit('setIsLoading', true)
-    return axios.get(api.service(payload.serviceId))
+    return axios.get(api.service, { params: payload })
       .then(res => {
         commit('setIsLoading', false)
         onSuccess && onSuccess(res)

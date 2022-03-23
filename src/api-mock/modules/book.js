@@ -83,7 +83,7 @@ export default [
       backdrop: 'BLACK',
       softcopy: true,
       printedPhotos: 4,
-      serviceId: '1-session',
+      serviceId: 'one-session',
       bookingDate: 1647277200000,
       bookingTime: 1647339000000,
       totalPrice: 300000
