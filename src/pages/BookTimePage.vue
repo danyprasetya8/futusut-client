@@ -19,7 +19,7 @@
           @dayclick="onDayClick"
         />
         <div class="mt-4 xl:mt-0 xl:ml-6">
-          <div class="font-bold text-center xl:text-left">
+          <div class="font-bold text-center xl:text-left mb-2">
             {{ selectedDateString }}
           </div>
 

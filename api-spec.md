@@ -165,10 +165,8 @@
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
         "email": "danyprasetyaangtoni@gmail.com",
         "phone": "085156760534",
-        "serviceId": "1-session",
         "bookingTime": 1647315000000,
         "pax": 2,
-        "totalPrice": 120000,
         "paymentStatus": "PENDING"
       },
       {
@@ -176,10 +174,8 @@
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
         "email": "danyprasetyaangtoni@gmail.com",
         "phone": "085156760534",
-        "serviceId": "1-session",
         "bookingTime": 1647316500000,
         "pax": 2,
-        "totalPrice": 120000,
         "paymentStatus": "PENDING"
       }
     ]

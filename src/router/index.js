@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AboutPage from '@/pages/AboutPage'
 import AdminBookingPage from '@/pages/admin/AdminBookingPage'
 import AdminBookingDetailPage from '@/pages/admin/AdminBookingDetailPage'
+import AdminHomePage from '@/pages/admin/AdminHomePage'
 import BookFormPage from '@/pages/BookFormPage'
 import BookTimePage from '@/pages/BookTimePage'
 import BookOnlinePage from '@/pages/BookOnlinePage'
@@ -88,6 +89,11 @@ const router = createRouter({
       path: page.adminBookingDetail,
       name: 'AdminBookingDetail',
       component: AdminBookingDetailPage
+    },
+    {
+      path: page.adminHome,
+      name: 'AdminHome',
+      component: AdminHomePage
     },
     {
       path: '/:notFound(.*)*',

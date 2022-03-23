@@ -15,7 +15,7 @@
           :to="menu.path"
           :class="{
             'py-3.5 px-10 mb-2 hover:bg-sky-500 rounded-tr-full rounded-br-full transition duration-150 ease-linear': true,
-            'bg-sky-500': selectedTab.path === menu.path
+            'bg-sky-500': isActiveTab(menu.path)
           }"
           @click="setSelectedTab(menu)"
         >
@@ -44,16 +44,24 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import config from '@/constant/config'
 
 const menus = [
+  {
+    path: config.page.adminHome,
+    text: 'Home'
+  },
   {
     path: config.page.adminBooking,
     text: 'Booking'
   }
 ]
 
+const route = useRoute()
 const selectedTab = ref(menus[0])
+
+const isActiveTab = path => route.path.indexOf(path) > -1
 
 const setSelectedTab = tab => {
   selectedTab.value = tab

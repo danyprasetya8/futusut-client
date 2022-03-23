@@ -6,9 +6,9 @@
       type="button"
       :class="{
         'p-2 w-1/4 m-1 border border-gray-300 transition duration-200 ease-linear': true,
-        'hover:bg-gray-200': time.available && time.timestamp !== selectedTime,
-        'bg-sky-700 text-white': time.available && time.timestamp === selectedTime,
+        'hover:bg-gray-200': time.available,
         'bg-gray-100 text-gray-400 cursor-default': !time.available,
+        'bg-sky-700 hover:bg-sky-700 text-sky-50': (time.available && time.timestamp === props.selectedTime) || currentCustomerBooking.bookingTime === time.timestamp
       }"
       @click="setSelectedTime(time)"
     >
@@ -34,6 +34,10 @@ const props = defineProps({
   onUpdateTimestamp: {
     type: Function,
     default: () => {}
+  },
+  bookingId: {
+    type: String,
+    default: ''
   }
 })
 
@@ -77,6 +81,8 @@ const isBookingTimeAvailable = timestamp => {
   })
 }
 
+const currentCustomerBooking = computed(() => reservedBookings.value.find(b => b.id === props.bookingId) || {})
+
 const getReservedBookings = () => {
   store.dispatch('getReservedBookingTimes', {
     payload: {
@@ -84,7 +90,11 @@ const getReservedBookings = () => {
     },
     onSuccess: res => {
       reservedBookings.value = res.data.data
-      emit('update:selectedTime', 0)
+      if (currentCustomerBooking.value.id) {
+        emit('update:selectedTime', currentCustomerBooking.value.bookingTime)
+      } else {
+        emit('update:selectedTime', 0)
+      }
     },
     onFail: () => {
       store.dispatch('toastGeneralError')

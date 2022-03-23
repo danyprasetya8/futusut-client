@@ -37,7 +37,8 @@ export default {
     reschedulePolicy: '/reschedule-policy',
     studioPolicy: '/studio-policy',
     adminBooking: '/admin/booking',
-    adminBookingDetail: '/admin/booking/:id'
+    adminBookingDetail: '/admin/booking/:id',
+    adminHome: '/admin/home'
   },
   role: {
     ADMIN: 'ROLE_ADMIN',

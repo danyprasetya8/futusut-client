@@ -17,22 +17,27 @@
             <div>Name:</div>
             {{ bookingDetail.name }}
           </div>
+
           <div class="mt-4">
             <div>Email:</div>
             {{ bookingDetail.email }}
           </div>
+
           <div class="mt-4">
             <div>Phone number:</div>
             {{ bookingDetail.phone }}
           </div>
+
           <div class="mt-4">
             <div>Additional Message:</div>
             {{ bookingDetail.message }}
           </div>
+
           <div class="mt-4">
             <div>Booking created at:</div>
             {{ formatDate(bookingDetail.createdDate) }}
           </div>
+
           <button
             v-if="isAvailableForReschedule"
             class="mt-4 text-sky-800"
@@ -42,6 +47,7 @@
             Reschedule booking
           </button>
         </div>
+
         <div class="w-1/2">
           <div class="mt-4">
             <div>Payment status:</div>
@@ -49,14 +55,17 @@
               {{ config.paymentStatus[bookingDetail.paymentStatus] }}
             </div>
           </div>
+
           <div class="mt-4">
             <div>Number of pax:</div>
             {{ bookingDetail.pax }}
           </div>
+
           <div class="mt-4">
             <div>Backdrop:</div>
             {{ backdrop.value }}
           </div>
+
           <div
             v-if="addOns.length"
             class="mt-4"
@@ -77,6 +86,7 @@
               </li>
             </ul>
           </div>
+
           <div class="mt-4 font-bold">
             <div>Total price:</div>
             {{ numberFormatter(bookingDetail.totalPrice, 'Rp.') }}
@@ -99,6 +109,7 @@
           v-model:selectedTime="selectedTime"
           :key="refreshTimeSelection"
           :selectedDate="selectedDate"
+          :bookingId="bookingDetail.id"
           class="mx-4 w-1/2"
         />
 
@@ -215,8 +226,7 @@ const addOns = computed(() => [
 )
 
 const isAvailableForReschedule = computed(() => {
-  const currentDate = new Date().getTime()
-  return bookingDetail.value.paymentStatus === 'PAID' && bookingDetail.value.bookingTime > currentDate
+  return bookingDetail.value.paymentStatus === 'PAID' && bookingDetail.value.bookingTime > new Date().getTime()
 })
 
 const onDayClick = day => {

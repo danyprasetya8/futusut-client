@@ -12,26 +12,14 @@ export default [
       message: 'Success Fetch Data',
       data: [
         {
-          id: 'booking-id',
-          name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          email: 'danyprasetyaangtoni@gmail.com',
-          phone: '085156760534',
-          serviceId: '1-session',
-          bookingTime: 1648185000000,
-          pax: 2,
-          totalPrice: 120000,
-          paymentStatus: 'PENDING'
+          id: 'booking-id-3',
+          name: 'Marco marco Marco marco Marco marco',
+          bookingTime: 1648185000000
         },
         {
-          id: 'booking-id-2',
-          name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          email: 'danyprasetyaangtoni@gmail.com',
-          phone: '085156760534',
-          serviceId: '1-session',
-          bookingTime: 1648194900000,
-          pax: 2,
-          totalPrice: 120000,
-          paymentStatus: 'PENDING'
+          id: 'booking-id-4',
+          name: 'Michelle Michelle Michelle Michelle Michelle Michelle ',
+          bookingTime: 1648194900000
         }
       ]
     }
@@ -47,26 +35,14 @@ export default [
       message: 'Success Fetch Data',
       data: [
         {
-          id: 'booking-id-3',
+          id: 'booking-id',
           name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          email: 'danyprasetyaangtoni@gmail.com',
-          phone: '085156760534',
-          serviceId: '1-session',
-          bookingTime: 1648033200000,
-          pax: 2,
-          totalPrice: 120000,
-          paymentStatus: 'PENDING'
+          bookingTime: 1648030200000
         },
         {
-          id: 'booking-id-4',
+          id: 'booking-id-2',
           name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          email: 'danyprasetyaangtoni@gmail.com',
-          phone: '085156760534',
-          serviceId: '1-session',
-          bookingTime: 1648037400000,
-          pax: 2,
-          totalPrice: 120000,
-          paymentStatus: 'PENDING'
+          bookingTime: 1648037400000
         }
       ]
     }
