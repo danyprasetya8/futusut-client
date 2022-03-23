@@ -68,25 +68,23 @@
     "code": 200,
     "data": [
       {
-        "id": "1-session",
+        "id": "one-session",
         "name": "1 Session",
         "duration": {
           "photoSession": 15,
           "photoSelection": 10
         },
-        "image": "",
         "pax": 2,
         "price": 120000,
         "printedPhotos": 2
       },
       {
-        "id": "2-session",
+        "id": "two-session",
         "name": "2 Session",
         "duration": {
           "photoSession": 30,
           "photoSelection": 20
         },
-        "image": "",
         "pax": 4,
         "price": 140000,
         "printedPhotos": 4
@@ -98,7 +96,7 @@
 ### Get Service
 # Method: GET
 # Url: 
-# Path variable
+# Request params
 `
   serviceId: 'service-id'
 `
@@ -107,13 +105,12 @@
   {
     "code": 200,
     "data": {
-      "id": "1-session",
+      "id": "one-session",
       "name": "1 Session",
       "duration": {
         "photoSession": 15,
         "photoSelection": 10
       },
-      "image": "",
       "pax": 2,
       "price": 120000,
       "printedPhotos": 2
@@ -130,18 +127,18 @@
     "code": 200,
     "data": [
       {
-        "id": "id-1",
+        "id": "people",
         "name": "People",
         "price": 40000
       },
       {
-        "id": "id-2",
+        "id": "softcopy",
         "name": "Softcopy",
         "price": 40000
       },
       {
-        "id": "id-3",
-        "name": "Print",
+        "id": "printedPhotos",
+        "name": "Printed Photo's",
         "price": 20000
       }
     ]
@@ -163,20 +160,12 @@
       {
         "id": "booking-id",
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
-        "email": "danyprasetyaangtoni@gmail.com",
-        "phone": "085156760534",
-        "bookingTime": 1647315000000,
-        "pax": 2,
-        "paymentStatus": "PENDING"
+        "bookingTime": 1647315000000
       },
       {
         "id": "booking-id",
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
-        "email": "danyprasetyaangtoni@gmail.com",
-        "phone": "085156760534",
-        "bookingTime": 1647316500000,
-        "pax": 2,
-        "paymentStatus": "PENDING"
+        "bookingTime": 1647316500000
       }
     ]
   }
@@ -222,28 +211,9 @@
   {
     "code": 200,
     "data": {
-      "booking": {
-        "id": "booking-id"
-      },
-      "paymentLink": "https://www.linktoxendit.com"
+      "bookingId": "booking-id",
+      "paymentUrl": "https://www.linktoxendit.com"
     }
-  }
-```
-
-### Cancel Booking
-# Method: DELETE
-# Url: 
-# Request body
-```json
-  {
-    "bookingId": "booking-id"
-  }
-```
-# Response body
-```json
-  {
-    "code": 200,
-    "data": true
   }
 ```
 
@@ -253,7 +223,7 @@
 # Request params
 `
   page: 1
-  status: PENDING | PAID | EXPIRED | CANCELLED
+  status: PENDING | PAID | EXPIRED
   keyword: dany
   size: 10
 `
@@ -285,7 +255,7 @@
 ### Get Booking Detail
 # Method: GET
 # Url: 
-# Path Variable
+# Request params
 `
   bookingId: "booking-id"
 `
@@ -324,6 +294,8 @@
 ```json
   {
     "code": 200,
-    "data": true
+    "data": {
+      "id": "booking-id"
+    }
   }
 ```

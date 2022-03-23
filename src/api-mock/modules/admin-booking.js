@@ -15,7 +15,7 @@ export default [
       data: [
         {
           id: 'booking-id',
-          name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
+          name: 'Dany Prasetya Angtoni',
           email: 'danyprasetyaangtoni@gmail.com',
           phone: '085156760534',
           serviceId: '1-session',
@@ -26,7 +26,7 @@ export default [
         },
         {
           id: 'booking-id-2',
-          name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
+          name: 'Dany Prasetya Angtoni',
           email: 'danyprasetyaangtoni@gmail.com',
           phone: '085156760534',
           serviceId: '2-session',

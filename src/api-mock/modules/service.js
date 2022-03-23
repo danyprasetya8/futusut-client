@@ -9,7 +9,7 @@ export default [
       message: 'Success Fetch Data',
       data: [
         {
-          id: '1-session',
+          id: 'one-session',
           name: '1 Session',
           duration: {
             photoSession: 15,
@@ -21,7 +21,7 @@ export default [
           printedPhotos: 2
         },
         {
-          id: '2-session',
+          id: 'two-session',
           name: '2 Session',
           duration: {
             photoSession: 30,
@@ -37,12 +37,12 @@ export default [
   },
   {
     method: 'GET',
-    url: api.service('1-session'),
+    url: api.service('one-session'),
     response: {
       success: true,
       message: 'Success Fetch Data',
       data: {
-        id: '1-session',
+        id: 'one-session',
         name: '1 Session',
         duration: {
           photoSession: 15,
@@ -57,12 +57,12 @@ export default [
   },
   {
     method: 'GET',
-    url: api.service('2-session'),
+    url: api.service('two-session'),
     response: {
       success: true,
       message: 'Success Fetch Data',
       data: {
-        id: '2-session',
+        id: 'two-session',
         name: '2 Session',
         duration: {
           photoSession: 30,
