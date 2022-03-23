@@ -48,6 +48,19 @@ const actions = {
         dispatch('toastGeneralError')
         onFail && onFail(err)
       })
+  },
+  getCheckoutDetail({ commit, dispatch }, { payload = {}, onSuccess, onFail }) {
+    commit('setIsLoading', true)
+    return axios.get(api.bookingDetail, { params: payload })
+      .then(res => {
+        commit('setIsLoading', false)
+        onSuccess && onSuccess(res)
+      })
+      .catch(err => {
+        commit('setIsLoading', false)
+        dispatch('toastGeneralError')
+        onFail && onFail(err)
+      })
   }
 }
 

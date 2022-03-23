@@ -14,6 +14,7 @@ import NotFoundPage from '@/pages/NotFoundPage'
 import PricelistPage from '@/pages/PricelistPage'
 import ReschedulePolicyPage from '@/pages/ReschedulePolicyPage'
 import StudioPolicyPage from '@/pages/StudioPolicyPage'
+import SuccessCheckoutPage from '@/pages/SuccessCheckoutPage'
 import config from '@/constant/config'
 
 const page = config.page
@@ -79,6 +80,11 @@ const router = createRouter({
       path: page.studioPolicy,
       name: 'StudioPolicy',
       component: StudioPolicyPage
+    },
+    {
+      path: page.successCheckout,
+      name: 'SuccessCheckout',
+      component: SuccessCheckoutPage
     },
     {
       path: page.adminBooking,

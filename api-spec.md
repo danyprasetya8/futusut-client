@@ -217,7 +217,27 @@
   }
 ```
 
-### Get List of Bookings
+### Get Checkout Detail
+# Method: GET
+# Url: 
+# Request params
+`
+  bookingId: "booking-id"
+`
+# Response body
+```json
+  {
+    "code": 200,
+    "data": {
+      "id": "booking-id",
+      "serviceId": "one-session",
+      "bookingTime": 1647857400000,
+      "paymentStatus": "PENDING"
+    }
+  }
+```
+
+### Get List of Bookings (ADMIN)
 # Method: GET
 # Url: 
 # Request params
@@ -252,7 +272,7 @@
   }
 ```
 
-### Get Booking Detail
+### Get Booking Detail (ADMIN)
 # Method: GET
 # Url: 
 # Request params
@@ -282,7 +302,7 @@
   }
 ```
 
-### Update Booking Time
+### Update Booking Time (ADMIN)
 # Method: PUT
 # Url: 
 # Request Body

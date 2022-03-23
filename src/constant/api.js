@@ -8,6 +8,7 @@ export default {
   reservedBookingTime: '/reserved-booking-time',
   bookingTimeAvailability: '/booking-time-availability',
   book: '/book',
+  bookingDetail: '/booking-detail',
   admin: {
     booking: '/admin-booking',
     bookingDetail(id) {

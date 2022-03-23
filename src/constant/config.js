@@ -36,6 +36,7 @@ export default {
     faq: '/faq',
     reschedulePolicy: '/reschedule-policy',
     studioPolicy: '/studio-policy',
+    successCheckout: '/success-checkout/:bookingId',
     adminBooking: '/admin/booking',
     adminBookingDetail: '/admin/booking/:id',
     adminHome: '/admin/home'

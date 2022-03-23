@@ -98,5 +98,22 @@ export default [
         paymentUrl: 'https://checkout-staging.xendit.co/web/6233105b80095de04d94e87f'
       }
     }
+  },
+  {
+    method: 'GET',
+    url: api.bookingDetail,
+    params: {
+      bookingId: 'booking-id'
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: {
+        id: 'booking-id',
+        serviceId: 'one-session',
+        bookingTime: 1648375800000,
+        paymentStatus: 'PAID'
+      }
+    }
   }
 ]
