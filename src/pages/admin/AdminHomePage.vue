@@ -3,7 +3,7 @@
     <div class="text-2xl font-bold m-8">
       Home
     </div>
-    <section class="mx-8 flex">
+    <section class="mx-8 flex flex-col xl:flex-row items-center xl:items-start">
       <Calendar
         :max-date="maxDate"
         :min-date="minDate"
@@ -11,7 +11,7 @@
         @dayclick="onDayClick"
       />
 
-      <div class="flex flex-wrap justify-center xl:justify-start ml-6">
+      <div class="flex flex-wrap justify-center xl:justify-start xl:ml-6 mt-6 xl:mt-0">
         <button
           v-for="time in bookingHours"
           :key="time.timestamp"
@@ -29,7 +29,7 @@
     </section>
     <section
       v-if="selectedTime.timestamp"
-      class="mx-8 mt-6"
+      class="mx-8 mt-6 mb-6 xl:mb-0"
     >
       <div class="flex items-center mb-2">
         <div class="text-lg font-semibold">

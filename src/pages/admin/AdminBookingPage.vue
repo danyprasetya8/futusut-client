@@ -1,15 +1,15 @@
 <template>
   <BaseAdminLayout>
-    <section class="my-2 mx-8">
-      <section class="mt-6 flex flex-col">
-        <div class="flex items-center justify-between">
-          <div class="flex">
+    <section class="my-2 mx-6 xl:mx-8">
+      <section class="xl:mt-6 flex flex-col">
+        <div class="flex flex-col xl:flex-row xl:items-center justify-between">
+          <div class="flex justify-center xl:justify-start">
             <button
               v-for="status in STATUSES"
               :key="status.id"
               type="button"
               :class="{
-                'py-2 mr-10 cursor-pointer text-sky-800 font-semibold border-b-4 border-transparent transition duration-150 ease-linear': true,
+                'py-2 mr-5 xl:mr-10 cursor-pointer text-sky-800 font-semibold border-b-4 border-transparent transition duration-150 ease-linear': true,
                 'border-sky-800': status.id === selectedTab.id
               }"
               @click="setSelectedTab(status)"
@@ -17,6 +17,7 @@
               {{ status.value }}
             </button>
           </div>
+
           <div class="flex border border-gray-300 px-3 py-2 mt-6 xl:mt-0 rounded-md xl:w-1/4">
             <SearchIcon class="w-7 mr-3 text-gray-500" />
             <input
@@ -28,8 +29,9 @@
           </div>
         </div>
 
-        <section class="my-7">
+        <section class="xl:my-7">
           <Table
+            v-if="!isMobile"
             :headers="TABLE_HEADERS"
             :items="computeBookings"
             :isLoading="isGettingBookings"
@@ -43,13 +45,32 @@
               </RouterLink>
             </template>
           </Table>
+          <MobileTable
+            v-else
+            :headers="TABLE_HEADERS"
+            :items="computeBookings"
+            :isLoading="isGettingBookings"
+            class="mt-4"
+          >
+            <template #openDetail="{ item }">
+              <RouterLink :to="{
+                name: 'AdminBookingDetail',
+                params: { id: item.id }
+              }">
+                <div class="text-sky-800">
+                  See detail
+                </div>
+              </RouterLink>
+            </template>
+          </MobileTable>
         </section>
 
         <Pagination
           v-if="!isGettingBookings"
           v-model:currentPage="currentPage"
           :totalPage="totalPage"
-          class="ml-auto"
+          :onUpdatingPage="scrollToTop"
+          class="self-center xl:ml-auto"
         />
       </section>
     </section>
@@ -62,9 +83,11 @@ import { ExternalLinkIcon, SearchIcon } from '@heroicons/vue/solid'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useStore } from 'vuex'
 import Pagination from '@/components/admin/Pagination'
+import MobileTable from '@/components/admin/MobileTable'
 import Table from '@/components/admin/Table'
 import config from '@/constant/config'
 import debounce from '@/utils/debouncer'
+import useResponsive from '@/composable/responsive'
 
 const STATUSES = Object.entries(config.paymentStatus).map(([id, value]) => ({ id, value }))
 STATUSES.unshift({
@@ -110,6 +133,8 @@ const TABLE_HEADERS = [
   }
 ]
 
+const { isMobile } = useResponsive()
+
 const store = useStore()
 
 const searchKeyword = ref('')
@@ -125,6 +150,9 @@ const computeBookings = computed(() => bookings.value.map(booking => ({
 })))
 
 const setSelectedTab = status => {
+  if (isGettingBookings.value) {
+    return
+  }
   selectedTab.value = status
 }
 
@@ -152,6 +180,15 @@ const getBookingList = page => {
 
 const setSearchKeyword = keyword => {
   searchKeyword.value = keyword
+}
+
+const scrollToTop = () => {
+  if (isMobile) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 }
 
 onMounted(() => {

@@ -78,6 +78,10 @@ const props = defineProps({
   totalPage: {
     type: Number,
     required: true
+  },
+  onUpdatingPage: {
+    type: Function,
+    default: () => {}
   }
 })
 
@@ -86,6 +90,7 @@ const emit = defineEmits(['update:currentPage'])
 const setPage = page => {
   if (page < 1 || page > props.totalPage) return
   emit('update:currentPage', page)
+  props.onUpdatingPage()
 }
 
 </script>

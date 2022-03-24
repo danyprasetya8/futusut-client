@@ -51,7 +51,7 @@
         Futusut Studio
       </div>
       <div class="text-gray-400">
-        {{ photoSessionDuration(service.duration.photoSession) }}
+        {{ service.duration.photoSession }} minutes
       </div>
       <div class="text-gray-600 text-lg mt-1">
         {{ numberFormatter(service.price, 'Rp.') }}
@@ -82,7 +82,6 @@ import config from '@/constant/config'
 const route = useRoute()
 const router = useRouter()
 const serviceId = computed(() => route.params.serviceId)
-const photoSessionDuration = duration => duration + ' minutes'
 
 const store = useStore()
 const service = ref({})

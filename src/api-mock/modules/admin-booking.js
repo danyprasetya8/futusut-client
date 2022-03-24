@@ -59,7 +59,7 @@ export default [
         backdrop: 'GRAY',
         withSoftCopy: true,
         serviceId: 'one-session',
-        bookingTime: 1648030200000,
+        bookingTime: 1648807800000,
         pax: 2,
         totalPrice: 120000,
         paymentStatus: 'PAID',

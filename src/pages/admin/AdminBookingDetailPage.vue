@@ -11,8 +11,8 @@
         {{ formatDate(bookingDetail.bookingTime) }}
       </div>
 
-      <section class="flex">
-        <div class="w-1/2">
+      <section class="flex flex-col xl:flex-row">
+        <div class="xl:w-1/2">
           <div class="mt-4">
             <div>Name:</div>
             {{ bookingDetail.name }}
@@ -37,18 +37,9 @@
             <div>Booking created at:</div>
             {{ formatDate(bookingDetail.createdDate) }}
           </div>
-
-          <button
-            v-if="isAvailableForReschedule"
-            class="mt-4 text-sky-800"
-            type="button"
-            @click="visibleRescheduleSection = true"
-          >
-            Reschedule booking
-          </button>
         </div>
 
-        <div class="w-1/2">
+        <div class="xl:w-1/2">
           <div class="mt-4">
             <div>Payment status:</div>
             <div class="font-semibold">
@@ -94,9 +85,18 @@
         </div>
       </section>
 
+      <button
+        v-if="isAvailableForReschedule"
+        class="mt-4 text-sky-800"
+        type="button"
+        @click="visibleRescheduleSection = true"
+      >
+        Reschedule booking
+      </button>
+
       <section
         v-if="visibleRescheduleSection"
-        class="mt-12 flex"
+        class="mt-12 flex flex-col xl:flex-row items-center xl:items-start"
       >
         <Calendar
           :max-date="maxDate"
@@ -110,11 +110,11 @@
           :key="refreshTimeSelection"
           :selectedDate="selectedDate"
           :bookingId="bookingDetail.id"
-          class="mx-4 w-1/2"
+          class="xl:mx-4 xl:w-1/2 mt-6 xl:mt-0"
         />
 
-        <section>
-          <div class="text-2xl font-bold mb-3">
+        <section class="self-start w-full xl:w-1/3">
+          <div class="text-2xl font-bold mb-3 mt-4 xl:mt-0">
             Change schedule
           </div>
           <div>
@@ -146,13 +146,17 @@
 
   <div v-if="visibleRescheduleConfirmationModal">
     <div class="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-20 z-10" />
-    <div class="fixed top-1/2 left-1/2 w-1/3 p-6 bg-white rounded transform -translate-x-1/2 -translate-y-1/2 flex flex-col z-20">
+
+    <!-- class="fixed top-1/2 left-1/2 w-1/3 p-6 bg-white rounded transform -translate-x-1/2 -translate-y-1/2 flex flex-col z-20" -->
+    <div class="modal-container">
       <div class="text-xl font-bold mb-2">
         Reschedule confirmation
       </div>
+
       <div class="mb-10">
         Are you sure to change booking time from {{ formatDate(bookingDetail.bookingTime) }} to {{ formatDate(selectedTime) }}?
       </div>
+
       <div class="ml-auto">
         <button
           type="button"
@@ -161,6 +165,7 @@
         >
           Cancel
         </button>
+
         <button
           type="button"
           class="mr-3 border border-sky-800 bg-sky-800 rounded text-white px-6 py-2 text-sm"
@@ -172,6 +177,13 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.modal-container {
+  @apply fixed left-1/2 p-6 bg-white rounded transform -translate-x-1/2 flex flex-col z-20
+    w-full xl:w-1/3 xl:top-1/2 bottom-0 xl:bottom-auto -translate-y-0 xl:-translate-y-1/2;
+}
+</style>
 
 <script setup>
 import BaseAdminLayout from '@/components/admin/BaseAdminLayout'

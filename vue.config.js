@@ -4,7 +4,7 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
-const mock = process.env.NODE_ENV !== 'production' || process.env.MOCK === 'true'
+const mock = process.env.NODE_ENV !== 'production' && process.env.MOCK === 'true'
 
 module.exports = {
   runtimeCompiler: true,
