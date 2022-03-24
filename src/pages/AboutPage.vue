@@ -14,7 +14,7 @@
       </section>
 
       <section class="flex flex-col xl:flex-row items-center xl:mt-16 xl:w-1/2 self-center">
-        <img src="~@/assets/images/about-illustration-1.jpg" class="image" alt="">
+        <img src="~@/assets/images/image1.jpeg" class="image" alt="">
         <p class="px-8 xl:px-0 text-center xl:text-left mt-4 xl:mt-0 xl:ml-auto xl:w-5/12 leading-8">
           Futusut was established by a group of friends who aim to create a convenient and independent photography session without eliminating the joy and the aesthetics. We want you to make yourself feel at home and be expressive; pose however you want as nobody's watching and be fully in charge as you are your very own photographer.
         </p>
@@ -35,8 +35,8 @@
             <source src="~@/assets/videos/background-ocean.mp4" type="video/mp4">
           </video>
           <img
-            src="~@/assets/images/about-illustration-1.jpg"
-            class="w-28 xl:w-60 transform rotate-12 -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2"
+            src="~@/assets/images/image2.jpeg"
+            class="w-24 xl:w-56 transform rotate-12 -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2"
             alt=""
           >
         </div>
@@ -55,12 +55,12 @@
         </p>
       </section>
 
-      <section class="mt-16 xl:mt-32 flex flex-col xl:flex-row xl:justify-end bg-red-200 xl:h-96">
-        <div class="xl:w-1/2 px-10 pt-16 bg-black bg-opacity-30">
+      <section class="backdrop-container relative mt-16 xl:mt-32 flex flex-col xl:flex-row xl:justify-end">
+        <div class="xl:w-1/2 px-10 py-8 xl:pt-16 bg-black bg-opacity-70">
           <p class="text-2xl xl:text-3xl font-bold">
             Our Services
           </p>
-          <p class="xl:w-1/2 my-6">
+          <p class="xl:w-3/4 my-6">
             By making an appointment for a photo session at Futusut Studio, not only will you have a private space all by yourself but also be equipped with a high-resolution camera and professional studio lighting. Additionally, a shutter-button will be provided for you so you can strike as many poses as you want! A variety of props are also available to complement your self-photo experience.
           </p>
           <RouterLink
@@ -80,6 +80,11 @@
   height: 500px;
   width: 312px;
   object-fit: cover;
+}
+
+.backdrop-container {
+  background: url('~@/assets/images/image3.jpeg') no-repeat;
+  background-position: left;
 }
 </style>
 
