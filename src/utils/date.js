@@ -7,7 +7,14 @@ const OPTION = {
   minute: '2-digit'
 }
 
+const TIME_OPTION = {
+  hour: '2-digit',
+  minute: '2-digit'
+}
+
 export const formatDate = (date, option = OPTION) => new Date(date).toLocaleDateString('en-GB', option)
+
+export const formatTime = (time, option = TIME_OPTION) => new Date(time).toLocaleTimeString('en-GB', option)
 
 export const getIncrementedDate = increment => {
   const date = new Date()

@@ -76,7 +76,8 @@
         },
         "pax": 2,
         "price": 120000,
-        "printedPhotos": 2
+        "printedPhotos": 2,
+        "time": 1
       },
       {
         "id": "two-session",
@@ -87,7 +88,8 @@
         },
         "pax": 4,
         "price": 140000,
-        "printedPhotos": 4
+        "printedPhotos": 4,
+        "time": 2
       }
     ]
   }
@@ -113,7 +115,8 @@
       },
       "pax": 2,
       "price": 120000,
-      "printedPhotos": 2
+      "printedPhotos": 2,
+      "time": 1
     }
   }
 ```
@@ -160,12 +163,12 @@
       {
         "id": "booking-id",
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
-        "bookingTime": 1647315000000
+        "bookingTime": [1647315000000]
       },
       {
         "id": "booking-id",
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
-        "bookingTime": 1647316500000
+        "bookingTime": [1647316500000]
       }
     ]
   }
@@ -231,7 +234,7 @@
     "data": {
       "id": "booking-id",
       "serviceId": "one-session",
-      "bookingTime": 1647857400000,
+      "bookingTime": [1647857400000],
       "paymentStatus": "PENDING"
     }
   }
@@ -258,7 +261,7 @@
         "email": "danyprasetyaangtoni@gmail.com",
         "phone": "085156760534",
         "serviceId": "one-session",
-        "bookingTime": 1647857400000,
+        "bookingTime": [1647857400000],
         "pax": 2,
         "totalPrice": 120000,
         "paymentStatus": "PENDING"
@@ -293,7 +296,7 @@
       "backdrop": "GRAY",
       "withSoftCopy": false,
       "serviceId": "one-session",
-      "bookingTime": 1647857400000,
+      "bookingTime": [1647857400000],
       "pax": 2,
       "totalPrice": 120000,
       "paymentStatus": "PENDING",
@@ -306,16 +309,71 @@
 # Method: PUT
 # Url: 
 # Request Body
-`
-  bookingId: "booking-id",
-  bookingTime: 1647857400000
-`
+```json
+  {
+    "bookingId": "booking-id",
+    "bookingTime": [1647857400000]
+  }
+```
+
 # Response body
 ```json
   {
     "code": 200,
     "data": {
       "id": "booking-id"
+    }
+  }
+```
+
+
+## Login
+# Method: POST
+# Url:
+# Request body
+```json
+  {
+    "email": "admin@mail.com",
+    "password": "secret-password"
+  }
+```
+# Response body
+```json
+  {
+    "code": 200,
+    "data": {
+      "token": "Bearer asdfghjklqweryuiop",
+      "user": {
+        "id": "user-id",
+        "name": "user-name",
+        "role": "ADMIN"
+      }
+    }
+  }
+```
+
+## Logout
+# Method: DELETE
+# Url:
+# Response body
+```json
+  {
+    "code": 200,
+    "data": true
+  }
+```
+
+## Get current user
+# Method: GET
+# Url:
+# Response body
+```json
+  {
+    "code": 200,
+    "data": {
+      "id": "user-id",
+      "name": "user-name",
+      "role": "ADMIN"
     }
   }
 ```

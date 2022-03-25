@@ -8,8 +8,8 @@
         'p-2 w-1/4 m-1 border border-gray-300 transition duration-200 ease-linear': true,
         'hover:bg-gray-200': time.available,
         'bg-gray-100 text-gray-400 cursor-default': !time.available,
-        'bg-sky-700 hover:bg-sky-700 text-sky-50': time.available && time.timestamp === props.selectedTime,
-        'border-sky-800 text-sky-800 bg-white': currentCustomerBooking.bookingTime === time.timestamp
+        'bg-sky-700 hover:bg-sky-700 text-sky-50': time.available && props.selectedTimes.includes(time.timestamp),
+        'border-sky-800 text-sky-800 bg-white': currentCustomerBooking.bookingTime && currentCustomerBooking.bookingTime.includes(time.timestamp)
       }"
       @click="setSelectedTime(time)"
     >
@@ -28,11 +28,11 @@ const props = defineProps({
     type: Date,
     required: true
   },
-  selectedTime: {
-    type: Number,
+  selectedTimes: {
+    type: Array,
     required: true
   },
-  selectedTimeCount: {
+  timeCount: {
     type: Number,
     required: true
   },
@@ -46,7 +46,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:selectedTime'])
+const emit = defineEmits(['update:selectedTimes'])
 
 const store = useStore()
 
@@ -54,33 +54,48 @@ const reservedBookings = ref([])
 
 const bookingHours = computed(() => config.bookingHours.map(toBookingHourInformation))
 
-const reservedTimes = computed(() => (reservedBookings.value || []).map(b => b.bookingTime))
+const reservedTimes = computed(() => (reservedBookings.value || []).flatMap(b => b.bookingTime))
 
-const toBookingHourInformation = bookingHour => {
+const toBookingHourInformation = (bookingHour, index) => {
   const date = new Date(props.selectedDate.getTime() + bookingHour)
   return {
     timestamp: date.getTime(),
     text: ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2),
-    available: !reservedTimes.value.includes(date.getTime()) && date.getTime() > new Date().getTime()
+    available: !reservedTimes.value.includes(date.getTime()) && date.getTime() > new Date().getTime(),
+    index
   }
 }
 
 const setSelectedTime = time => {
   if (!time.available) return
-  isBookingTimeAvailable(time.timestamp)
-}
 
-const isBookingTimeAvailable = timestamp => {
-  store.dispatch('isBookingTimeAvailable', {
-    payload: { timestamp },
+  const reservingTime = bookingHours.value.slice(time.index, props.timeCount + time.index)
+    .filter(t => t.available)
+    .map(t => t.timestamp)
+
+  if (reservingTime.length < props.timeCount) {
+    if (time.index === bookingHours.value.length - 1) {
+      store.dispatch('toastInfo', 'No more session available after ' + time.text)
+      return
+    }
+
+    store.dispatch('toastInfo', 'Time is not available, please choose another time')
+    return
+  }
+
+  store.dispatch('isBookingTimesAvailable', {
+    payload: {
+      timestamps: reservingTime
+    },
     onSuccess: res => {
-      const { data } = res.data
-      if (data) {
-        emit('update:selectedTime', timestamp)
-        props.onUpdateTimestamp()
-      } else {
+      const availabilities = res.map(r => r.data.data) || []
+
+      if (availabilities.some(a => !a)) {
         store.dispatch('toastInfo', 'Time is not available, please choose another time')
         getReservedBookings()
+      } else {
+        emit('update:selectedTimes', reservingTime)
+        props.onUpdateTimestamp()
       }
     }
   })
@@ -95,11 +110,7 @@ const getReservedBookings = () => {
     },
     onSuccess: res => {
       reservedBookings.value = res.data.data
-      if (currentCustomerBooking.value.id) {
-        emit('update:selectedTime', currentCustomerBooking.value.bookingTime)
-      } else {
-        emit('update:selectedTime', 0)
-      }
+      emit('update:selectedTimes', [])
     },
     onFail: () => {
       store.dispatch('toastGeneralError')
@@ -107,21 +118,7 @@ const getReservedBookings = () => {
   })
 }
 
-onMounted(() => {
-  getReservedBookings()
-
-  store.dispatch('isBookingTimesAvailable', {
-    payload: {
-      timestamps: [1648444200000 , 1648448100000]
-    },
-    onSuccess: res => {
-      console.log(res)
-    },
-    onFail: err => {
-      console.log(err)
-    }
-  })
-})
+onMounted(getReservedBookings)
 
 watch(() => props.selectedDate, getReservedBookings)
 </script>

@@ -11,8 +11,13 @@ const first_17_10 = mockTimestamp + bookingHours[14]
 const mockTimestamp2 = getIncrementedDate(3).getTime()
 const second_12_10 = mockTimestamp2 + bookingHours[4]
 const second_13_15 = mockTimestamp2 + bookingHours[5]
+const second_13_40 = mockTimestamp2 + bookingHours[6]
+const second_14_05 = mockTimestamp2 + bookingHours[7]
+const second_16_20 = mockTimestamp2 + bookingHours[12]
 const second_16_45 = mockTimestamp2 + bookingHours[13]
 const second_17_10 = mockTimestamp2 + bookingHours[14]
+const second_17_35 = mockTimestamp2 + bookingHours[15]
+const second_18_00 = mockTimestamp2 + bookingHours[16]
 const second_19_35 = mockTimestamp2 + bookingHours[18]
 const second_20_00 = mockTimestamp2 + bookingHours[19]
 const second_20_25 = mockTimestamp2 + bookingHours[20]
@@ -31,12 +36,12 @@ export default [
         {
           id: 'booking-id',
           name: 'Marco marco Marco marco Marco marco',
-          bookingTime: first_11_45
+          bookingTime: [first_11_45]
         },
         {
           id: 'booking-id-2',
           name: 'Michelle Michelle Michelle Michelle Michelle Michelle ',
-          bookingTime: first_17_10
+          bookingTime: [first_17_10]
         }
       ]
     }
@@ -54,12 +59,12 @@ export default [
         {
           id: 'booking-id-3',
           name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          bookingTime: second_13_15
+          bookingTime: [second_13_15]
         },
         {
           id: 'booking-id-4',
-          name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          bookingTime: second_20_25
+          name: 'Dany Prasetya 2',
+          bookingTime: [second_13_40, second_14_05]
         }
       ]
     }
@@ -92,6 +97,18 @@ export default [
     method: 'GET',
     url: api.bookingTimeAvailability,
     params: {
+      timestamp: second_16_20
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
       timestamp: second_16_45
     },
     response: {
@@ -105,6 +122,30 @@ export default [
     url: api.bookingTimeAvailability,
     params: {
       timestamp: second_17_10
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_17_35
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_18_00
     },
     response: {
       success: true,
@@ -145,7 +186,7 @@ export default [
     response: {
       success: true,
       message: 'Success Fetch Data',
-      data: false
+      data: true
     }
   },
   {
@@ -188,7 +229,7 @@ export default [
       data: {
         id: 'booking-id',
         serviceId: 'one-session',
-        bookingTime: first_11_45,
+        bookingTime: [first_11_45],
         paymentStatus: 'PAID'
       }
     }

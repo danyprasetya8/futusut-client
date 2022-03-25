@@ -5,7 +5,7 @@ const toast = useToast()
 
 const OPTION = {
   position: POSITION.TOP_CENTER,
-  timeout: 2000,
+  timeout: 3000,
   toastClassName: 'toast-container'
 }
 

@@ -196,9 +196,17 @@ import { useStore } from 'vuex'
 import { numberInput } from '@/utils/number-input'
 import { numberFormatter } from '@/utils/formatter'
 import { isValidEmail } from '@/utils/validation'
+import { formatDate, formatTime } from '@/utils/date'
 import { useRouter } from 'vue-router'
 import { popupCenter } from '@/utils/window'
 import config from '@/constant/config'
+
+const DATE_FORMAT = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}
 
 const ADDITIONAL_PRINTED_PHOTOS = Array.from({ length: 11 }, (_, i) => i)
 
@@ -211,7 +219,6 @@ const service = ref({})
 const addOns = ref([])
 const paxOptions = ref([])
 const bookingInfo = ref({})
-const paymentWindow = ref(null)
 
 const form = ref({
   email: '',
@@ -230,14 +237,17 @@ const error = ref({
 })
 
 const currentBook = computed(() => store.getters.currentBook || {})
-const bookingTimeString = computed(() => new Date(currentBook.value.bookingTime).toLocaleDateString('en-GB', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit'
-}))
+
+const totalServiceDurationMillis = computed(() => {
+  const { photoSession, photoSelection } = service.value.duration
+  return (photoSession + photoSelection) * 60 * 1000
+})
+
+const bookingTimeString = computed(() => {
+  const first = currentBook.value.bookingTime[0]
+  return `${formatDate(first, DATE_FORMAT)}
+      ${formatTime(first)} - ${formatTime(first + totalServiceDurationMillis.value)}`
+})
 
 const personAddOns = computed(() => addOns.value.find(a => a.id === 'people'))
 const softcopyAddOns = computed(() => addOns.value.find(a => a.id === 'softcopy'))
@@ -327,7 +337,7 @@ const pay = e => {
 
   if (isValidForm()) {
     store.commit('setIsLoading', true)
-    store.dispatch('isBookingTimeAvailable', {
+    store.dispatch('isBookingTimesAvailable', {
       payload: {
         timestamp: currentBook.value.bookingTime
       },
@@ -344,11 +354,9 @@ const pay = e => {
 
 const getBookingTimeAvailabilityOnSuccess = res => {
   store.commit('setIsLoading', false)
-  const { data } = res.data
+  const availabilities = res.map(r => r.data.data) || []
 
-  if (data) {
-    createBooking()
-  } else {
+  if (availabilities.some(a => !a)) {
     store.dispatch('toastError', 'Time is not available, please choose another time')
     router.push({
       name: 'BookTime',
@@ -356,6 +364,8 @@ const getBookingTimeAvailabilityOnSuccess = res => {
         serviceId: currentBook.value.serviceId
       }
     })
+  } else {
+    createBooking()
   }
 }
 
@@ -392,7 +402,7 @@ const createBooking = () => {
 
 const createBookingOnSuccess = res => {
   bookingInfo.value = res.data.data
-  paymentWindow.value = popupCenter({
+  popupCenter({
     url: bookingInfo.value.paymentUrl,
     title: 'Futusut payment',
     w: 800,

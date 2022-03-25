@@ -24,9 +24,9 @@
           </div>
 
           <TimeSelection
-            v-model:selectedTime="selectedTime"
+            v-model:selectedTimes="selectedTimes"
             :selectedDate="selectedDate"
-            :selectedTimeCount="service.time"
+            :timeCount="service.time"
             :onUpdateTimestamp="onUpdateTimestamp"
           />
         </div>
@@ -44,8 +44,8 @@
       <div class="font-semibold text-xl">
         {{ service.name }}
       </div>
-      <div v-if="selectedTime">
-        {{ selectedTimeString }}
+      <div v-if="selectedTimes.length">
+        {{ selectedTimesString }}
       </div>
 
       <div class="mt-2 text-gray-400">
@@ -62,8 +62,8 @@
         type="button"
         :class="{
           'text-white py-2 mt-4 transition duration-150 ease-linear': true,
-          'bg-sky-700': selectedTime,
-          'bg-gray-400 cursor-default': !selectedTime
+          'bg-sky-700': selectedTimes.length,
+          'bg-gray-400 cursor-default': !selectedTimes.length
         }"
         @click="toBookFormPage"
       >
@@ -80,9 +80,16 @@ import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { Calendar } from 'v-calendar'
 import { numberFormatter } from '@/utils/formatter'
-import { setStartOfDay, getIncrementedDate } from '@/utils/date'
+import { setStartOfDay, getIncrementedDate, formatDate, formatTime } from '@/utils/date'
 import TimeSelection from '@/components/TimeSelection'
 import config from '@/constant/config'
+
+const DATE_FORMAT = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}
 
 const route = useRoute()
 const router = useRouter()
@@ -91,7 +98,7 @@ const serviceId = computed(() => route.params.serviceId)
 const store = useStore()
 const service = ref({})
 const selectedDate = ref(null)
-const selectedTime = ref(0)
+const selectedTimes = ref([])
 const refreshTimeSelection = ref(0)
 const bookingSummaryEl = ref()
 
@@ -112,21 +119,23 @@ const selectedDateString = computed(() => selectedDate.value.toLocaleDateString(
   day: 'numeric'
 }))
 
-const selectedTimeString = computed(() => new Date(selectedTime.value).toLocaleDateString('en-GB', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit'
-}))
+const totalServiceDurationMillis = computed(() => {
+  const { photoSession, photoSelection } = service.value.duration
+  return (photoSession + photoSelection) * 60 * 1000
+})
+
+const selectedTimesString = computed(() => {
+  const first = selectedTimes.value[0]
+  return `${formatDate(first, DATE_FORMAT)}
+      ${formatTime(first)} - ${formatTime(first + totalServiceDurationMillis.value)}`
+})
 
 const onDayClick = day => {
   const startOfDay = setStartOfDay(day.date)
 
   if (startOfDay.getTime() >= minDate.value.getTime() && startOfDay.getTime() <= maxDate.value.getTime()) {
     selectedDate.value = day.date
-    selectedTime.value = 0
+    selectedTimes.value = []
   }
 }
 
@@ -142,31 +151,29 @@ const setBookingSumaryElement = el => {
   bookingSummaryEl.value = el
 }
 
-const isBookingTimeAvailable = timestamp => {
-  store.dispatch('isBookingTimeAvailable', {
-    payload: { timestamp },
+const toBookFormPage = () => {
+  if (!selectedTimes.value.length) return
+
+  store.dispatch('isBookingTimesAvailable', {
+    payload: {
+      timestamps: selectedTimes.value
+    },
     onSuccess: res => {
-      const { data } = res.data
-      if (data) {
+      const availabilities = res.map(r => r.data.data) || []
+
+      if (availabilities.some(a => !a)) {
+        store.dispatch('toastInfo', 'Time is not available, please choose another time')
+        refreshTimeSelection.value++
+      } else {
         store.commit('setCurrentBook', {
           serviceId: serviceId.value,
           bookingDate: selectedDate.value.getTime(),
-          bookingTime: selectedTime.value
+          bookingTime: selectedTimes.value
         })
         router.push(config.page.bookForm)
-      } else {
-        store.dispatch('toastInfo', 'Time is not available, please choose another time')
-        refreshTimeSelection.value++
       }
     }
   })
-}
-
-const toBookFormPage = () => {
-  if (!selectedTime.value) {
-    return
-  }
-  isBookingTimeAvailable(selectedTime.value)
 }
 
 const getService = () => {

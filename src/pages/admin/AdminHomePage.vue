@@ -85,7 +85,7 @@ const toBookingHourInformation = bookingHour => {
   return {
     timestamp: date.getTime(),
     text: ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2),
-    booking: reservedBookings.value.find(b => b.bookingTime === date.getTime()) || {}
+    booking: reservedBookings.value.find(b => b.bookingTime.includes(date.getTime())) || {}
   }
 }
 

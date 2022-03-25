@@ -8,7 +8,7 @@
         {{ service.name }}
       </div>
       <div>
-        {{ formatDate(bookingDetail.bookingTime) }}
+        {{ bookingTimeString }}
       </div>
 
       <section class="flex flex-col xl:flex-row">
@@ -106,9 +106,10 @@
         />
 
         <TimeSelection
-          v-model:selectedTime="selectedTime"
+          v-model:selectedTimes="selectedTimes"
           :key="refreshTimeSelection"
           :selectedDate="selectedDate"
+          :timeCount="service.time"
           :bookingId="bookingDetail.id"
           class="xl:mx-4 xl:w-1/2 mt-6 xl:mt-0"
         />
@@ -119,21 +120,21 @@
           </div>
           <div>
             <div>From:</div>
-            {{ formatDate(bookingDetail.bookingTime) }}
+            {{ bookingTimeString }}
           </div>
           <div
-            v-if="selectedTime"
+            v-if="selectedTimes.length"
             class="mt-2"
           >
             <div>To:</div>
-            {{ formatDate(selectedTime) }}
+            {{ selectedTimesString }}
           </div>
           <button
             type="button"
             :class="{
               'mt-5 text-center w-full py-2 text-white transition duration-150 ease-linear': true,
-              'bg-sky-800 hover:bg-sky-700': selectedTime,
-              'bg-gray-400 cursor-default': !selectedTime
+              'bg-sky-800 hover:bg-sky-700': selectedTimes.length,
+              'bg-gray-400 cursor-default': !selectedTimes.length
             }"
             @click="confirmReschedule"
           >
@@ -147,14 +148,13 @@
   <div v-if="visibleRescheduleConfirmationModal">
     <div class="fixed top-0 left-0 h-screen w-screen bg-black bg-opacity-20 z-10" />
 
-    <!-- class="fixed top-1/2 left-1/2 w-1/3 p-6 bg-white rounded transform -translate-x-1/2 -translate-y-1/2 flex flex-col z-20" -->
     <div class="modal-container">
       <div class="text-xl font-bold mb-2">
         Reschedule confirmation
       </div>
 
       <div class="mb-10">
-        Are you sure to change booking time from {{ formatDate(bookingDetail.bookingTime) }} to {{ formatDate(selectedTime) }}?
+        Are you sure to change booking time from {{ bookingTimeString }} to {{ selectedTimesString }}?
       </div>
 
       <div class="ml-auto">
@@ -192,9 +192,16 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { numberFormatter } from '@/utils/formatter'
-import { formatDate, getIncrementedDate, setStartOfDay } from '@/utils/date'
+import { formatDate, formatTime, getIncrementedDate, setStartOfDay } from '@/utils/date'
 import TimeSelection from '@/components/TimeSelection'
 import config from '@/constant/config'
+
+const DATE_FORMAT = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}
 
 const route = useRoute()
 const router = useRouter()
@@ -204,7 +211,7 @@ const bookingDetail = ref({})
 const service = ref({})
 const visibleRescheduleSection = ref(false)
 const selectedDate = ref(null)
-const selectedTime = ref(0)
+const selectedTimes = ref([])
 const visibleRescheduleConfirmationModal = ref(false)
 const refreshTimeSelection = ref(0)
 
@@ -217,6 +224,27 @@ const attributes = computed(() => [
     dates: selectedDate.value
   }
 ])
+
+const serviceDuration = computed(() => service.value.duration || {})
+
+const totalServiceDurationMillis = computed(() => {
+  const { photoSession, photoSelection } = serviceDuration.value
+  return (photoSession + photoSelection) * 60 * 1000
+})
+
+const firstBookingDetailTime = computed(() => bookingDetail.value.bookingTime[0] || 0)
+
+const bookingTimeString = computed(() => {
+  return `${formatDate(firstBookingDetailTime.value, DATE_FORMAT)}
+      ${formatTime(firstBookingDetailTime.value)} - ${formatTime(firstBookingDetailTime.value + totalServiceDurationMillis.value)}`
+})
+
+const firstSelectedTime = computed(() => selectedTimes.value[0] || 0)
+
+const selectedTimesString = computed(() => {
+  return `${formatDate(firstSelectedTime.value, DATE_FORMAT)}
+      ${formatTime(firstSelectedTime.value)} - ${formatTime(firstSelectedTime.value + totalServiceDurationMillis.value)}`
+})
 
 const backdrop = computed(() => config.addOns.backdrop.find(b => b.id === bookingDetail.value.backdrop))
 
@@ -238,7 +266,7 @@ const addOns = computed(() => [
 )
 
 const isAvailableForReschedule = computed(() => {
-  return bookingDetail.value.paymentStatus === 'PAID' && bookingDetail.value.bookingTime > new Date().getTime()
+  return bookingDetail.value.paymentStatus === 'PAID' && firstBookingDetailTime.value > new Date().getTime()
 })
 
 const onDayClick = day => {
@@ -246,30 +274,31 @@ const onDayClick = day => {
 
   if (startOfDay.getTime() >= minDate.value.getTime() && startOfDay.getTime() <= maxDate.value.getTime()) {
     selectedDate.value = day.date
-    selectedTime.value = 0
+    selectedTimes.value = []
   }
 }
 
 const confirmReschedule = () => {
-  if (!selectedTime.value) return
+  if (!selectedTimes.value.length) return
   visibleRescheduleConfirmationModal.value = true
 }
 
 const doReschedule = () => {
   store.commit('setIsLoading', true)
-  store.dispatch('isBookingTimeAvailable', {
+  store.dispatch('isBookingTimesAvailable', {
     payload: {
-      timestamp: selectedTime.value
+      timestamp: selectedTimes.value
     },
     onSuccess: res => {
-      const { data } = res.data
-      if (data) {
-        rescheduleBooking()
-      } else {
+      const availabilities = res.map(r => r.data.data) || []
+
+      if (availabilities.some(a => !a)) {
         store.commit('setIsLoading', false)
         store.dispatch('toastInfo', 'Time is not available, please choose another time')
         refreshTimeSelection.value++
         visibleRescheduleConfirmationModal.value = false
+      } else {
+        rescheduleBooking()
       }
     },
     onFail: () => {
@@ -283,7 +312,7 @@ const rescheduleBooking = () => {
   store.dispatch('rescheduleBooking', {
     payload: {
       bookingId: bookingDetail.value.id,
-      bookingTime: selectedTime.value
+      bookingTime: selectedTimes.value
     },
     onSuccess: () => {
       router.push(config.page.adminBooking)

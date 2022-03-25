@@ -101,16 +101,8 @@ const TABLE_HEADERS = [
     value: 'name'
   },
   {
-    text: 'Email',
-    value: 'email'
-  },
-  {
-    text: 'Phone',
-    value: 'phone'
-  },
-  {
     text: 'Service',
-    value: 'serviceId'
+    value: 'service'
   },
   {
     text: 'Time',
@@ -137,6 +129,7 @@ const { isMobile } = useResponsive()
 
 const store = useStore()
 
+const services = ref([])
 const searchKeyword = ref('')
 const selectedTab = ref(STATUSES[0])
 const currentPage = ref(1)
@@ -146,6 +139,8 @@ const isGettingBookings = ref(false)
 
 const computeBookings = computed(() => bookings.value.map(booking => ({
   ...booking,
+  service: services.value.find(s => s.id === booking.serviceId).name,
+  bookingTime: booking.bookingTime[0],
   paymentStatus: config.paymentStatus[booking.paymentStatus]
 })))
 
@@ -192,7 +187,12 @@ const scrollToTop = () => {
 }
 
 onMounted(() => {
-  getBookingList(1)
+  store.dispatch('getServices', {
+    onSuccess: res => {
+      services.value = res.data.data
+      getBookingList(1)
+    }
+  })
 })
 
 watch(currentPage, () => getBookingList(currentPage.value))
