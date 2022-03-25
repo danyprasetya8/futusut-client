@@ -31,6 +31,13 @@ const actions = {
         onFail && onFail(err)
       })
   },
+  isBookingTimesAvailable(_, { payload = {}, onSuccess, onFail } = {}) {
+    const { timestamps = [] } = payload
+    const promises = timestamps.map(timestamp => axios.get(api.bookingTimeAvailability, { params: { timestamp } }))
+    return Promise.all([...promises])
+      .then(res => onSuccess && onSuccess(res))
+      .catch(err => onFail && onFail(err))
+  },
   isBookingTimeAvailable(_, { payload = {}, onSuccess, onFail } = {}) {
     return axios.get(api.bookingTimeAvailability, { params: { ...payload } })
       .then(res => onSuccess && onSuccess(res))

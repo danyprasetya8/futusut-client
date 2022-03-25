@@ -102,7 +102,21 @@ const getReservedBookings = () => {
   })
 }
 
-onMounted(getReservedBookings)
+onMounted(() => {
+  getReservedBookings()
+
+  store.dispatch('isBookingTimesAvailable', {
+    payload: {
+      timestamps: [1648201500000, 1648203000000]
+    },
+    onSuccess: res => {
+      console.log(res)
+    },
+    onFail: err => {
+      console.log(err)
+    }
+  })
+})
 
 watch(() => props.selectedDate, getReservedBookings)
 </script>

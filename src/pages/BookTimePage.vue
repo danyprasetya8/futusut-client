@@ -59,7 +59,11 @@
 
       <button
         type="button"
-        class="bg-sky-700 text-white py-2 mt-4"
+        :class="{
+          'text-white py-2 mt-4 transition duration-150 ease-linear': true,
+          'bg-sky-700': selectedTime,
+          'bg-gray-400 cursor-default': !selectedTime
+        }"
         @click="toBookFormPage"
       >
         Next
