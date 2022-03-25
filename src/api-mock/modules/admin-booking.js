@@ -1,4 +1,13 @@
 import api from '@/constant/api'
+import config from '@/constant/config'
+import { getIncrementedDate } from '@/utils/date'
+
+const { bookingHours } = config
+
+const mockTimestamp2 = getIncrementedDate(3).getTime()
+const _13_15 = mockTimestamp2 + bookingHours[5]
+const _17_10 = mockTimestamp2 + bookingHours[14]
+const _20_00 = mockTimestamp2 + bookingHours[19]
 
 export default [
   {
@@ -14,23 +23,23 @@ export default [
       message: 'Success Fetch Data',
       data: [
         {
-          id: 'booking-id',
+          id: 'booking-id-3',
           name: 'Dany Prasetya Angtoni',
           email: 'danyprasetyaangtoni@gmail.com',
           phone: '085156760534',
           serviceId: 'one-session',
-          bookingTime: 1647857400000,
+          bookingTime: _13_15,
           pax: 2,
           totalPrice: 120000,
           paymentStatus: 'PENDING'
         },
         {
-          id: 'booking-id-2',
+          id: 'booking-id-4',
           name: 'Dany Prasetya Angtoni',
           email: 'danyprasetyaangtoni@gmail.com',
           phone: '085156760534',
           serviceId: 'two-session',
-          bookingTime: 1647857400000,
+          bookingTime: _20_00,
           pax: 4,
           totalPrice: 240000,
           paymentStatus: 'PENDING'
@@ -45,12 +54,12 @@ export default [
   },
   {
     method: 'GET',
-    url: api.admin.bookingDetail('booking-id'),
+    url: api.admin.bookingDetail('booking-id-3'),
     response: {
       success: true,
       message: 'Success Fetch Data',
       data: {
-        id: 'booking-id',
+        id: 'booking-id-3',
         name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
         email: 'danyprasetyaangtoni@gmail.com',
         phone: '085156760534',
@@ -59,7 +68,7 @@ export default [
         backdrop: 'GRAY',
         withSoftCopy: true,
         serviceId: 'one-session',
-        bookingTime: 1648807800000,
+        bookingTime: _13_15,
         pax: 2,
         totalPrice: 120000,
         paymentStatus: 'PAID',
@@ -72,7 +81,7 @@ export default [
     url: api.admin.reschedule,
     body: {
       bookingId: 'booking-id',
-      bookingTime: 1648203000000
+      bookingTime: _17_10
     },
     response: {
       success: true,

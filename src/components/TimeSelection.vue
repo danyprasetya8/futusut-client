@@ -8,7 +8,8 @@
         'p-2 w-1/4 m-1 border border-gray-300 transition duration-200 ease-linear': true,
         'hover:bg-gray-200': time.available,
         'bg-gray-100 text-gray-400 cursor-default': !time.available,
-        'bg-sky-700 hover:bg-sky-700 text-sky-50': (time.available && time.timestamp === props.selectedTime) || currentCustomerBooking.bookingTime === time.timestamp
+        'bg-sky-700 hover:bg-sky-700 text-sky-50': time.available && time.timestamp === props.selectedTime,
+        'border-sky-800 text-sky-800 bg-white': currentCustomerBooking.bookingTime === time.timestamp
       }"
       @click="setSelectedTime(time)"
     >
@@ -28,6 +29,10 @@ const props = defineProps({
     required: true
   },
   selectedTime: {
+    type: Number,
+    required: true
+  },
+  selectedTimeCount: {
     type: Number,
     required: true
   },
@@ -107,7 +112,7 @@ onMounted(() => {
 
   store.dispatch('isBookingTimesAvailable', {
     payload: {
-      timestamps: [1648201500000, 1648203000000]
+      timestamps: [1648444200000 , 1648448100000]
     },
     onSuccess: res => {
       console.log(res)

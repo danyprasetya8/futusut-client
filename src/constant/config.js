@@ -37,6 +37,7 @@ export default {
     reschedulePolicy: '/reschedule-policy',
     studioPolicy: '/studio-policy',
     successCheckout: '/success-checkout/:bookingId',
+    admin: '/admin',
     adminBooking: '/admin/booking',
     adminBookingDetail: '/admin/booking/:id',
     adminHome: '/admin/home'
@@ -75,5 +76,9 @@ export default {
         value: 'Black'
       }
     ]
+  },
+  service: {
+    oneSession: 'one-session',
+    twoSession: 'two-session'
   }
 }

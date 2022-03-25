@@ -1,25 +1,42 @@
 import api from '@/constant/api'
+import config from '@/constant/config'
+import { getIncrementedDate } from '@/utils/date'
+
+const { bookingHours } = config
+
+const mockTimestamp = getIncrementedDate(1).getTime()
+const first_11_45 = mockTimestamp + bookingHours[3]
+const first_17_10 = mockTimestamp + bookingHours[14]
+
+const mockTimestamp2 = getIncrementedDate(3).getTime()
+const second_12_10 = mockTimestamp2 + bookingHours[4]
+const second_13_15 = mockTimestamp2 + bookingHours[5]
+const second_16_45 = mockTimestamp2 + bookingHours[13]
+const second_17_10 = mockTimestamp2 + bookingHours[14]
+const second_19_35 = mockTimestamp2 + bookingHours[18]
+const second_20_00 = mockTimestamp2 + bookingHours[19]
+const second_20_25 = mockTimestamp2 + bookingHours[20]
 
 export default [
   {
     method: 'GET',
     url: api.reservedBookingTime,
     params: {
-      timestamp: 1648141200000
+      timestamp: mockTimestamp
     },
     response: {
       success: true,
       message: 'Success Fetch Data',
       data: [
         {
-          id: 'booking-id-3',
+          id: 'booking-id',
           name: 'Marco marco Marco marco Marco marco',
-          bookingTime: 1648185000000
+          bookingTime: first_11_45
         },
         {
-          id: 'booking-id-4',
+          id: 'booking-id-2',
           name: 'Michelle Michelle Michelle Michelle Michelle Michelle ',
-          bookingTime: 1648194900000
+          bookingTime: first_17_10
         }
       ]
     }
@@ -28,21 +45,21 @@ export default [
     method: 'GET',
     url: api.reservedBookingTime,
     params: {
-      timestamp: 1647968400000
+      timestamp: mockTimestamp2
     },
     response: {
       success: true,
       message: 'Success Fetch Data',
       data: [
         {
-          id: 'booking-id',
+          id: 'booking-id-3',
           name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          bookingTime: 1648030200000
+          bookingTime: second_13_15
         },
         {
-          id: 'booking-id-2',
+          id: 'booking-id-4',
           name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          bookingTime: 1648037400000
+          bookingTime: second_20_25
         }
       ]
     }
@@ -51,7 +68,19 @@ export default [
     method: 'GET',
     url: api.bookingTimeAvailability,
     params: {
-      timestamp: 1648201500000
+      timestamp: second_12_10
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_13_15
     },
     response: {
       success: true,
@@ -63,12 +92,60 @@ export default [
     method: 'GET',
     url: api.bookingTimeAvailability,
     params: {
-      timestamp: 1648203000000
+      timestamp: second_16_45
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: false
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_17_10
     },
     response: {
       success: true,
       message: 'Success Fetch Data',
       data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_19_35
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_20_00
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: true
+    }
+  },
+  {
+    method: 'GET',
+    url: api.bookingTimeAvailability,
+    params: {
+      timestamp: second_20_25
+    },
+    response: {
+      success: true,
+      message: 'Success Fetch Data',
+      data: false
     }
   },
   {
@@ -84,8 +161,8 @@ export default [
       softcopy: true,
       printedPhotos: 4,
       serviceId: 'one-session',
-      bookingDate: 1647277200000,
-      bookingTime: 1647339000000,
+      bookingDate: mockTimestamp2,
+      bookingTime: [second_17_10],
       totalPrice: 300000
     },
     response: {
@@ -111,7 +188,7 @@ export default [
       data: {
         id: 'booking-id',
         serviceId: 'one-session',
-        bookingTime: 1648375800000,
+        bookingTime: first_11_45,
         paymentStatus: 'PAID'
       }
     }

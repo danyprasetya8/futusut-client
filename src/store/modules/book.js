@@ -34,7 +34,7 @@ const actions = {
   isBookingTimesAvailable(_, { payload = {}, onSuccess, onFail } = {}) {
     const { timestamps = [] } = payload
     const promises = timestamps.map(timestamp => axios.get(api.bookingTimeAvailability, { params: { timestamp } }))
-    return Promise.all([...promises])
+    return Promise.all(promises)
       .then(res => onSuccess && onSuccess(res))
       .catch(err => onFail && onFail(err))
   },

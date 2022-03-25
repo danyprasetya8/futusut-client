@@ -202,7 +202,7 @@
     "printedPhotos": 4,
     "serviceId": "one-session",
     "bookingDate": 1647277200000,
-    "bookingTime": 1647316500000,
+    "bookingTime": [1647316500000],
     "totalPrice": 300000
   }
 ```

@@ -26,6 +26,7 @@
           <TimeSelection
             v-model:selectedTime="selectedTime"
             :selectedDate="selectedDate"
+            :selectedTimeCount="service.time"
             :onUpdateTimestamp="onUpdateTimestamp"
           />
         </div>

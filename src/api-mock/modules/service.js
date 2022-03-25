@@ -15,10 +15,10 @@ export default [
             photoSession: 15,
             photoSelection: 10
           },
-          image: '',
           pax: 2,
           price: 120000,
-          printedPhotos: 2
+          printedPhotos: 2,
+          time: 1
         },
         {
           id: 'two-session',
@@ -27,10 +27,10 @@ export default [
             photoSession: 30,
             photoSelection: 20
           },
-          image: '',
           pax: 4,
           price: 240000,
-          printedPhotos: 4
+          printedPhotos: 4,
+          time: 2
         }
       ]
     }
@@ -51,10 +51,10 @@ export default [
           photoSession: 15,
           photoSelection: 10
         },
-        image: '',
         pax: 2,
         price: 120000,
-        printedPhotos: 2
+        printedPhotos: 2,
+        time: 1
       }
     }
   },
@@ -74,10 +74,10 @@ export default [
           photoSession: 30,
           photoSelection: 20
         },
-        image: '',
         pax: 4,
         price: 240000,
-        printedPhotos: 4
+        printedPhotos: 4,
+        time: 2
       }
     }
   },

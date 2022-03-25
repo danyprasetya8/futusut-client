@@ -27,6 +27,10 @@ const router = createRouter({
       redirect: page.home
     },
     {
+      path: page.admin,
+      redirect: page.adminHome
+    },
+    {
       path: page.home,
       name: 'Home',
       component: HomePage
