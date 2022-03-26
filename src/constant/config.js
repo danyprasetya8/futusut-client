@@ -40,7 +40,8 @@ export default {
     admin: '/admin',
     adminBooking: '/admin/booking',
     adminBookingDetail: '/admin/booking/:id',
-    adminHome: '/admin/home'
+    adminHome: '/admin/home',
+    adminLogin: '/admin/login'
   },
   role: {
     ADMIN: 'ADMIN'

@@ -3,6 +3,7 @@ import AboutPage from '@/pages/AboutPage'
 import AdminBookingPage from '@/pages/admin/AdminBookingPage'
 import AdminBookingDetailPage from '@/pages/admin/AdminBookingDetailPage'
 import AdminHomePage from '@/pages/admin/AdminHomePage'
+import AdminLoginPage from '@/pages/admin/AdminLoginPage'
 import BookFormPage from '@/pages/BookFormPage'
 import BookTimePage from '@/pages/BookTimePage'
 import BookOnlinePage from '@/pages/BookOnlinePage'
@@ -104,6 +105,11 @@ const router = createRouter({
       path: page.adminHome,
       name: 'AdminHome',
       component: AdminHomePage
+    },
+    {
+      path: page.adminLogin,
+      name: 'AdminLogin',
+      component: AdminLoginPage
     },
     {
       path: '/:notFound(.*)*',
