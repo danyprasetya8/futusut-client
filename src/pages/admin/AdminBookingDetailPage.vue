@@ -89,11 +89,12 @@
         v-if="isAvailableForReschedule"
         class="mt-4 text-sky-800"
         type="button"
-        @click="visibleRescheduleSection = true"
+        @click="setVisibleRescheduleSection"
       >
         Reschedule booking
       </button>
 
+      <div :ref="el => rescheduleSectionEl = el" />
       <section
         v-if="visibleRescheduleSection"
         class="mt-12 flex flex-col xl:flex-row items-center xl:items-start"
@@ -195,6 +196,7 @@ import { numberFormatter } from '@/utils/formatter'
 import { formatDate, formatTime, getIncrementedDate, setStartOfDay } from '@/utils/date'
 import TimeSelection from '@/components/TimeSelection'
 import config from '@/constant/config'
+import useResponsive from '@/composable/responsive'
 
 const DATE_FORMAT = {
   weekday: 'long',
@@ -206,10 +208,12 @@ const DATE_FORMAT = {
 const route = useRoute()
 const router = useRouter()
 const store = useStore()
+const { isMobile } = useResponsive()
 
 const bookingDetail = ref({})
 const service = ref({})
 const visibleRescheduleSection = ref(false)
+const rescheduleSectionEl = ref(null)
 const selectedDate = ref(null)
 const selectedTimes = ref([])
 const visibleRescheduleConfirmationModal = ref(false)
@@ -281,6 +285,19 @@ const onDayClick = day => {
 const confirmReschedule = () => {
   if (!selectedTimes.value.length) return
   visibleRescheduleConfirmationModal.value = true
+}
+
+const setVisibleRescheduleSection = () => {
+  if (visibleRescheduleSection.value) return
+  visibleRescheduleSection.value = true
+  if (isMobile) {
+    setTimeout(() => {
+      window.scrollTo({
+        top: rescheduleSectionEl.value.getBoundingClientRect().top,
+        behavior: 'smooth'
+      })
+    }, 100)
+  }
 }
 
 const doReschedule = () => {

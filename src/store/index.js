@@ -5,6 +5,7 @@ import commonModule from './modules/common'
 import responsiveModule from './modules/responsive'
 import serviceModule from './modules/service'
 import toastModule from './modules/toast'
+import userModule from './modules/user'
 
 export default createStore({
   modules: {
@@ -13,6 +14,7 @@ export default createStore({
     commonModule,
     responsiveModule,
     serviceModule,
-    toastModule
+    toastModule,
+    userModule
   }
 })

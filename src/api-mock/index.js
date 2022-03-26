@@ -5,12 +5,14 @@ import adminBookingModule from './modules/admin-booking'
 import bookModule from './modules/book'
 import commonModule from './modules/common'
 import serviceModule from './modules/service'
+import userModule from './modules/user'
 
 const data = [
   ...adminBookingModule,
   ...bookModule,
   ...commonModule,
-  ...serviceModule
+  ...serviceModule,
+  ...userModule
 ]
 
 const mock = new MockAdapter(axios)

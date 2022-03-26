@@ -55,6 +55,8 @@ onBeforeMount(() => {
   store.commit('setIsMediumDesktopAndDown', isMediumDesktopAndDown())
   store.commit('setIsMediumDesktopAndUp', isMediumDesktopAndUp())
   store.commit('setIsSmallMobile', isSmallMobile())
+
+  store.dispatch('getCurrentUser')
 })
 
 </script>

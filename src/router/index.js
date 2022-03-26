@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { validateRoute } from '@/utils/route-guard'
 import AboutPage from '@/pages/AboutPage'
 import AdminBookingPage from '@/pages/admin/AdminBookingPage'
 import AdminBookingDetailPage from '@/pages/admin/AdminBookingDetailPage'
@@ -19,6 +20,7 @@ import SuccessCheckoutPage from '@/pages/SuccessCheckoutPage'
 import config from '@/constant/config'
 
 const page = config.page
+const { ADMIN } = config.role
 
 const router = createRouter({
   history: createWebHistory(),
@@ -34,90 +36,143 @@ const router = createRouter({
     {
       path: page.home,
       name: 'Home',
-      component: HomePage
+      component: HomePage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.about,
       name: 'About',
-      component: AboutPage
+      component: AboutPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.contact,
       name: 'Contact',
-      component: ContactPage
+      component: ContactPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.bookForm,
       name: 'BookForm',
-      component: BookFormPage
+      component: BookFormPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.bookOnline,
       name: 'BookOnline',
-      component: BookOnlinePage
+      component: BookOnlinePage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.bookTime,
       name: 'BookTime',
-      component: BookTimePage
+      component: BookTimePage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.bookDetail,
       name: 'BookDetail',
-      component: BookDetailPage
+      component: BookDetailPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.pricelist,
       name: 'Pricelist',
-      component: PricelistPage
+      component: PricelistPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.faq,
       name: 'Faq',
-      component: FaqPage
+      component: FaqPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.reschedulePolicy,
       name: 'ReschedulePolicy',
-      component: ReschedulePolicyPage
+      component: ReschedulePolicyPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.studioPolicy,
       name: 'StudioPolicy',
-      component: StudioPolicyPage
+      component: StudioPolicyPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.successCheckout,
       name: 'SuccessCheckout',
-      component: SuccessCheckoutPage
+      component: SuccessCheckoutPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: page.adminBooking,
       name: 'AdminBooking',
-      component: AdminBookingPage
+      component: AdminBookingPage,
+      meta: {
+        roles: [ADMIN]
+      }
     },
     {
       path: page.adminBookingDetail,
       name: 'AdminBookingDetail',
-      component: AdminBookingDetailPage
+      component: AdminBookingDetailPage,
+      meta: {
+        roles: [ADMIN]
+      }
     },
     {
       path: page.adminHome,
       name: 'AdminHome',
-      component: AdminHomePage
+      component: AdminHomePage,
+      meta: {
+        roles: [ADMIN]
+      }
     },
     {
       path: page.adminLogin,
       name: 'AdminLogin',
-      component: AdminLoginPage
+      component: AdminLoginPage,
+      meta: {
+        roles: []
+      }
     },
     {
       path: '/:notFound(.*)*',
       abstract: true,
       name: 'NotFound',
-      component: NotFoundPage
+      component: NotFoundPage,
+      meta: {
+        roles: []
+      }
     }
   ]
 })
+
+router.beforeEach(validateRoute)
 
 export default router

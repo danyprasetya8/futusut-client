@@ -43,6 +43,9 @@ export default {
     adminHome: '/admin/home',
     adminLogin: '/admin/login'
   },
+  userBlackListedPage: [
+    '/admin/login'
+  ],
   role: {
     ADMIN: 'ADMIN'
   },

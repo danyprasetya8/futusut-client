@@ -15,5 +15,10 @@ export default {
       return `${this.booking}/${id}`
     },
     reschedule: '/reschedule'
+  },
+  user: {
+    base: '/user',
+    login: '/user/login',
+    logout: '/user/logout'
   }
 }

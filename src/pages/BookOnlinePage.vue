@@ -21,9 +21,8 @@
             :to="config.page.studioPolicy"
             class="underline text-blue-800"
           >
-            Futusut Studios' policy
+            Futusut Studios' policy and protocols
           </RouterLink>
-          and protocols
         </label>
       </div>
 
@@ -38,9 +37,23 @@
           <div
             v-for="service in services"
             :key="service.id"
-            class="mb-6 xl:mb-0 xl:mr-8 shadow rounded-md"
+            class="mb-6 xl:mb-0 xl:mr-8 w-60 shadow rounded-md"
           >
-            <div class="w-56 h-32 bg-gray-300 rounded-t-md" />
+            <div class="rounded-t">
+              <img
+                v-if="service.id === oneSession"
+                src="~@/assets/images/image1.jpeg"
+                class="w-full h-full object-cover rounded-t"
+                alt=""
+              >
+              <img
+                v-else-if="service.id === twoSession"
+                src="~@/assets/images/image2.jpeg"
+                class="w-full h-full object-cover rounded-t"
+                alt=""
+              >
+            </div>
+
             <div class="py-4 px-6">
               <div class="text-xl font-semibold">
                 {{ service.name }}
@@ -80,6 +93,8 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import SkeletonCard from '@/components/SkeletonCard'
 import config from '@/constant/config'
+
+const { oneSession, twoSession } = config.service
 
 const router = useRouter()
 const store = useStore()

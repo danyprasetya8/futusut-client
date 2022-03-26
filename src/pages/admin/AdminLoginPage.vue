@@ -1,18 +1,22 @@
 <template>
   <section class="flex h-screen">
-    <section class="w-1/2 flex justify-center items-center">
+    <section class="w-1/2 flex justify-center items-start xl:items-center">
       <img
         src="~@/assets/images/logo.png"
-        class="w-1/2"
+        class="w-3/4 xl:w-1/2 mt-8 xl:mt-0"
         alt=""
       >
     </section>
 
     <section class="w-1/2 flex justify-center items-center bg-black">
       <form
-        class="rounded-lg w-3/5 p-12 bg-white"
+        class="rounded w-11/12 xl:w-7/12 shadow-lg p-8 bg-white fixed xl:relative top-1/2 xl:top-auto left-1/2 xl:left-auto transform -translate-x-1/2 xl:translate-x-0 -translate-y-1/2 xl:translate-y-0"
         @submit="login"
       >
+        <div class="text-center font-bold text-2xl mb-6">
+          ADMIN MENU
+        </div>
+
         <div class="mb-4">
           <div class="mb-4 text-gray-800">
             Email
@@ -43,7 +47,8 @@
         </div>
 
         <button
-          class="text-center w-full text-white py-2.5 bg-sky-800 hover:bg-sky-600 transition duration-150 ease-linear"
+          type="submit"
+          class="text-center w-full text-white py-2.5 bg-black hover:bg-gray-800 rounded transition duration-150 ease-linear"
         >
           Login
         </button>
@@ -55,11 +60,13 @@
 <script setup>
 import { useStore } from 'vuex'
 import { ref } from 'vue'
+import { useRoute,useRouter } from 'vue-router'
 import { isValidEmail } from '@/utils/validation'
+import config from '@/constant/config'
 
 const form = ref({
-  email: '',
-  password: ''
+  email: 'dany@mail.com',
+  password: 'secret'
 })
 
 const error = ref({
@@ -67,6 +74,8 @@ const error = ref({
 })
 
 const store = useStore()
+const route = useRoute()
+const router = useRouter()
 
 const isValidForm = () => {
   if (!isValidEmail(form.value.email)) {
@@ -82,7 +91,29 @@ const login = e => {
   error.value.email = ''
 
   if (isValidForm()) {
-    console.log(form.value)
+    store.dispatch('login', {
+      payload: form.value,
+      onSuccess: loginOnSuccess,
+      onFail: () => {
+        store.dispatch('toastError', 'Incorrect email/password')
+      }
+    })
   }
+}
+
+const loginOnSuccess = res => {
+  window.localStorage.setItem('token', res.data.data.token)
+  store.dispatch('getCurrentUser', {
+    onSuccess: () => {
+      if (route.query.redirect) {
+        const parsed = Buffer.from(route.query.redirect, 'base64')
+          .toString('ascii')
+
+        router.push(parsed)
+        return
+      }
+      router.push(config.page.admin)
+    }
+  })
 }
 </script>

@@ -18,11 +18,6 @@ const getters = {
 }
 
 const actions = {
-  getBanners(_, { onSuccess, onFail } = {}) {
-    return axios.get(api.banner)
-      .then(res => onSuccess && onSuccess(res))
-      .catch(err => onFail && onFail(err))
-  },
   subscribeNewsletter(_, { payload = {}, onSuccess, onFail } = {}) {
     return axios.post(api.subscription, payload)
       .then(res => onSuccess && onSuccess(res))

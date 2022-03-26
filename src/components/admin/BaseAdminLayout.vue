@@ -29,14 +29,15 @@
       <button
         type="button"
         class="self-center mt-auto mb-12 py-2 w-3/4 border border-white rounded-lg hover:bg-white hover:bg-opacity-10 transition duration-150 ease-linear"
+        @click="logout"
       >
         Logout
       </button>
     </section>
 
     <section class="w-full xl:w-4/5">
-      <header class="flex justify-between xl:justify-end items-center p-6 bg-white shadow">
-        <div>Hi, admin</div>
+      <header class="flex justify-between xl:justify-end items-center py-6 px-6 xl:px-12 bg-white shadow">
+        <div>Hi, {{ currentUser.name }}</div>
 
         <BurgerMenu
           v-if="isMobile"
@@ -75,6 +76,7 @@
             <button
               type="button"
               class="self-center mt-auto py-2 w-3/4 border border-white rounded-lg"
+              @click="logout"
             >
               Logout
             </button>
@@ -90,8 +92,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 import { XIcon } from '@heroicons/vue/solid'
 import BurgerMenu from '@/components/BurgerMenu'
 import useResponsive from '@/composable/responsive'
@@ -110,12 +113,27 @@ const menus = [
 
 const { isMobile } = useResponsive()
 const route = useRoute()
+const router = useRouter()
+const store = useStore()
+
 const selectedTab = ref(menus[0])
 const visibleMobileMenu = ref(false)
+
+const currentUser = computed(() => store.getters.currentUser || {})
 
 const isActiveTab = path => route.path.indexOf(path) > -1
 
 const setSelectedTab = tab => {
   selectedTab.value = tab
+}
+
+const logout = () => {
+  store.dispatch('logout', {
+    onSuccess: () => {
+      store.commit('clearCurrentUser')
+      window.localStorage.removeItem('token')
+      router.push(config.page.adminLogin)
+    }
+  })
 }
 </script>
