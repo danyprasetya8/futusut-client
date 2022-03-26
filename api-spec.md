@@ -70,10 +70,8 @@
       {
         "id": "one-session",
         "name": "1 Session",
-        "duration": {
-          "photoSession": 15,
-          "photoSelection": 10
-        },
+        "photoSessionDuration": 15,
+        "photoSelectionDuration": 10,
         "pax": 2,
         "price": 120000,
         "printedPhotos": 2,
@@ -82,10 +80,8 @@
       {
         "id": "two-session",
         "name": "2 Session",
-        "duration": {
-          "photoSession": 30,
-          "photoSelection": 20
-        },
+        "photoSessionDuration": 30,
+        "photoSelectionDuration": 20,
         "pax": 4,
         "price": 140000,
         "printedPhotos": 4,
@@ -109,10 +105,8 @@
     "data": {
       "id": "one-session",
       "name": "1 Session",
-      "duration": {
-        "photoSession": 15,
-        "photoSelection": 10
-      },
+      "photoSessionDuration": 15,
+      "photoSelectionDuration": 10,
       "pax": 2,
       "price": 120000,
       "printedPhotos": 2,

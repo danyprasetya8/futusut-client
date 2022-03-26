@@ -239,8 +239,8 @@ const error = ref({
 const currentBook = computed(() => store.getters.currentBook || {})
 
 const totalServiceDurationMillis = computed(() => {
-  const { photoSession, photoSelection } = service.value.duration
-  return (photoSession + photoSelection) * 60 * 1000
+  const { photoSessionDuration, photoSelectionDuration } = service.value
+  return (photoSessionDuration + photoSelectionDuration) * 60 * 1000
 })
 
 const bookingTimeString = computed(() => {

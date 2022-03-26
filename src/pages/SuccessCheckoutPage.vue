@@ -30,10 +30,10 @@
             {{ service.name }}
           </div>
           <div>
-            {{ serviceDuration.photoSession }} minutes photo selection
+            {{ service.photoSessionDuration }} minutes photo selection
           </div>
           <div>
-            {{ serviceDuration.photoSelection }} minutes photo selection
+            {{ service.photoSelectionDuration }} minutes photo selection
           </div>
           <div class="mt-4 font-semibold">
             Dominico Garden, Jalan Sei Besitang, Sei Sikambing D, Medan City, North Sumatra, Indonesia
@@ -59,7 +59,6 @@ const bookingInformation = ref({})
 const service = ref({})
 
 const dateInformation = computed(() => new Date(bookingInformation.value.bookingTime))
-const serviceDuration = computed(() => service.value.duration || {})
 
 const getService = () => {
   store.dispatch('getService', {

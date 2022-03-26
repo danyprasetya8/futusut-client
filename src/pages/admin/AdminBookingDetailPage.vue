@@ -229,11 +229,9 @@ const attributes = computed(() => [
   }
 ])
 
-const serviceDuration = computed(() => service.value.duration || {})
-
 const totalServiceDurationMillis = computed(() => {
-  const { photoSession, photoSelection } = serviceDuration.value
-  return (photoSession + photoSelection) * 60 * 1000
+  const { photoSessionDuration, photoSelectionDuration } = service.value
+  return (photoSessionDuration + photoSelectionDuration) * 60 * 1000
 })
 
 const firstBookingDetailTime = computed(() => bookingDetail.value.bookingTime[0] || 0)

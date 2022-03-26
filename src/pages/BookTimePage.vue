@@ -52,7 +52,7 @@
         Futusut Studio
       </div>
       <div class="text-gray-400">
-        {{ service.duration.photoSession }} minutes
+        {{ service.photoSessionDuration }} minutes
       </div>
       <div class="text-gray-600 text-lg mt-1">
         {{ numberFormatter(service.price, 'Rp.') }}
@@ -120,8 +120,8 @@ const selectedDateString = computed(() => selectedDate.value.toLocaleDateString(
 }))
 
 const totalServiceDurationMillis = computed(() => {
-  const { photoSession, photoSelection } = service.value.duration
-  return (photoSession + photoSelection) * 60 * 1000
+  const { photoSessionDuration, photoSelectionDuration } = service.value
+  return (photoSessionDuration + photoSelectionDuration) * 60 * 1000
 })
 
 const selectedTimesString = computed(() => {
