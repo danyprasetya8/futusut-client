@@ -1,22 +1,24 @@
+const PREFIX = '/.netlify/functions'
+
 export default {
-  banner: '/functions/banner',
-  subscription: '/functions/subscription',
-  feedback: '/functions/feedback',
-  services: '/functions/services',
-  service: '/functions/service',
-  addOns: '/functions/addons',
-  reservedBookingTime: '/functions/reserved-booking-time',
-  bookingTimeAvailability: '/functions/booking-time-availability',
-  book: '/functions/book',
-  bookingDetail: '/functions/booking-detail',
+  banner: PREFIX + '/banner',
+  subscription: PREFIX + '/subscription',
+  feedback: PREFIX + '/feedback',
+  services: PREFIX + '/session',
+  service: PREFIX + '/service',
+  addOns: PREFIX + '/addons',
+  reservedBookingTime: PREFIX + '/reserved-booking-time',
+  bookingTimeAvailability: PREFIX + '/booking-time-availability',
+  book: PREFIX + '/book',
+  bookingDetail: PREFIX + '/booking-detail',
   admin: {
-    booking: '/functions/admin-booking',
-    bookingDetail: '/functions/admin-booking/detail',
-    reschedule: '/functions/reschedule'
+    booking: PREFIX + '/admin-booking',
+    bookingDetail: PREFIX + '/admin-booking/detail',
+    reschedule: PREFIX + '/reschedule'
   },
   user: {
-    base: '/functions/user',
-    login: '/functions/user/login',
-    logout: '/functions/user/logout'
+    base: PREFIX + '/user',
+    login: PREFIX + '/user/login',
+    logout: PREFIX + '/user/logout'
   }
 }

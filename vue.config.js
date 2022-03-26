@@ -32,8 +32,8 @@ module.exports = {
     historyApiFallback: true,
     port: 8080,
     proxy: {
-      '/functions/': {
-        target: 'https://futusut-api.netlify.app/.netlify',
+      '/.netlify/': {
+        target: 'https://futusut-api.netlify.app',
         changeOrigin: true
       }
     }
