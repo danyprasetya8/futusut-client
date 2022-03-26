@@ -7,11 +7,7 @@ export default [
     body: {
       email: 'my.email@mail.com'
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'POST',
@@ -22,10 +18,6 @@ export default [
       message: 'I want to this, that, and something else',
       phone: '08123456789'
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   }
 ]

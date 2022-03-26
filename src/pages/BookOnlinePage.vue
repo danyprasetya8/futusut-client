@@ -114,8 +114,9 @@ const getServices = () => {
   isGettingServices.value = true
   store.dispatch('getServices', {
     onSuccess: res => {
+      console.log(res)
       isGettingServices.value = false
-      services.value = res.data.data
+      services.value = res.data
     },
     onFail: () => {
       isGettingServices.value = false

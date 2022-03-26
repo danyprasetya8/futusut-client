@@ -88,7 +88,7 @@ const setSelectedTime = time => {
       timestamps: reservingTime
     },
     onSuccess: res => {
-      const availabilities = res.map(r => r.data.data) || []
+      const availabilities = res.map(r => r.data) || []
 
       if (availabilities.some(a => !a)) {
         store.dispatch('toastInfo', 'Time is not available, please choose another time')
@@ -109,7 +109,7 @@ const getReservedBookings = () => {
       timestamp: props.selectedDate.getTime()
     },
     onSuccess: res => {
-      reservedBookings.value = res.data.data
+      reservedBookings.value = res.data
       emit('update:selectedTimes', [])
     },
     onFail: () => {

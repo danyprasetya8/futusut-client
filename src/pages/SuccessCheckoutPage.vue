@@ -65,7 +65,7 @@ const getService = () => {
       serviceId: bookingInformation.value.serviceId
     },
     onSuccess: res => {
-      service.value = res.data.data
+      service.value = res.data
     }
   })
 }
@@ -97,7 +97,7 @@ onMounted(() => {
   store.dispatch('getCheckoutDetail', {
     payload: { bookingId },
     onSuccess: res => {
-      bookingInformation.value = res.data.data
+      bookingInformation.value = res.data
 
       if (bookingInformation.value.paymentStatus !== 'PAID') {
         toHomePage()

@@ -9,38 +9,26 @@ const routes = [
       password: 'secret'
     },
     response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: {
-        token: 'asdfzxcvqwerasdfzxcv',
-        user: {
-          id: 'user-id',
-          name: 'Dany',
-          role: 'ADMIN'
-        }
+      token: 'asdfzxcvqwerasdfzxcv',
+      user: {
+        id: 'user-id',
+        name: 'Dany',
+        role: 'ADMIN'
       }
     }
   },
   {
     method: 'DELETE',
     url: api.user.logout,
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
     url: api.user.base,
     response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: {
-        id: 'user-id',
-        name: 'Dany',
-        role: 'ADMIN'
-      }
+      id: 'user-id',
+      name: 'Dany',
+      role: 'ADMIN'
     }
   }
 ]

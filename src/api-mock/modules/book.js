@@ -29,22 +29,18 @@ export default [
     params: {
       timestamp: mockTimestamp
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: [
-        {
-          id: 'booking-id',
-          name: 'Marco marco Marco marco Marco marco',
-          bookingTime: [first_11_45]
-        },
-        {
-          id: 'booking-id-2',
-          name: 'Michelle Michelle Michelle Michelle Michelle Michelle ',
-          bookingTime: [first_17_10]
-        }
-      ]
-    }
+    response: [
+      {
+        id: 'booking-id',
+        name: 'Marco marco Marco marco Marco marco',
+        bookingTime: [first_11_45]
+      },
+      {
+        id: 'booking-id-2',
+        name: 'Michelle Michelle Michelle Michelle Michelle Michelle ',
+        bookingTime: [first_17_10]
+      }
+    ]
   },
   {
     method: 'GET',
@@ -52,22 +48,18 @@ export default [
     params: {
       timestamp: mockTimestamp2
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: [
-        {
-          id: 'booking-id-3',
-          name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-          bookingTime: [second_13_15]
-        },
-        {
-          id: 'booking-id-4',
-          name: 'Dany Prasetya 2',
-          bookingTime: [second_13_40, second_14_05]
-        }
-      ]
-    }
+    response: [
+      {
+        id: 'booking-id-3',
+        name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
+        bookingTime: [second_13_15]
+      },
+      {
+        id: 'booking-id-4',
+        name: 'Dany Prasetya 2',
+        bookingTime: [second_13_40, second_14_05]
+      }
+    ]
   },
   {
     method: 'GET',
@@ -75,11 +67,7 @@ export default [
     params: {
       timestamp: second_12_10
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -87,11 +75,7 @@ export default [
     params: {
       timestamp: second_13_15
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: false
-    }
+    response: false
   },
   {
     method: 'GET',
@@ -99,11 +83,7 @@ export default [
     params: {
       timestamp: second_16_20
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -111,11 +91,7 @@ export default [
     params: {
       timestamp: second_16_45
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: false
-    }
+    response: false
   },
   {
     method: 'GET',
@@ -123,11 +99,7 @@ export default [
     params: {
       timestamp: second_17_10
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -135,11 +107,7 @@ export default [
     params: {
       timestamp: second_17_35
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -147,11 +115,7 @@ export default [
     params: {
       timestamp: second_18_00
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -159,11 +123,7 @@ export default [
     params: {
       timestamp: second_19_35
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -171,11 +131,7 @@ export default [
     params: {
       timestamp: second_20_00
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'GET',
@@ -183,11 +139,7 @@ export default [
     params: {
       timestamp: second_20_25
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'POST',
@@ -207,14 +159,10 @@ export default [
       totalPrice: 300000
     },
     response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: {
-        booking: {
-          id: 'booking-id'
-        },
-        paymentUrl: 'https://checkout-staging.xendit.co/web/6233105b80095de04d94e87f'
-      }
+      booking: {
+        id: 'booking-id'
+      },
+      paymentUrl: 'https://checkout-staging.xendit.co/web/6233105b80095de04d94e87f'
     }
   },
   {
@@ -224,14 +172,10 @@ export default [
       bookingId: 'booking-id'
     },
     response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: {
-        id: 'booking-id',
-        serviceId: 'one-session',
-        bookingTime: [first_11_45],
-        paymentStatus: 'PAID'
-      }
+      id: 'booking-id',
+      serviceId: 'one-session',
+      bookingTime: [first_11_45],
+      paymentStatus: 'PAID'
     }
   }
 ]

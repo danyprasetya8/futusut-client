@@ -316,7 +316,7 @@ const getService = () => {
       serviceId: currentBook.value.serviceId
     },
     onSuccess: res => {
-      service.value = res.data.data
+      service.value = res.data
       paxOptions.value = Array.from({ length: 8 }, (_, i) => i + 1)
       form.value.pax = paxOptions.value[0]
     }
@@ -326,7 +326,7 @@ const getService = () => {
 const getServiceAddOns = () => {
   store.dispatch('getServiceAddOns', {
     onSuccess: res => {
-      addOns.value = res.data.data
+      addOns.value = res.data
     }
   })
 }
@@ -354,7 +354,7 @@ const pay = e => {
 
 const getBookingTimeAvailabilityOnSuccess = res => {
   store.commit('setIsLoading', false)
-  const availabilities = res.map(r => r.data.data) || []
+  const availabilities = res.map(r => r.data) || []
 
   if (availabilities.some(a => !a)) {
     store.dispatch('toastError', 'Time is not available, please choose another time')
@@ -401,7 +401,7 @@ const createBooking = () => {
 }
 
 const createBookingOnSuccess = res => {
-  bookingInfo.value = res.data.data
+  bookingInfo.value = res.data
   popupCenter({
     url: bookingInfo.value.paymentUrl,
     title: 'Futusut payment',

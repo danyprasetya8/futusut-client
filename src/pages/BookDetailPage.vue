@@ -89,7 +89,7 @@ onMounted(() => {
       serviceId: serviceId.value
     },
     onSuccess: res => {
-      service.value = res.data.data
+      service.value = res.data
     }
   })
 })

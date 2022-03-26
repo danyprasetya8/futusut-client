@@ -114,7 +114,7 @@ const getReservedBookings = () => {
       timestamp: selectedDate.value.getTime()
     },
     onSuccess: res => {
-      reservedBookings.value = res.data.data
+      reservedBookings.value = res.data
       selectedTime.value = {}
     },
     onFail: () => {

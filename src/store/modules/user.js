@@ -60,7 +60,7 @@ const actions = {
       .then(res => {
         commit('setGettingUser', false)
         commit('setIsLoading', false)
-        commit('setCurrentUser', res.data.data)
+        commit('setCurrentUser', res.data)
         onSuccess && onSuccess(res)
       })
       .catch(err => {

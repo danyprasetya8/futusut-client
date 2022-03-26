@@ -62,24 +62,20 @@ export default [
       bookingId: 'booking-id-3'
     },
     response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: {
-        id: 'booking-id-3',
-        name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-        email: 'danyprasetyaangtoni@gmail.com',
-        phone: '085156760534',
-        message: 'I want to bring my pet',
-        additionalPrintedPhotos: 0,
-        backdrop: 'GRAY',
-        withSoftCopy: true,
-        serviceId: 'one-session',
-        bookingTime: [_13_15],
-        pax: 2,
-        totalPrice: 120000,
-        paymentStatus: 'PAID',
-        createdDate: 1647857400000
-      }
+      id: 'booking-id-3',
+      name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
+      email: 'danyprasetyaangtoni@gmail.com',
+      phone: '085156760534',
+      message: 'I want to bring my pet',
+      additionalPrintedPhotos: 0,
+      backdrop: 'GRAY',
+      withSoftCopy: true,
+      serviceId: 'one-session',
+      bookingTime: [_13_15],
+      pax: 2,
+      totalPrice: 120000,
+      paymentStatus: 'PAID',
+      createdDate: 1647857400000
     }
   },
   {
@@ -89,24 +85,20 @@ export default [
       bookingId: 'booking-id-4'
     },
     response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: {
-        id: 'booking-id-4',
-        name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
-        email: 'danyprasetyaangtoni@gmail.com',
-        phone: '085156760534',
-        message: 'I want to bring my pet',
-        additionalPrintedPhotos: 0,
-        backdrop: 'GRAY',
-        withSoftCopy: true,
-        serviceId: 'two-session',
-        bookingTime: [_13_40, _14_05],
-        pax: 4,
-        totalPrice: 240000,
-        paymentStatus: 'PAID',
-        createdDate: 1647857400000
-      }
+      id: 'booking-id-4',
+      name: 'Dany Prasetya Angtoni Angtoni Angtoni Angtoni',
+      email: 'danyprasetyaangtoni@gmail.com',
+      phone: '085156760534',
+      message: 'I want to bring my pet',
+      additionalPrintedPhotos: 0,
+      backdrop: 'GRAY',
+      withSoftCopy: true,
+      serviceId: 'two-session',
+      bookingTime: [_13_40, _14_05],
+      pax: 4,
+      totalPrice: 240000,
+      paymentStatus: 'PAID',
+      createdDate: 1647857400000
     }
   },
   {
@@ -116,11 +108,7 @@ export default [
       bookingId: 'booking-id-3',
       bookingTime: [_17_10]
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   },
   {
     method: 'PUT',
@@ -129,10 +117,6 @@ export default [
       bookingId: 'booking-id-4',
       bookingTime: [_19_35, _20_00]
     },
-    response: {
-      success: true,
-      message: 'Success Fetch Data',
-      data: true
-    }
+    response: true
   }
 ]
