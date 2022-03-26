@@ -65,8 +65,8 @@ import { isValidEmail } from '@/utils/validation'
 import config from '@/constant/config'
 
 const form = ref({
-  email: 'dany@mail.com',
-  password: 'secret'
+  email: '',
+  password: ''
 })
 
 const error = ref({
