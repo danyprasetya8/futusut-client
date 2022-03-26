@@ -57,7 +57,10 @@ export default [
   },
   {
     method: 'GET',
-    url: api.admin.bookingDetail('booking-id-3'),
+    url: api.admin.bookingDetail,
+    params: {
+      bookingId: 'booking-id-3'
+    },
     response: {
       success: true,
       message: 'Success Fetch Data',
@@ -81,7 +84,10 @@ export default [
   },
   {
     method: 'GET',
-    url: api.admin.bookingDetail('booking-id-4'),
+    url: api.admin.bookingDetail,
+    params: {
+      bookingId: 'booking-id-4'
+    },
     response: {
       success: true,
       message: 'Success Fetch Data',

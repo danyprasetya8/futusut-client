@@ -30,7 +30,13 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    port: 8080
+    port: 8080,
+    proxy: {
+      '/functions/': {
+        target: 'https://futusut-api.netlify.app/.netlify',
+        changeOrigin: true
+      }
+    }
   },
   chainWebpack: config => {
     config.module

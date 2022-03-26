@@ -12,7 +12,7 @@ const actions = {
   },
   getBookingDetail({ commit, dispatch }, { payload, onSuccess, onFail } = {}) {
     commit('setIsLoading', true)
-    return axios.get(api.admin.bookingDetail(payload.bookingId))
+    return axios.get(api.admin.bookingDetail, { params: payload })
       .then(res => {
         commit('setIsLoading', false)
         onSuccess && onSuccess(res)
