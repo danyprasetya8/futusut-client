@@ -82,7 +82,7 @@ export default {
     ]
   },
   service: {
-    oneSession: 'one-session',
-    twoSession: 'two-session'
+    oneSession: 'SESSION_TYPE_ONE',
+    twoSession: 'SESSION_TYPE_TWO'
   }
 }

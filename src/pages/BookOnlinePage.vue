@@ -60,7 +60,7 @@
               </div>
               <div class="h-0.5 w-full bg-gray-100 my-3" />
               <div class="mb-1">
-                {{ service.photoSessionDuration }} minutes
+                {{ service.sessionDuration }} minutes
               </div>
               <div class="mb-5">
                 {{ numberFormatter(service.price, 'Rp.') }}

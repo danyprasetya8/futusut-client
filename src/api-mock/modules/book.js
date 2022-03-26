@@ -153,7 +153,7 @@ export default [
       backdrop: 'BLACK',
       softcopy: true,
       printedPhotos: 4,
-      serviceId: 'one-session',
+      serviceId: 'SESSION_TYPE_ONE',
       bookingDate: mockTimestamp2,
       bookingTime: [second_17_10],
       totalPrice: 300000
@@ -173,7 +173,7 @@ export default [
     },
     response: {
       id: 'booking-id',
-      serviceId: 'one-session',
+      serviceId: 'SESSION_TYPE_ONE',
       bookingTime: [first_11_45],
       paymentStatus: 'PAID'
     }

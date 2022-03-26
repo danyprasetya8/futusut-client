@@ -68,20 +68,20 @@
     "code": 200,
     "data": [
       {
-        "id": "one-session",
-        "name": "1 Session",
-        "photoSessionDuration": 15,
-        "photoSelectionDuration": 10,
+        "id": "SESSION_TYPE_ONE",
+        "name": "Session 1",
+        "sessionDuration": 15,
+        "selectionDuration": 10,
         "pax": 2,
         "price": 120000,
         "printedPhotos": 2,
         "time": 1
       },
       {
-        "id": "two-session",
-        "name": "2 Session",
-        "photoSessionDuration": 30,
-        "photoSelectionDuration": 20,
+        "id": "SESSION_TYPE_TWO",
+        "name": "Session 2",
+        "sessionDuration": 30,
+        "selectionDuration": 20,
         "pax": 4,
         "price": 140000,
         "printedPhotos": 4,
@@ -103,10 +103,10 @@
   {
     "code": 200,
     "data": {
-      "id": "one-session",
-      "name": "1 Session",
-      "photoSessionDuration": 15,
-      "photoSelectionDuration": 10,
+      "id": "SESSION_TYPE_ONE",
+      "name": "Session 1",
+      "sessionDuration": 15,
+      "selectionDuration": 10,
       "pax": 2,
       "price": 120000,
       "printedPhotos": 2,
@@ -197,7 +197,7 @@
     "backdrop": "BLACK | WHITE | GRAY",
     "softcopy": true,
     "printedPhotos": 4,
-    "serviceId": "one-session",
+    "serviceId": "SESSION_TYPE_ONE",
     "bookingDate": 1647277200000,
     "bookingTime": [1647316500000],
     "totalPrice": 300000
@@ -227,7 +227,7 @@
     "code": 200,
     "data": {
       "id": "booking-id",
-      "serviceId": "one-session",
+      "serviceId": "SESSION_TYPE_ONE",
       "bookingTime": [1647857400000],
       "paymentStatus": "PENDING"
     }
@@ -254,7 +254,7 @@
         "name": "Dany Prasetya Angtoni Angtoni Angtoni Angtoni",
         "email": "danyprasetyaangtoni@gmail.com",
         "phone": "085156760534",
-        "serviceId": "one-session",
+        "serviceId": "SESSION_TYPE_ONE",
         "bookingTime": [1647857400000],
         "pax": 2,
         "totalPrice": 120000,
@@ -289,7 +289,7 @@
       "additionalPrintedPhotos": 0,
       "backdrop": "GRAY",
       "withSoftCopy": false,
-      "serviceId": "one-session",
+      "serviceId": "SESSION_TYPE_ONE",
       "bookingTime": [1647857400000],
       "pax": 2,
       "totalPrice": 120000,

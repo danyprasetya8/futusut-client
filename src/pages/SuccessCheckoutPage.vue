@@ -30,10 +30,10 @@
             {{ service.name }}
           </div>
           <div>
-            {{ service.photoSessionDuration }} minutes photo selection
+            {{ service.sessionDuration }} minutes photo selection
           </div>
           <div>
-            {{ service.photoSelectionDuration }} minutes photo selection
+            {{ service.selectionDuration }} minutes photo selection
           </div>
           <div class="mt-4 font-semibold">
             Dominico Garden, Jalan Sei Besitang, Sei Sikambing D, Medan City, North Sumatra, Indonesia
@@ -75,8 +75,8 @@ const toHomePage = () => {
 }
 
 const totalServiceDurationMillis = computed(() => {
-  const { photoSessionDuration, photoSelectionDuration } = service.value
-  return (photoSessionDuration + photoSelectionDuration) * 60 * 1000
+  const { sessionDuration, selectionDuration } = service.value
+  return (sessionDuration + selectionDuration) * 60 * 1000
 })
 
 const bookingInformationTime = computed(() => bookingInformation.value.bookingTime || [])

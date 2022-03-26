@@ -6,20 +6,20 @@ export default [
     url: api.services,
     response: [
       {
-        id: 'one-session',
-        name: '1 Session',
-        photoSessionDuration: 15,
-        photoSelectionDuration: 10,
+        id: 'SESSION_TYPE_ONE',
+        name: 'Session 1',
+        sessionDuration: 15,
+        selectionDuration: 10,
         pax: 2,
         price: 120000,
         printedPhotos: 2,
         time: 1
       },
       {
-        id: 'two-session',
-        name: '2 Session',
-        photoSessionDuration: 30,
-        photoSelectionDuration: 20,
+        id: 'SESSION_TYPE_TWO',
+        name: 'Session 2',
+        sessionDuration: 30,
+        selectionDuration: 20,
         pax: 4,
         price: 240000,
         printedPhotos: 4,
@@ -31,13 +31,13 @@ export default [
     method: 'GET',
     url: api.service,
     params: {
-      serviceId: 'one-session'
+      serviceId: 'SESSION_TYPE_ONE'
     },
     response: {
-      id: 'one-session',
-      name: '1 Session',
-      photoSessionDuration: 15,
-      photoSelectionDuration: 10,
+      id: 'SESSION_TYPE_ONE',
+      name: 'Session 1',
+      sessionDuration: 15,
+      selectionDuration: 10,
       pax: 2,
       price: 120000,
       printedPhotos: 2,
@@ -48,13 +48,13 @@ export default [
     method: 'GET',
     url: api.service,
     params: {
-      serviceId: 'two-session'
+      serviceId: 'SESSION_TYPE_TWO'
     },
     response: {
-      id: 'two-session',
-      name: '2 Session',
-      photoSessionDuration: 30,
-      photoSelectionDuration: 20,
+      id: 'SESSION_TYPE_TWO',
+      name: 'Session 2',
+      sessionDuration: 30,
+      selectionDuration: 20,
       pax: 4,
       price: 240000,
       printedPhotos: 4,

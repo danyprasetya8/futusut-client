@@ -11,10 +11,10 @@
         Valid for {{ service.pax }} pax
       </div>
       <div>
-        {{ service.photoSessionDuration }} minutes photo session
+        {{ service.sessionDuration }} minutes photo session
       </div>
       <div>
-        {{ service.photoSelectionDuration }} minutes photo selection
+        {{ service.selectionDuration }} minutes photo selection
       </div>
       <div>
         {{ service.printedPhotos }} printed photos
@@ -22,7 +22,7 @@
 
       <div class="flex my-4">
         <div class="p-2.5 xl:p-4 border border-gray-300">
-          {{ service.photoSessionDuration }} min
+          {{ service.sessionDuration }} min
         </div>
         <div class="p-2.5 xl:p-4 border border-l-0 border-r-0 border-gray-300">
           {{ numberFormatter(service.price, 'Rp.') }}
