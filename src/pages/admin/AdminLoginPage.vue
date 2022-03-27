@@ -102,7 +102,7 @@ const login = e => {
 }
 
 const loginOnSuccess = res => {
-  window.localStorage.setItem('token', res.data.token)
+  window.localStorage.setItem('token', res.data.data.token)
   store.dispatch('getCurrentUser', {
     onSuccess: () => {
       if (route.query.redirect) {

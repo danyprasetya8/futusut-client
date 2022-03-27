@@ -150,7 +150,7 @@
               <div>{{ numberFormatter(service.price, 'Rp.') }}</div>
             </div>
 
-            <div v-if="addOnsInformation.length">
+            <div v-if="addOns.length && addOnsInformation.length">
               <div
                 v-for="addOn in addOnsInformation"
                 :key="addOn.id"
@@ -166,7 +166,10 @@
             </div>
 
             <div class="my-3 h-0.5 bg-gray-700 w-full" />
-            <div class="flex justify-between font-bold mt-4">
+            <div
+              v-if="addOns.length"
+              class="flex justify-between font-bold mt-4"
+            >
               <div>
                 Total price:
               </div>
@@ -316,7 +319,7 @@ const getService = () => {
       serviceId: currentBook.value.serviceId
     },
     onSuccess: res => {
-      service.value = res.data
+      service.value = res.data.data
       paxOptions.value = Array.from({ length: 8 }, (_, i) => i + 1)
       form.value.pax = paxOptions.value[0]
     }
@@ -326,7 +329,7 @@ const getService = () => {
 const getServiceAddOns = () => {
   store.dispatch('getServiceAddOns', {
     onSuccess: res => {
-      addOns.value = res.data
+      addOns.value = res.data.data
     }
   })
 }
@@ -354,7 +357,7 @@ const pay = e => {
 
 const getBookingTimeAvailabilityOnSuccess = res => {
   store.commit('setIsLoading', false)
-  const availabilities = res.map(r => r.data) || []
+  const availabilities = res.map(r => r.data.data) || []
 
   if (availabilities.some(a => !a)) {
     store.dispatch('toastError', 'Time is not available, please choose another time')
@@ -401,7 +404,7 @@ const createBooking = () => {
 }
 
 const createBookingOnSuccess = res => {
-  bookingInfo.value = res.data
+  bookingInfo.value = res.data.data
   popupCenter({
     url: bookingInfo.value.paymentUrl,
     title: 'Futusut payment',

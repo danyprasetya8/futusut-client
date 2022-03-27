@@ -31,13 +31,18 @@ const actions = {
         onFail && onFail(err)
       })
   },
-  isBookingTimesAvailable({ dispatch }, { payload = {}, onSuccess, onFail } = {}) {
+  isBookingTimesAvailable({ commit, dispatch }, { payload = {}, onSuccess, onFail } = {}) {
     const { timestamps = [] } = payload
+    commit('setIsLoading', true)
     const promises = timestamps.map(timestamp => axios.get(api.bookingTimeAvailability, { params: { timestamp } }))
     return Promise.all(promises)
-      .then(res => onSuccess && onSuccess(res))
+      .then(res => {
+        onSuccess && onSuccess(res)
+        commit('setIsLoading', false)
+      })
       .catch(err => {
         onFail && onFail(err)
+        commit('setIsLoading', false)
         dispatch('toastGeneralError')
       })
   },

@@ -159,7 +159,7 @@ const toBookFormPage = () => {
       timestamps: selectedTimes.value
     },
     onSuccess: res => {
-      const availabilities = res.map(r => r.data) || []
+      const availabilities = res.map(r => r.data.data) || []
 
       if (availabilities.some(a => !a)) {
         store.dispatch('toastInfo', 'Time is not available, please choose another time')
@@ -182,7 +182,7 @@ const getService = () => {
       serviceId: serviceId.value
     },
     onSuccess: res => {
-      service.value = res.data
+      service.value = res.data.data
     }
   })
 }

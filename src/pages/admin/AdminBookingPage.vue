@@ -189,7 +189,7 @@ const scrollToTop = () => {
 onMounted(() => {
   store.dispatch('getServices', {
     onSuccess: res => {
-      services.value = res.data
+      services.value = res.data.data
       getBookingList(1)
     }
   })
