@@ -159,9 +159,7 @@ export default [
       totalPrice: 300000
     },
     response: {
-      booking: {
-        id: 'booking-id'
-      },
+      bookingId: 'booking-id',
       paymentUrl: 'https://checkout-staging.xendit.co/web/6233105b80095de04d94e87f'
     }
   },

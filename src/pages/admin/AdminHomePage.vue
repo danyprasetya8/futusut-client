@@ -111,7 +111,7 @@ const setSelectedTime = time => {
 const getReservedBookings = () => {
   store.dispatch('getReservedBookingTimes', {
     payload: {
-      timestamp: selectedDate.value.getTime()
+      timestampDate: selectedDate.value.getTime()
     },
     onSuccess: res => {
       reservedBookings.value = res.data

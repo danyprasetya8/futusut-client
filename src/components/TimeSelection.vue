@@ -106,7 +106,7 @@ const currentCustomerBooking = computed(() => reservedBookings.value.find(b => b
 const getReservedBookings = () => {
   store.dispatch('getReservedBookingTimes', {
     payload: {
-      timestamp: props.selectedDate.getTime()
+      timestampDate: props.selectedDate.getTime()
     },
     onSuccess: res => {
       reservedBookings.value = res.data
