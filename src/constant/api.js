@@ -1,24 +1,23 @@
 const PREFIX = '/.netlify/functions'
 
 export default {
-  banner: PREFIX + '/banner',
   subscription: PREFIX + '/subscription',
   feedback: PREFIX + '/feedback',
-  services: PREFIX + '/session',
-  service: PREFIX + '/service',
+  services: PREFIX + '/services',
+  service: PREFIX + '/services',
   addOns: PREFIX + '/addons',
-  reservedBookingTime: PREFIX + '/reserved-booking-time',
-  bookingTimeAvailability: PREFIX + '/booking-time-availability',
-  book: PREFIX + '/book',
-  bookingDetail: PREFIX + '/booking-detail',
+  reservedBookingTime: PREFIX + '/booking',
+  bookingTimeAvailability: PREFIX + '/booking',
+  book: PREFIX + '/booking',
+  bookingDetail: PREFIX + '/checkout-detail',
   admin: {
     booking: PREFIX + '/admin-booking',
-    bookingDetail: PREFIX + '/admin-booking/detail',
+    bookingDetail: PREFIX + '/booking-detail',
     reschedule: PREFIX + '/reschedule'
   },
   user: {
-    base: PREFIX + '/user',
-    login: PREFIX + '/user/login',
+    base: PREFIX + '/current-user',
+    login: PREFIX + '/login',
     logout: PREFIX + '/user/logout'
   }
 }

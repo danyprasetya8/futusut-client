@@ -33,7 +33,7 @@ module.exports = {
     port: 8080,
     proxy: {
       '/.netlify/': {
-        target: 'https://futusut-api.netlify.app',
+        target: 'https://futusut-staging.netlify.app',
         changeOrigin: true
       }
     }
