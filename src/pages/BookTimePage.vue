@@ -154,11 +154,13 @@ const setBookingSumaryElement = el => {
 const toBookFormPage = () => {
   if (!selectedTimes.value.length) return
 
+  store.commit('setIsLoading', true)
   store.dispatch('isBookingTimesAvailable', {
     payload: {
       timestamps: selectedTimes.value
     },
     onSuccess: res => {
+      store.commit('setIsLoading', false)
       const availabilities = res.map(r => r.data.data) || []
 
       if (availabilities.some(a => !a)) {
@@ -172,6 +174,10 @@ const toBookFormPage = () => {
         })
         router.push(config.page.bookForm)
       }
+    },
+    onFail: () => {
+      store.commit('setIsLoading', false)
+      store.dispatch('toastGeneralError')
     }
   })
 }

@@ -83,11 +83,13 @@ const setSelectedTime = time => {
     return
   }
 
+  store.commit('setIsLoading', true)
   store.dispatch('isBookingTimesAvailable', {
     payload: {
       timestamps: reservingTime
     },
     onSuccess: res => {
+      store.commit('setIsLoading', false)
       const availabilities = res.map(r => r.data.data) || []
 
       if (availabilities.some(a => !a)) {
@@ -97,6 +99,10 @@ const setSelectedTime = time => {
         emit('update:selectedTimes', reservingTime)
         props.onUpdateTimestamp()
       }
+    },
+    onFail: () => {
+      store.commit('setIsLoading', false)
+      store.dispatch('toastGeneralError')
     }
   })
 }

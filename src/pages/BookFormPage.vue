@@ -342,12 +342,12 @@ const pay = e => {
     store.commit('setIsLoading', true)
     store.dispatch('isBookingTimesAvailable', {
       payload: {
-        timestamp: currentBook.value.bookingTime
+        timestamps: currentBook.value.bookingTime
       },
       onSuccess: getBookingTimeAvailabilityOnSuccess,
       onFail: () => {
-        store.dispatch('toastGeneralError')
         store.commit('setIsLoading', false)
+        store.dispatch('toastGeneralError')
       }
     })
   } else {
@@ -356,11 +356,11 @@ const pay = e => {
 }
 
 const getBookingTimeAvailabilityOnSuccess = res => {
-  store.commit('setIsLoading', false)
   const availabilities = res.map(r => r.data.data) || []
 
   if (availabilities.some(a => !a)) {
-    store.dispatch('toastError', 'Time is not available, please choose another time')
+    store.commit('setIsLoading', false)
+    store.dispatch('toastInfo', 'Time is not available, please choose another time')
     router.push({
       name: 'BookTime',
       params: {
@@ -404,7 +404,7 @@ const createBooking = () => {
 }
 
 const createBookingOnSuccess = res => {
-  bookingInfo.value = res.data.data
+  bookingInfo.value = res.data
   popupCenter({
     url: bookingInfo.value.paymentUrl,
     title: 'Futusut payment',
