@@ -66,19 +66,22 @@ export default [
     url: api.addOns,
     response: [
       {
-        id: 'people',
+        id: 'PEOPLE_ADDONS',
         name: 'People',
-        price: 40000
+        price: 40000,
+        type: 'PEOPLE'
       },
       {
-        id: 'softcopy',
+        id: 'SOFTCOPY_ADDONS',
         name: 'Softcopy',
-        price: 40000
+        price: 40000,
+        type: 'SOFTCOPY'
       },
       {
-        id: 'printedPhotos',
+        id: 'PRINT_ADDONS',
         name: 'Printed Photo\'s',
-        price: 20000
+        price: 20000,
+        type: 'PRINT'
       }
     ]
   }

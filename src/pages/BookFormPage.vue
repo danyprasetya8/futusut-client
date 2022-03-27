@@ -249,9 +249,9 @@ const bookingTimeString = computed(() => {
       ${formatTime(first)} - ${formatTime(first + totalServiceDurationMillis.value)}`
 })
 
-const personAddOns = computed(() => addOns.value.find(a => a.id === 'people'))
-const softcopyAddOns = computed(() => addOns.value.find(a => a.id === 'softcopy'))
-const printedPhotosAddOns = computed(() => addOns.value.find(a => a.id === 'printedPhotos'))
+const personAddOns = computed(() => addOns.value.find(a => a.id === 'PEOPLE_ADDONS'))
+const softcopyAddOns = computed(() => addOns.value.find(a => a.id === 'SOFTCOPY_ADDONS'))
+const printedPhotosAddOns = computed(() => addOns.value.find(a => a.id === 'PRINT_ADDONS'))
 
 const softcopyAdditionalPrice = computed(() => ({
   id: softcopyAddOns.value.id,
