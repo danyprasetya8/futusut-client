@@ -146,11 +146,15 @@ const faqList = computed(() => [
   {
     question: t('faq.nine.question'),
     answer: t('faq.nine.answer')
+  },
+  {
+    question: t('faq.ten.question'),
+    answer: t('faq.ten.answer')
   }
 ])
 
 const generalFaqList = computed(() => faqList.value.slice(0, 5).filter(f => f.question.toLowerCase().includes(searchKeyword.value.toLowerCase())))
-const policyFaqList = computed(() => faqList.value.slice(5, 9).filter(f => f.question.toLowerCase().includes(searchKeyword.value.toLowerCase())))
+const policyFaqList = computed(() => faqList.value.slice(5, 10).filter(f => f.question.toLowerCase().includes(searchKeyword.value.toLowerCase())))
 
 const setSelectedFaq = index => {
   if (selectedFaq.value === index) {

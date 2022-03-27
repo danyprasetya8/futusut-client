@@ -34,7 +34,6 @@ export default {
     bookDetail: '/book/:serviceId',
     pricelist: '/pricelist',
     faq: '/faq',
-    reschedulePolicy: '/reschedule-policy',
     studioPolicy: '/studio-policy',
     successCheckout: '/success-checkout/:bookingId',
     admin: '/admin',

@@ -14,7 +14,6 @@ import FaqPage from '@/pages/FaqPage'
 import HomePage from '@/pages/HomePage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import PricelistPage from '@/pages/PricelistPage'
-import ReschedulePolicyPage from '@/pages/ReschedulePolicyPage'
 import StudioPolicyPage from '@/pages/StudioPolicyPage'
 import SuccessCheckoutPage from '@/pages/SuccessCheckoutPage'
 import config from '@/constant/config'
@@ -101,14 +100,6 @@ const router = createRouter({
       path: page.faq,
       name: 'Faq',
       component: FaqPage,
-      meta: {
-        roles: []
-      }
-    },
-    {
-      path: page.reschedulePolicy,
-      name: 'ReschedulePolicy',
-      component: ReschedulePolicyPage,
       meta: {
         roles: []
       }

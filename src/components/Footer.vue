@@ -49,12 +49,6 @@
           FAQ
         </RouterLink>
         <RouterLink
-          :to="reschedulePolicy"
-          class="mb-2 xl:mb-0 xl:mr-8 underline"
-        >
-          Reschedule Policy
-        </RouterLink>
-        <RouterLink
           :to="studioPolicy"
           class="underline"
         >
@@ -74,7 +68,7 @@ import { ref } from 'vue'
 import { isValidEmail } from '@/utils/validation'
 import { useStore } from 'vuex'
 
-const { faq, reschedulePolicy, studioPolicy } = config.page
+const { faq, studioPolicy } = config.page
 
 const email = ref('')
 const store = useStore()

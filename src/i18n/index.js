@@ -89,21 +89,21 @@ const i18n = createI18n({
           answer: 'Unfortunately, you can\'t cancel/ask for a refund after you have booked your session. But you can definitely reschedule your session! <br />*maximum 1x24 hours prior to your scheduled session. <br />*limited to one time'
         },
         seven: {
+          question: 'Can I reschedule my booking?',
+          answer: 'It is possible to reschedule once with maximum 1x24 hours prior to your scheduled session, for more information about session rescheduling please reach out through our whatsapp'
+        },
+        eight: {
           question: 'Can I walk-in for a session?',
           answer: 'Yes you can, but there is a low possibility that the slot you desire is available. Therefore, we highly encourage you to do the bookings beforehand through the link on our bio.'
         },
-        eight: {
+        nine: {
           question: 'What if we late for a session?',
           answer: 'We strongly recommend you to arrive 10 minutes prior to your scheduled time as late arrivals will result in cancellation with no refund. Therefore, if you are unable to arrive on time, we encourage you to make a new booking on available dates/times.'
         },
-        nine: {
+        ten: {
           question: 'How do I know if my booking is confirmed?',
           answer: 'You can claim your slot after you making your payments online. We will reach out to you regarding your booking via Whatsapp and Email after it is confirmed by our website.'
         }
-      },
-      reschedule: {
-        cancellation: 'It is non refundable for any payment that has been made.',
-        policy: 'It is possible to reschedule once with maximum 1x24 hours prior to your scheduled session, for more information about session rescheduling please reach out through our whatsapp below'
       }
     },
     ID: {
@@ -160,21 +160,21 @@ const i18n = createI18n({
           answer: 'Sangat disayangkan namun anda tidak dapat membatalkan/meminta pengembalian dana setelah anda memesan sesi anda. Tetapi anda dapat mengganti sesi anda!<br/>*maksimum 1x24 jam sebelum sesi Anda<br/>*hanya bisa sekali'
         },
         seven: {
+          question: 'Bisakah saya mengganti jadwal pesanan saya?',
+          answer: 'Anda hanya dapat  melakukan pergantian jadwal/reschedule sekali dengan ketentuan pergantian harus dilakukan paling lambat 1x24 jam dari waktu sesi yang sudah dipilih'
+        },
+        eight: {
           question: 'Bisakah saya datang langsung untuk sesi?',
           answer: 'Bisa, tapi kemungkinannya kecil bahwa slot yang Anda inginkan tersedia. Oleh karena itu, kami sangat menyarankan Anda untuk melakukan pemesanan terlebih dahulu melalui tautan di bio kami.'
         },
-        eight: {
+        nine: {
           question: 'Bagaimana jika saya terlambat untuk sesi saya?',
           answer: 'Kami sangat menyarankan Anda untuk tiba 10 menit sebelum waktu yang dijadwalkan karena kedatangan yang terlambat akan mengakibatkan pembatalan tanpa pengembalian uang. Oleh karena itu, jika Anda tidak dapat tiba tepat waktu, kami menyarankan Anda untuk melakukan pemesanan baru pada tanggal/waktu yang tersedia.'
         },
-        nine: {
+        ten: {
           question: 'Bagaimana saya tahu jika pemesanan saya sudah dikonfirmasi?',
           answer: 'Anda dapat mengklaim slot Anda setelah melakukan pembayaran secara online. Kami akan menghubungi Anda mengenai pemesanan Anda melalui Whatsapp dan Email setelah dikonfirmasi oleh situs web kami.'
         }
-      },
-      reschedule: {
-        cancellation: 'Semua pembayaran yang sudah dilakukan tidak bisa di dikembalikan/refund',
-        policy: 'Anda hanya dapat  melakukan pergantian jadwal/reschedule sekali dengan ketentuan pergantian harus dilakukan paling lambat 1x24 jam dari waktu sesi yang sudah dipilih'
       }
     }
   }
