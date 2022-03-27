@@ -23,6 +23,8 @@ import { computed, defineProps, defineEmits, ref, watch, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import config from '@/constant/config'
 
+const TEN_MINUTES = 10 * 60 * 1000
+
 const props = defineProps({
   selectedDate: {
     type: Date,
@@ -61,7 +63,7 @@ const toBookingHourInformation = (bookingHour, index) => {
   return {
     timestamp: date.getTime(),
     text: ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2),
-    available: !reservedTimes.value.includes(date.getTime()) && date.getTime() > new Date().getTime(),
+    available: !reservedTimes.value.includes(date.getTime()) && date.getTime() + TEN_MINUTES > new Date().getTime(),
     index
   }
 }

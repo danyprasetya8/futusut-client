@@ -102,7 +102,7 @@ const selectedTimes = ref([])
 const refreshTimeSelection = ref(0)
 const bookingSummaryEl = ref()
 
-const minDate = computed(() => getIncrementedDate(1))
+const minDate = computed(() => getIncrementedDate(0))
 const maxDate = computed(() => getIncrementedDate(14))
 
 const attributes = computed(() => [
