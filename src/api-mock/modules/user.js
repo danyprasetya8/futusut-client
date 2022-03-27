@@ -17,11 +17,6 @@ const routes = [
     }
   },
   {
-    method: 'DELETE',
-    url: api.user.logout,
-    response: true
-  },
-  {
     method: 'GET',
     url: api.user.base,
     response: {

@@ -17,7 +17,6 @@ export default {
   },
   user: {
     base: PREFIX + '/current-user',
-    login: PREFIX + '/login',
-    logout: PREFIX + '/user/logout'
+    login: PREFIX + '/login'
   }
 }

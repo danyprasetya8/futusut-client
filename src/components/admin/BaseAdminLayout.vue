@@ -128,12 +128,8 @@ const setSelectedTab = tab => {
 }
 
 const logout = () => {
-  store.dispatch('logout', {
-    onSuccess: () => {
-      store.commit('clearCurrentUser')
-      window.localStorage.removeItem('token')
-      router.push(config.page.adminLogin)
-    }
-  })
+  store.commit('clearCurrentUser')
+  window.localStorage.removeItem('token')
+  router.push(config.page.adminLogin)
 }
 </script>

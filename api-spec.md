@@ -346,17 +346,6 @@
   }
 ```
 
-## Logout
-# Method: DELETE
-# Url:
-# Response body
-```json
-  {
-    "code": 200,
-    "data": true
-  }
-```
-
 ## Get current user
 # Method: GET
 # Url:

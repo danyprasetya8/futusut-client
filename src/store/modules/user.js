@@ -32,24 +32,11 @@ const actions = {
     commit('setIsLoading', true)
     return axios.post(api.user.login, payload)
       .then(res => {
-        onSuccess && onSuccess(res)
         commit('setIsLoading', false)
+        onSuccess && onSuccess(res)
       })
       .catch(err => {
         commit('setIsLoading', false)
-        onFail && onFail(err)
-      })
-  },
-  logout ({ commit, dispatch }, { payload = {}, onSuccess, onFail } = {}) {
-    commit('setIsLoading', true)
-    return axios.delete(api.user.logout, { data: payload })
-      .then(res => {
-        onSuccess && onSuccess(res)
-        commit('setIsLoading', false)
-      })
-      .catch(err => {
-        commit('setIsLoading', false)
-        dispatch('toastGeneralError')
         onFail && onFail(err)
       })
   },
@@ -60,7 +47,7 @@ const actions = {
       .then(res => {
         commit('setGettingUser', false)
         commit('setIsLoading', false)
-        commit('setCurrentUser', res.data.data.user)
+        commit('setCurrentUser', res.data.user)
         onSuccess && onSuccess(res)
       })
       .catch(err => {
