@@ -37,7 +37,7 @@
 
     <section class="w-full xl:w-4/5">
       <header class="flex justify-between xl:justify-end items-center py-6 px-6 xl:px-12 bg-white shadow">
-        <div>Hi, {{ currentUser.name }}</div>
+        <div>Hi, {{ currentUser.email }}</div>
 
         <BurgerMenu
           v-if="isMobile"

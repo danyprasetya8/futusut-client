@@ -42,14 +42,14 @@
             <div class="rounded-t">
               <img
                 v-if="service.id === oneSession"
-                src="~@/assets/images/image1.jpeg"
-                class="w-full h-full object-cover rounded-t"
+                src="~@/assets/images/service-banner-1.jpeg"
+                class="w-full h-52 object-cover rounded-t"
                 alt=""
               >
               <img
                 v-else-if="service.id === twoSession"
-                src="~@/assets/images/image2.jpeg"
-                class="w-full h-full object-cover rounded-t"
+                src="~@/assets/images/service-banner-2.jpeg"
+                class="w-full h-52 object-cover rounded-t"
                 alt=""
               >
             </div>

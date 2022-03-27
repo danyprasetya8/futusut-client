@@ -11,8 +11,7 @@ const routes = [
     response: {
       token: 'asdfzxcvqwerasdfzxcv',
       user: {
-        id: 'user-id',
-        name: 'Dany',
+        email: 'user-id',
         role: 'ADMIN'
       }
     }
@@ -26,9 +25,10 @@ const routes = [
     method: 'GET',
     url: api.user.base,
     response: {
-      id: 'user-id',
-      name: 'Dany',
-      role: 'ADMIN'
+      user: {
+        email: 'dany@mail.com',
+        role: 'ADMIN'
+      }
     }
   }
 ]
