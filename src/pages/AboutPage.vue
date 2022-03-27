@@ -75,7 +75,7 @@
   </BaseLayout>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .image {
   height: 500px;
   width: 312px;

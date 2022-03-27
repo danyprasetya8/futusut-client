@@ -18,41 +18,35 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .banner-image {
   height: 520px;
   width: 390px;
   object-fit: cover;
 }
 
-.banner-description {
-  &__overlay {
-    @apply absolute left-0 top-0 h-0
-      text-gray-800 w-full
-      flex justify-end items-end
-      bg-white bg-opacity-60;
-    transition: .4s ease;
-  }
-
-  &__text {
-    @apply absolute right-0 bottom-1/3
-      transform -translate-y-1/2
-      w-3/4 mr-6 opacity-0 text-left text-sm;
-    transition: .1s ease;
-    transition-delay: .1s;
-  }
+.banner-description__overlay {
+  @apply absolute left-0 top-0 h-0
+    text-gray-800 w-full
+    flex justify-end items-end
+    bg-white bg-opacity-60;
+  transition: .4s ease;
 }
 
-.banner-container:hover {
-  .banner-description {
-    &__overlay {
-      @apply h-2/3 pb-20 pr-8;
-    }
+.banner-description__text {
+  @apply absolute right-0 bottom-1/3
+    transform -translate-y-1/2
+    w-3/4 mr-6 opacity-0 text-left text-sm;
+  transition: .1s ease;
+  transition-delay: .1s;
+}
 
-    &__text {
-      opacity: 1;
-    }
-  }
+.banner-container:hover .banner-description__overlay {
+  @apply h-2/3 pb-20 pr-8;
+}
+
+.banner-container:hover .banner-description__text {
+  opacity: 1;
 }
 </style>
 

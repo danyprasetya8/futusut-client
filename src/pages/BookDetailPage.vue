@@ -66,10 +66,6 @@
   </BaseLayout>
 </template>
 
-<style lang="scss" scoped>
-  
-</style>
-
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
 import { computed, onMounted, ref } from 'vue'
