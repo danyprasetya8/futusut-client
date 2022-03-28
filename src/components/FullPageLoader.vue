@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-0 left-0 w-screen h-screen z-10 bg-black bg-opacity-20 flex justify-center items-center">
+  <div class="fixed top-0 left-0 w-screen h-screen z-50 bg-black bg-opacity-20 flex justify-center items-center">
     <div class="lds-ellipsis">
       <div />
       <div />

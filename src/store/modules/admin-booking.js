@@ -25,7 +25,13 @@ const actions = {
   },
   rescheduleBooking({ commit, dispatch }, { payload, onSuccess, onFail } = {}) {
     commit('setIsLoading', true)
-    return axios.put(api.admin.reschedule, payload)
+    const put = {
+      method: 'PUT',
+      url: api.admin.reschedule,
+      params: payload.params,
+      data: payload.form
+    }
+    return axios(put)
       .then(res => {
         commit('setIsLoading', false)
         onSuccess && onSuccess(res)

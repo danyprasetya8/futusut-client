@@ -302,7 +302,7 @@ const doReschedule = () => {
   store.commit('setIsLoading', true)
   store.dispatch('isBookingTimesAvailable', {
     payload: {
-      timestamp: selectedTimes.value
+      timestamps: selectedTimes.value
     },
     onSuccess: res => {
       const availabilities = res.map(r => r.data.data) || []
@@ -326,8 +326,12 @@ const doReschedule = () => {
 const rescheduleBooking = () => {
   store.dispatch('rescheduleBooking', {
     payload: {
-      bookingId: bookingDetail.value.id,
-      bookingTime: selectedTimes.value
+      params: {
+        bookingId: bookingDetail.value.id,
+      },
+      form: {
+        bookingTime: selectedTimes.value
+      }
     },
     onSuccess: () => {
       router.push(config.page.adminBooking)
@@ -352,7 +356,7 @@ onMounted(() => {
       bookingId: route.params.id
     },
     onSuccess: res => {
-      bookingDetail.value = res.data.data
+      bookingDetail.value = res.data.data[0]
       getService(bookingDetail.value.serviceId)
     }
   })

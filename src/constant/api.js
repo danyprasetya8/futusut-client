@@ -13,7 +13,7 @@ export default {
   admin: {
     booking: PREFIX + '/admin-booking',
     bookingDetail: PREFIX + '/booking-detail',
-    reschedule: PREFIX + '/reschedule'
+    reschedule: PREFIX + '/update-booking'
   },
   user: {
     base: PREFIX + '/current-user',
