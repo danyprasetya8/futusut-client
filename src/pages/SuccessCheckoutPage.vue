@@ -97,8 +97,7 @@ onMounted(() => {
   store.dispatch('getCheckoutDetail', {
     payload: { bookingId },
     onSuccess: res => {
-      bookingInformation.value = res.data.data
-
+      bookingInformation.value = res.data.data[0]
       if (bookingInformation.value.paymentStatus !== 'PAID') {
         toHomePage()
       } else {
