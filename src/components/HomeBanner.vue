@@ -1,8 +1,11 @@
 <template>
-  <div class="banner-container relative">
-    <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30" />
+  <div
+    @click="nothing"
+    class="banner-container relative"
+  >
+    <!-- <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-30" /> -->
     <img
-      :src="props.banner.url"
+      :src="props.banner.src"
       alt=""
       class="banner-image"
     >
@@ -42,7 +45,7 @@
 }
 
 .banner-container:hover .banner-description__overlay {
-  @apply h-2/3 pb-20 pr-8;
+  /* @apply h-2/3 pb-20 pr-8; */
 }
 
 .banner-container:hover .banner-description__text {
@@ -59,4 +62,6 @@ const props = defineProps({
     required: true
   }
 })
+
+const nothing = () => {}
 </script>

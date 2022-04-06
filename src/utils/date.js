@@ -16,8 +16,7 @@ export const formatDate = (date, option = OPTION) => new Date(date).toLocaleDate
 
 export const formatTime = (time, option = TIME_OPTION) => new Date(time).toLocaleTimeString('en-GB', option)
 
-export const getIncrementedDate = increment => {
-  const date = new Date()
+export const getIncrementedDate = (increment, date = new Date()) => {
   date.setDate(date.getDate() + increment)
   return setStartOfDay(date)
 }

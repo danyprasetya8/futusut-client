@@ -163,8 +163,8 @@ const getBookingList = page => {
     onSuccess: res => {
       const { data, paging } = res.data
       bookings.value = data
-      totalPage.value = paging.totalPage
-      currentPage.value = paging.page
+      totalPage.value = +paging.totalPaging
+      currentPage.value = +paging.page
       isGettingBookings.value = false
     },
     onFail: () => {
@@ -190,9 +190,9 @@ onMounted(() => {
   store.dispatch('getServices', {
     onSuccess: res => {
       services.value = res.data.data
-      getBookingList(1)
     }
   })
+  getBookingList(1)
 })
 
 watch(currentPage, () => getBookingList(currentPage.value))

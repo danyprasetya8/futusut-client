@@ -42,17 +42,14 @@ const actions = {
   },
   getCurrentUser ({ commit }, { onSuccess, onFail } = {}) {
     commit('setGettingUser', true)
-    commit('setIsLoading', true)
     return axios.get(api.user.base)
       .then(res => {
         commit('setGettingUser', false)
-        commit('setIsLoading', false)
         commit('setCurrentUser', res.data.user)
         onSuccess && onSuccess(res)
       })
       .catch(err => {
         commit('setGettingUser', false)
-        commit('setIsLoading', false)
         onFail && onFail(err)
       })
   } 

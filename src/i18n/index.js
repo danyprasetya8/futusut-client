@@ -2,7 +2,7 @@ import { createI18n } from 'vue-i18n'
 
 const DAMAGED_GOODS = [
   {
-    name: 'Backdrops',
+    name: 'Backdrop(s)',
     price: '855000'
   },
   {

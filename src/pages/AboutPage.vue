@@ -31,7 +31,7 @@
         </div>
 
         <div class="mt-16 xl:mt-0 xl:w-1/2 relative">
-          <video autoplay muted loop class="w-full">
+          <video autoplay muted loop playsinline class="w-full">
             <source src="~@/assets/videos/background-ocean.mp4" type="video/mp4">
           </video>
           <img

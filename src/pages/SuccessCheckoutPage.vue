@@ -1,6 +1,9 @@
 <template>
   <BaseLayout>
-    <section class="my-20 w-1/2 mx-auto">
+    <section
+      v-if="bookingInformation.id"
+      class="my-20 w-1/2 mx-auto"
+    >
       <div class="text-2xl font-bold">
         Great, You're Booked!
       </div>

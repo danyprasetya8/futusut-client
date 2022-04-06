@@ -3,8 +3,12 @@
     <div>
       <button
         type="button"
-        class="flex justify-between w-full rounded-md border border-gray-300 px-4 py-2.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition duration-150 ease-in-out" 
+        :class="{
+          'flex justify-between w-full rounded-md border border-gray-300 px-4 py-2.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition duration-150 ease-in-out': true,
+          'bg-gray-100 hover:bg-gray-100 cursor-default': props.disabled
+        }" 
         @click="visibleItems = !visibleItems"
+        :disabled="props.disabled"
       >
         <div>
           {{ props.selectedItem.value || props.selectedItem }}
@@ -80,6 +84,10 @@ const props = defineProps({
   selectedItem: {
     type: [Object, Number, String],
     required: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 

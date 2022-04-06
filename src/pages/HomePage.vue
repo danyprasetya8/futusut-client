@@ -1,7 +1,7 @@
 <template>
   <BaseLayout>
-    <section class="mb-10 xl:mb-24 mt-8 xl:mt-20 w-10/12 xl:w-2/3 self-center">
-      <section class="flex flex-col xl:flex-row justify-center mb-6">
+    <section class="mb-10 xl:mb-24 mt-8 xl:mt-20 w-10/12 md:w-11/12 xl:w-2/3 self-center">
+      <section class="flex flex-col md:flex-row xl:flex-row justify-center mb-6">
         <div
           v-for="banner in paginatedBanners"
           :key="banner.image"
@@ -48,8 +48,7 @@ import BaseLayout from '@/components/BaseLayout'
 import HomeBanner from '@/components/HomeBanner'
 import config from '@/constant/config'
 import useResponsive from '@/composable/responsive'
-import dummy from '@/assets/images/image1.jpeg'
-import dummy2 from '@/assets/images/image2.jpeg'
+import bannerUtils from '@/utils/banners'
 
 const BANNER_PER_PAGE = 3
 const page = config.page
@@ -60,12 +59,7 @@ const banners = ref([])
 const { isMobile } = useResponsive()
 
 onMounted(() => {
-  banners.value = Array.from({ length: 15 })
-    .map((_, i) => ({
-      description: 'Description',
-      title: 'Image title',
-      url: i % 2 ? dummy : dummy2
-    }))
+  banners.value = bannerUtils
   totalPage.value = banners.value.length / BANNER_PER_PAGE
 })
 

@@ -11,7 +11,7 @@ export default {
   book: PREFIX + '/booking',
   bookingDetail: PREFIX + '/checkout-detail',
   admin: {
-    booking: PREFIX + '/admin-booking',
+    booking: PREFIX + '/booking-list',
     bookingDetail: PREFIX + '/booking-detail',
     reschedule: PREFIX + '/update-booking'
   },

@@ -56,14 +56,20 @@ const reservedBookings = ref([])
 
 const bookingHours = computed(() => config.bookingHours.map(toBookingHourInformation))
 
+const bufferHours = computed(() => config.bufferHourMillis.map(h => props.selectedDate.getTime() + h))
+
 const reservedTimes = computed(() => (reservedBookings.value || []).flatMap(b => b.bookingTime))
 
 const toBookingHourInformation = (bookingHour, index) => {
   const date = new Date(props.selectedDate.getTime() + bookingHour)
+
+  const notReservedYet = !reservedTimes.value.includes(date.getTime())
+  const greaterThanCurrentTime = date.getTime() + TEN_MINUTES > new Date().getTime()
+
   return {
     timestamp: date.getTime(),
     text: ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2),
-    available: !reservedTimes.value.includes(date.getTime()) && date.getTime() + TEN_MINUTES > new Date().getTime(),
+    available: notReservedYet && greaterThanCurrentTime,
     index
   }
 }
@@ -71,11 +77,33 @@ const toBookingHourInformation = (bookingHour, index) => {
 const setSelectedTime = time => {
   if (!time.available) return
 
+  if (bufferHours.value.includes(time.timestamp) && props.timeCount > 1) {
+    store.dispatch('toastInfo', `We are taking a break after ${time.text}. Please choose another time`)
+    return
+  }
+
+  /**
+   * Ex: time -> 10.55
+   * Ex: bookingHours -> [10.30, 10.55, 11.20, 11.45, 12.10]
+   * Service type one -> timeCount: 1 | Service type two -> timeCount: 2
+   * Expected reservingTime value
+   * - service type one -> [10.55]
+   * - service type two -> [10.55, 11.20]
+   */
   const reservingTime = bookingHours.value.slice(time.index, props.timeCount + time.index)
     .filter(t => t.available)
     .map(t => t.timestamp)
 
+  /**
+   * If service type one -> reservingTime length should be 1
+   * If service type two -> reservingTime length should be 2
+   * If not then there's unavailable time
+   */
   if (reservingTime.length < props.timeCount) {
+
+    /**
+     * Case: when service type is two and user select the last booking time
+     */
     if (time.index === bookingHours.value.length - 1) {
       store.dispatch('toastInfo', 'No more session available after ' + time.text)
       return
@@ -85,6 +113,10 @@ const setSelectedTime = time => {
     return
   }
 
+  maybeSetSelectedTime(reservingTime)
+}
+
+const maybeSetSelectedTime = reservingTime => {
   store.commit('setIsLoading', true)
   store.dispatch('isBookingTimesAvailable', {
     payload: {

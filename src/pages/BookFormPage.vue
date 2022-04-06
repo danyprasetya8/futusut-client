@@ -18,12 +18,16 @@
             <div class="mb-3">
               Name
             </div>
-            <div class="px-4 py-2 border border-gray-300 rounded-md">
+            <div :class="{
+              'px-4 py-2 border border-gray-300 rounded-md': true,
+              'bg-gray-100': isDisabledForm
+            }">
               <input
                 v-model="form.name"
                 type="text"
                 class="outline-none w-full"
                 placeholder="Input your name"
+                :disabled="isDisabledForm"
               >
             </div>
             <div class="text-xs text-red-400 mt-2">
@@ -35,13 +39,17 @@
             <div class="mb-3">
               Phone
             </div>
-            <div class="px-4 py-2 border border-gray-300 rounded-md">
+            <div :class="{
+              'px-4 py-2 border border-gray-300 rounded-md': true,
+              'bg-gray-100': isDisabledForm
+            }">
               <input
                 v-model="form.phone"
                 type="text"
                 class="outline-none w-full"
                 placeholder="Input your phone number"
                 @keypress="numberInput"
+                :disabled="isDisabledForm"
               >
             </div>
             <div class="text-xs text-red-400 mt-2">
@@ -53,12 +61,16 @@
             <div class="mb-3">
               Email
             </div>
-            <div class="px-4 py-2 border border-gray-300 rounded-md">
+            <div :class="{
+              'px-4 py-2 border border-gray-300 rounded-md': true,
+              'bg-gray-100': isDisabledForm
+            }">
               <input
                 v-model="form.email"
                 type="text"
                 class="outline-none w-full"
                 placeholder="Input your email"
+                :disabled="isDisabledForm"
               >
             </div>
             <div class="text-xs text-red-400 mt-2">
@@ -73,6 +85,7 @@
             <Dropdown
               v-model:selectedItem="form.additionalPrintedPhotos"
               :items="ADDITIONAL_PRINTED_PHOTOS"
+              :disabled="isDisabledForm"
             />
           </div>
 
@@ -83,6 +96,7 @@
             <Dropdown
               v-model:selectedItem="form.pax"
               :items="paxOptions"
+              :disabled="isDisabledForm"
             />
           </div>
 
@@ -93,6 +107,7 @@
             <Dropdown
               v-model:selectedItem="form.backdrop"
               :items="BACKDROP"
+              :disabled="isDisabledForm"
             />
           </div>
 
@@ -102,6 +117,7 @@
               class="h-4 w-4 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top mr-2 cursor-pointer"
               id="checkbox"
               type="checkbox"
+              :disabled="isDisabledForm"
             >
             <label
               class="form-check-label inline-block text-gray-800"
@@ -115,11 +131,15 @@
             <div class="mb-3">
               Message
             </div>
-            <div class="px-4 py-2 border border-gray-300 rounded-md">
+            <div :class="{
+              'px-4 py-2 border border-gray-300 rounded-md': true,
+              'bg-gray-100': isDisabledForm
+            }">
               <textarea
                 v-model="form.message"
                 class="outline-none w-full"
                 placeholder="Add additional message"
+                :disabled="isDisabledForm"
               />
             </div>
           </div>
@@ -194,7 +214,7 @@
 <script setup>
 import BaseLayout from '@/components/BaseLayout'
 import Dropdown from '@/components/Dropdown'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
 import { numberInput } from '@/utils/number-input'
 import { numberFormatter } from '@/utils/formatter'
@@ -203,6 +223,7 @@ import { formatDate, formatTime } from '@/utils/date'
 import { useRouter } from 'vue-router'
 import { popupCenter } from '@/utils/window'
 import config from '@/constant/config'
+import useResponsive from '@/composable/responsive'
 
 const DATE_FORMAT = {
   weekday: 'long',
@@ -222,6 +243,9 @@ const service = ref({})
 const addOns = ref([])
 const paxOptions = ref([])
 const bookingInfo = ref({})
+const isDisabledForm = ref(false)
+
+const { isMobile } = useResponsive()
 
 const form = ref({
   email: '',
@@ -338,6 +362,11 @@ const pay = e => {
   e.preventDefault()
   cleanErrors()
 
+  if (bookingInfo.value.paymentUrl) {
+    openPaymentUrl()
+    return
+  }
+
   if (isValidForm()) {
     store.commit('setIsLoading', true)
     store.dispatch('isBookingTimesAvailable', {
@@ -403,14 +432,25 @@ const createBooking = () => {
   })
 }
 
+const openPaymentUrl = () => {
+  if (!isMobile) {
+    popupCenter({
+      url: bookingInfo.value.paymentUrl,
+      title: 'Futusut payment',
+      w: 1200,
+      h: 1000
+    })
+  } else {
+    setTimeout(() => {
+      window.location.href = bookingInfo.value.paymentUrl
+    }, 250)
+  }
+}
+
 const createBookingOnSuccess = res => {
   bookingInfo.value = res.data
-  popupCenter({
-    url: bookingInfo.value.paymentUrl,
-    title: 'Futusut payment',
-    w: 800,
-    h: 1000
-  })
+  isDisabledForm.value = true
+  openPaymentUrl()
 }
 
 const scrollToTop = () => {
@@ -420,25 +460,15 @@ const scrollToTop = () => {
   })
 }
 
-const beforeUnloadCallback = e => {
-  e.preventDefault()
-  e.returnValue = ''
-}
-
 onMounted(() => {
   if (!currentBook.value.serviceId) {
     router.push(config.page.bookOnline)
     return
   }
-  window.addEventListener('beforeunload', beforeUnloadCallback)
   scrollToTop()
   getService()
   getServiceAddOns()
   form.value.backdrop = BACKDROP[0]
   form.value.additionalPrintedPhotos = ADDITIONAL_PRINTED_PHOTOS[0]
-})
-
-onUnmounted(() => {
-  window.removeEventListener('beforeunload', beforeUnloadCallback)
 })
 </script>

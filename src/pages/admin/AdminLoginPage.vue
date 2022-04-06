@@ -103,8 +103,10 @@ const login = e => {
 
 const loginOnSuccess = res => {
   window.localStorage.setItem('token', res.data.token)
+  store.commit('setIsLoading', true)
   store.dispatch('getCurrentUser', {
     onSuccess: () => {
+      store.commit('setIsLoading', false)
       if (route.query.redirect) {
         const parsed = Buffer.from(route.query.redirect, 'base64')
           .toString('ascii')
@@ -113,7 +115,8 @@ const loginOnSuccess = res => {
         return
       }
       router.push(config.page.admin)
-    }
+    },
+    onFail: () => store.commit('setIsLoading', false)
   })
 }
 </script>

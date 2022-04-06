@@ -15,6 +15,7 @@
         <Calendar
           :max-date="maxDate"
           :min-date="minDate"
+          :disabled-dates="disabledDates"
           :attributes="attributes"
           @dayclick="onDayClick"
         />
@@ -101,6 +102,7 @@ const selectedDate = ref(null)
 const selectedTimes = ref([])
 const refreshTimeSelection = ref(0)
 const bookingSummaryEl = ref()
+const disabledDates = ref([1648486800000, 1648573200000, 1648659600000])
 
 const minDate = computed(() => getIncrementedDate(0))
 const maxDate = computed(() => getIncrementedDate(14))
@@ -133,7 +135,11 @@ const selectedTimesString = computed(() => {
 const onDayClick = day => {
   const startOfDay = setStartOfDay(day.date)
 
-  if (startOfDay.getTime() >= minDate.value.getTime() && startOfDay.getTime() <= maxDate.value.getTime()) {
+  const validChangingDate = startOfDay.getTime() >= minDate.value.getTime()
+    && startOfDay.getTime() <= maxDate.value.getTime()
+    && !isDateIsDisabled(startOfDay.getTime())
+
+  if (validChangingDate) {
     selectedDate.value = day.date
     selectedTimes.value = []
   }
@@ -193,8 +199,18 @@ const getService = () => {
   })
 }
 
+const isDateIsDisabled = (date = setStartOfDay(new Date()).getTime()) => {
+  return disabledDates.value.includes(date)
+}
+
 onMounted(() => {
-  selectedDate.value = minDate.value
+  if (isDateIsDisabled()) {
+    const last = disabledDates.value.length
+    selectedDate.value = getIncrementedDate(1, new Date(disabledDates.value[last - 1]))
+  } else {
+    selectedDate.value = minDate.value
+  }
+
   getService()
 })
 </script>

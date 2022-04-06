@@ -57,8 +57,9 @@
           Contact Details
         </div>
         <p>
-          Dominico Garden, Jalan Sei Besitang, Sei Sikambing D, Medan City, North Sumatra, Indonesia <br />
-          088262274552 <br />
+          Futusut Studio <br />
+          Dominico Garden, Jalan Sei Besitang no. 9, Sei Sikambing D, Medan City, North Sumatra, Indonesia <br />
+          +6281261383807 <br />
           futusut@gmail.com
         </p>
       </div>

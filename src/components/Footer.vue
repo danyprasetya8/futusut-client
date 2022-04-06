@@ -9,7 +9,7 @@
         Instagram
       </a>
       <a
-        href="https://api.whatsapp.com/send?phone=6281992123123"
+        href="https://api.whatsapp.com/send?phone=6281261383807"
         target="_blank"
         class="mb-4 hover:text-gray-300 transition duration-150 ease"
       >
