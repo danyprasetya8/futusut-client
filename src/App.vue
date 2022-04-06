@@ -1,16 +1,50 @@
 <template>
-  <div>
-    test
-  </div>
-  <div>
-    test
-  </div>
+  <RouterView />
+  <FullPageLoader v-if="isLoading" />
 </template>
 
-<script setup>
-import { onMounted } from 'vue'
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&display=swap');
 
-onMounted(() => {
-  console.log('on mount')
+.toast-container {
+  min-height: 20px !important;
+  padding: 15px 24px !important;
+  border-radius: 4px !important;
+}
+
+.toast-container .Vue-Toastification__toast-body {
+  font-size: 14px !important;
+}
+</style>
+
+<script setup>
+import {
+  isMediumDesktop,
+  isMediumDesktopAndDown,
+  isMediumDesktopAndUp,
+  isMobile,
+  isSmallDesktop,
+  isSmallDesktopAndUp,
+  isSmallMobile
+} from '@/utils/responsive'
+import { useStore } from 'vuex'
+import { computed, onBeforeMount } from 'vue'
+import FullPageLoader from '@/components/FullPageLoader'
+
+const store = useStore()
+
+const isLoading = computed(() => store.getters.isLoading)
+
+onBeforeMount(() => {
+  store.commit('setIsMobile', isMobile())
+  store.commit('setIsSmallDesktop', isSmallDesktop())
+  store.commit('setIsSmallDesktopAndUp', isSmallDesktopAndUp())
+  store.commit('setIsMediumDesktop', isMediumDesktop())
+  store.commit('setIsMediumDesktopAndDown', isMediumDesktopAndDown())
+  store.commit('setIsMediumDesktopAndUp', isMediumDesktopAndUp())
+  store.commit('setIsSmallMobile', isSmallMobile())
+
+  store.dispatch('getCurrentUser')
 })
+
 </script>

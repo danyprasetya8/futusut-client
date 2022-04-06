@@ -1,10 +1,20 @@
 import { createStore } from 'vuex'
+import adminBookingModule from './modules/admin-booking'
+import bookModule from './modules/book'
+import commonModule from './modules/common'
+import responsiveModule from './modules/responsive'
+import serviceModule from './modules/service'
+import toastModule from './modules/toast'
 import userModule from './modules/user'
-import snackbarModule from './modules/snackbar'
 
 export default createStore({
   modules: {
-    userModule,
-    snackbarModule
+    adminBookingModule,
+    bookModule,
+    commonModule,
+    responsiveModule,
+    serviceModule,
+    toastModule,
+    userModule
   }
 })

@@ -28,17 +28,24 @@ const mutations = {
 }
 
 const actions = {
-  login (_, { payload = {}, onSuccess, onFail } = {}) {
-    return axios.post(api.user.login, payload.requestBody)
-      .then(res => onSuccess && onSuccess(res))
-      .catch(err => onFail && onFail(err))
+  login ({ commit }, { payload = {}, onSuccess, onFail } = {}) {
+    commit('setIsLoading', true)
+    return axios.post(api.user.login, payload)
+      .then(res => {
+        commit('setIsLoading', false)
+        onSuccess && onSuccess(res)
+      })
+      .catch(err => {
+        commit('setIsLoading', false)
+        onFail && onFail(err)
+      })
   },
   getCurrentUser ({ commit }, { onSuccess, onFail } = {}) {
     commit('setGettingUser', true)
     return axios.get(api.user.base)
-    .then(res => {
+      .then(res => {
         commit('setGettingUser', false)
-        commit('setCurrentUser', res.data.data)
+        commit('setCurrentUser', res.data.user)
         onSuccess && onSuccess(res)
       })
       .catch(err => {

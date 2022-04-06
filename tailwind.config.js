@@ -26,6 +26,8 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+      sky: colors.sky,
+      'light-black': '#0D0805'
     },
     spacing: {
       px: '1px',
@@ -240,12 +242,8 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
+        '"Fredoka"',
+        'sans-serif'
       ],
       serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: [
@@ -258,8 +256,8 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
-      comfortaa: [
-        '"Comfortaa"',
+      fredoka: [
+        '"Fredoka"',
         'sans-serif'
       ]
     },
@@ -962,8 +960,5 @@ module.exports = {
     width: ['responsive'],
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
-  },
-  plugins: [
-    require('@tailwindcss/line-clamp')
-  ],
+  }
 }
